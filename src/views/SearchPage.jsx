@@ -3,7 +3,7 @@ import { Searchbar } from "../components/Searchbar";
 import { Product } from "../components/Product";
 
 export function SearchPage() {
-    let product = {product_name: "Producto 1", category: "Categoria 1", price: "Precio 1"};
+  let product = {product_name: "Producto 1", category: "Categoria 1", price: "Precio 1"};
 
   return (
     <>
