@@ -11,8 +11,9 @@ export function Navbar() {
   <div className="mx-auto max-w-screen-xl p-4">
     <div className="flex items-center justify-between gap-4 lg:gap-10">
       <div className="flex lg:w-0 lg:flex-1">
+        <Link to={LANDING_PAGE}> <img src={DMAYOR_LOGO} alt="LOGO DMAYOR" className='w-[180px]' /> </Link>
       <span className="sr-only">Home</span>
-          <img src={DMAYOR_LOGO} alt="LOGO DMAYOR" className='w-[180px]' />
+          
       </div>
 
       <nav
