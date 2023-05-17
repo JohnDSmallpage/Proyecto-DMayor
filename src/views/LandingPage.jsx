@@ -6,6 +6,7 @@ export function LandingPage() {
 
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
   let product = {product_name: "Producto 1", category: "Categoria 1", price: "Precio 1"};
+  let SearchButton = true;
 
   return (
     <>
@@ -16,7 +17,7 @@ export function LandingPage() {
               Consigue lo que tu negocio necesita para crecer
             </h1>
             <p className="mx-auto font-normal text-sm my-6 max-w-lg"></p>
-            <Searchbar />
+            <Searchbar button = {SearchButton}/>
           </div>
         </div>
 
