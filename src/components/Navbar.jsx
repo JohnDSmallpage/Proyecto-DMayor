@@ -1,9 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { CATEGORIAS, LANDING_PAGE, PROVEEDORES, FAQ } from '../routes/Url';
+import { CATEGORIAS, LANDING_PAGE, PROVEEDORES, FAQ, REGISTER, LOGIN } from '../routes/Url';
 import DMAYOR_LOGO from '../images/DMAYOR_logo.png';
+import { useUser } from '../firebase models/userContext';
+import { logout } from '../firebase models/auth-service';
 
 export function Navbar() {
+  const { user, setUser } = useUser();
+  const handleLogout = async () => {
+    await logout();
+  };
   return (
     <> 
     
@@ -25,21 +31,30 @@ export function Navbar() {
         <Link to={FAQ}>Faq</Link>
 
       </nav>
+    {!user? 
       <div className=" flex-1 items-end justify-end gap-4  sm:flex">
-        <a
+        <Link
           className=" hidden rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-500 md:flex"
-          href=""
+          to={LOGIN}
         >
           Log in
-        </a>
+        </Link>
 
-        <a
+        <Link
           className="rounded-lg bg-[#ff7a00] px-5 py-2 text-sm font-medium text-white"
-          href=""
+          to={REGISTER}
         >
           Registrarse
-        </a>
+        </Link>
       </div>
+      :
+      <button
+      onClick={handleLogout}
+      className="h-[38px] lg:h-[48px] bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-gray-100 font-bold"
+    >
+      Cerrar Sesión{" "}
+    </button>
+      }
 
       <div className=" md:hidden lg:hidden xl:hidden">
         <button className="rounded-lg bg-gray-100 p-2 text-gray-600" type="button">
