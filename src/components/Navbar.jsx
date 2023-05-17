@@ -25,7 +25,6 @@ export function Navbar() {
         <Link to={FAQ}>Faq</Link>
 
       </nav>
-
       <div className=" flex-1 items-end justify-end gap-4  sm:flex">
         <a
           className=" hidden rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-500 md:flex"
