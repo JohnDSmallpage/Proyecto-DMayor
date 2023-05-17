@@ -1,18 +1,19 @@
-import React from 'react'
+import React from "react";
 
-export function Product({info}) {
+export function Product({ info }) {
   return (
-    <>
-    <div class="lg:w-1/4 md:w-1/2 p-4 ">
-        <a class="block relative h-48 rounded overflow-hidden">
-          <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="https://dummyimage.com/420x260"/>
-        </a>
-        <div class="mt-4">
-          <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{info.category}</h3>
-          <h2 class="text-gray-900 title-font text-lg font-medium">{info.name_product}</h2>
-          <p class="mt-1">{info.price}</p>
-        </div>
+    <div
+      id="main-container"
+      className="flex flex-col bg-[#F3F5F6] rounded-[10px] p-4 w-[174px] h-[134px]"
+    >
+      <div id="img-container" className="flex justify-center items-center rounded-[5px] h-[90px]">
+        <img className=" w-full h-full" src="" />
       </div>
-    </>
-  )
+
+      <div id="info-container" className="flex flex-row justify-between">
+        <h2 class="text-gray-900 ">{info.name_product}</h2>
+        <p class="mt-1">{info.price}</p>
+      </div>
+    </div>
+  );
 }
