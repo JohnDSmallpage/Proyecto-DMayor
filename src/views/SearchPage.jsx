@@ -1,9 +1,14 @@
 import React from "react";
 import { Searchbar } from "../components/Searchbar";
 import { Product } from "../components/Product";
+import { useContext } from "react";
+import { searchContext } from "../firebase models/SearchContext";
 
-export function SearchPage() {
+
+export function SearchPage(props) {
   let product = {product_name: "Producto 1", category: "Categoria 1", price: "Precio 1"};
+  const productSearched = useContext(searchContext);
+
 
   return (
     <>
@@ -12,9 +17,10 @@ export function SearchPage() {
       </div>
 
 
+
       <div className="flex flex-wrap">
 
-      <Product info={product}/>
+
       <Product info={product}/>
 
       </div>

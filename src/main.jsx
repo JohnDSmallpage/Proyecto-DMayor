@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import {BrowserRouter} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
-import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE} from './routes/Url';
+
+import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN} from './routes/Url';
 import {LandingPage} from './views/LandingPage';
 import {Layout} from './views/Layout';
 import {Providers} from './views/Providers';
 import {Faq} from './views/Faq';
 import { SearchPage } from './views/SearchPage';
 import { Error } from './views/Error';
+import {RegisterPage} from './views/RegisterPage'
+import { LoginPage } from './views/LoginPage';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -23,6 +26,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={FAQ} element={<Faq/>} />
           <Route path={SEARCH_PAGE} element={<SearchPage/>} />
           <Route path={DEFAULT} element={<Error/>} />
+          <Route path={REGISTER} element={<RegisterPage/>}/>
+          <Route path={LOGIN} element={<LoginPage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

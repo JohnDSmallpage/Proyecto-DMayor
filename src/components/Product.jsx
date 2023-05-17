@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Product({ info }) {
+export function Product(props) {
   return (
     <>
       <div className="lg:w-1/4 md:w-1/2 p-4 ">
@@ -16,7 +16,7 @@ export function Product({ info }) {
             {/* {info.category} */}
           </h3>
           <h2 className="text-gray-900 title-font text-lg font-medium">
-            {info.product_name}
+            {props.textSearch}
           </h2>
           {/* <p className="mt-1">{info.price}</p> */}
         </div>

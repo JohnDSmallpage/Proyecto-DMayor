@@ -3,12 +3,16 @@ import { Link } from "react-router-dom";
 import { SEARCH_PAGE } from "../routes/Url";
 import { Product } from "./Product";
 import { useState } from "react";
+import { useContext } from "react";
+import { searchContext } from "../firebase models/SearchContext";
 
-export function Searchbar(props) {
+
+export function Searchbar() {
   const [text, setText] = useState("");
+  const productSearched = useContext(searchContext);
 
   const handleInputChange = (event) => {
-    setText(event.target.value);
+    productSearched.setSearchText(event.target.value);
   };
 
   return (
@@ -19,6 +23,7 @@ export function Searchbar(props) {
           type="text"
           placeholder="Busca tus productos"
           onChange={handleInputChange}
+          value={productSearched.searchText}
         />
         <div>
           <div>
