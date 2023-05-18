@@ -11,8 +11,8 @@ export function Product({ info }) {
       </div>
 
       <div id="info-container" className="flex flex-row justify-between">
-        <h2 class="text-gray-900 ">{info.name_product}</h2>
-        <p class="mt-1">{info.price}</p>
+        <h2 class="text-gray-900 text-[8px]">{info.product_name}</h2>
+        <p class="mt-1 text-[#FF7A00]">{info.price}</p>
       </div>
     </div>
   );
