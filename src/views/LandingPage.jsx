@@ -29,7 +29,7 @@ export function LandingPage() {
         <h2 className="text-xl font-bold text-gray-800 text-center mt-3">Productos destacados</h2>
         <section className="flex justify-center mt-4"> 
         
-         <Product info={product}/>
+         {/* <Product info={product}/> */}
 
         </section>
 

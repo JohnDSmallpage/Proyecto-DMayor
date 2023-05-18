@@ -13,12 +13,12 @@ export function Product({info}) {
         </a>
         <div className="mt-4">
           <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-            {info.category}
+            {info.category.charAt(0).toUpperCase() + info.category.slice(1)}
           </h3>
           <h2 className="text-gray-900 title-font text-lg font-medium">
-            {info.name}
+            {info.name.charAt(0).toUpperCase() + info.name.slice(1)}
           </h2>
-          <p className="mt-1">{info.price}</p>
+          <p className="mt-1">{"$" + info.price }</p>
         </div>
       </div>
     </>

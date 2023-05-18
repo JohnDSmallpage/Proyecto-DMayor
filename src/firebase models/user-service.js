@@ -7,9 +7,10 @@ export async function createUserProfile(userId,data){
 }
 
 export async function getProductsByName(textSearched){
+    textSearched = textSearched.toLowerCase();
 
     console.log(textSearched);
-    const usersQuery = query(collection(db,"products"), where("name","==",textSearched));
+    const usersQuery = query(collection(db,"products"), where("name","==", textSearched));
     
     const results = await getDocs(usersQuery);
 
