@@ -5,6 +5,7 @@ import { Product } from "./Product";
 import { useState } from "react";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
+import { getProductsByName } from "../firebase models/user-service";
 
 
 export function Searchbar() {
@@ -13,6 +14,12 @@ export function Searchbar() {
 
   const handleInputChange = (event) => {
     productSearched.setSearchText(event.target.value);
+  };
+
+  const getProducts = async (searchedText) => {
+    const data = await getProductsByName(searchedText);
+    productSearched.setProducts(data);
+
   };
 
   return (
@@ -27,7 +34,7 @@ export function Searchbar() {
         />
         <div>
           <div>
-            <button className="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin">
+            <button className="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin" onClick={() => getProducts(productSearched.searchText)}>
               <Link to={SEARCH_PAGE}>Buscar</Link>
             </button>
           </div>
