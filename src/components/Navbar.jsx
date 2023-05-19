@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { CATEGORIAS, LANDING_PAGE, PROVEEDORES, FAQ, REGISTER, LOGIN } from '../routes/Url';
+import { CATEGORIAS, LANDING_PAGE, PROVEEDORES, FAQ, REGISTER, LOGIN, ADMIN } from '../routes/Url';
 import DMAYOR_LOGO from '../images/DMAYOR_logo.png';
 import { useUser } from '../firebase models/userContext';
 import { logout } from '../firebase models/auth-service';
@@ -55,6 +55,9 @@ export function Navbar() {
     >
       Cerrar Sesión{" "}
     </button>
+      }
+      {user?.admin &&
+      <Link to={ADMIN}>adminView</Link>
       }
 
       <div className=" md:hidden lg:hidden xl:hidden">

@@ -4,7 +4,7 @@ import './index.css'
 import {BrowserRouter} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 
-import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN} from './routes/Url';
+import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN} from './routes/Url';
 import {LandingPage} from './views/LandingPage';
 import {Layout} from './views/Layout';
 import {Providers} from './views/Providers';
@@ -13,6 +13,9 @@ import { SearchPage } from './views/SearchPage';
 import { Error } from './views/Error';
 import {RegisterPage} from './views/RegisterPage'
 import { LoginPage } from './views/LoginPage';
+import { ApplicationPage } from './views/ApplicationPage';
+import { PrivateRouteDoc } from './components/PrivateRoute';
+import { AdminView } from './views/adminView';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -28,6 +31,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={DEFAULT} element={<Error/>} />
           <Route path={REGISTER} element={<RegisterPage/>}/>
           <Route path={LOGIN} element={<LoginPage/>}/>
+          <Route path={APPLICATION} element={<ApplicationPage/>}/>
+          <Route path={ADMIN} element={<PrivateRouteDoc><AdminView/></PrivateRouteDoc>}/>
         </Route>
       </Routes>
     </BrowserRouter>

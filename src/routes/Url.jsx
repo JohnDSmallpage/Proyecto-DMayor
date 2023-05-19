@@ -6,4 +6,6 @@ export const SEARCH_PAGE = "/search";
 export const DEFAULT = "*";
 export const REGISTER = "/register"
 export const LOGIN = "/login"
+export const APPLICATION ="/application"
+export const ADMIN = "/admin"
 
