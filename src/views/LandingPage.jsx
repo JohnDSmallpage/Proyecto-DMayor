@@ -28,50 +28,101 @@ export function LandingPage() {
         <Searchbar />
       </div>
 
-      <div id="carrusel-container" className="flex justify-center items-center">
-        Carrusel
+      <div id="carrusel-container" className="flex justify-center items-center font-bold">
+        (Carrusel fotos)
       </div>
 
       <div
         id="products-container"
-        className="flex flex-col justify-center items-center w-[350px] mx-[15px] gap-[13px]"
+        className="flex flex-col justify-center items-center mx-[15px] gap-[13px]"
       >
         <h2 className="text-[20px] font-bold text-gray-800 text-center mt-3">
           Productos destacados
         </h2>
-        <section className="flex flex-row justify-between  gap-[10px] ">
+        <section className="flex flex-row flex-wrap justify-between  gap-[10px] ">
+          {/* Poner que se muestren maximo 6 productos */}
           <Product info={product} />
           <Product info={product} />
+          <Product info={product} />
+          <Product info={product} />
+          <Product info={product} />
+          <Product info={product} />
+          
+          
+          
         </section>
         <button className="flex justify-center items-center font-bold text-white bg-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
           VER MÁS
         </button>
       </div>
 
-      <div id="categories-container" className="flex flex-col justify-center items-center bg-[#FF7A00] gap-[13px] font-bold text-white">
-        <h2 className="text-[20px] text-center mt-3">
-          Categorias
-        </h2>
-        <div id="category-buttons" className="flex flex-row gap-[20px]">
+      <div
+        id="categories-container"
+        className="flex flex-col justify-center items-center bg-[#FF7A00] gap-[13px] font-bold text-white"
+      >
+        <h2 className="text-[20px] text-center mt-3">Categorias</h2>
+        <div id="category-buttons" className="flex flex-row gap-[20px] lg:gap-[30px]">
           <div className="flex flex-col gap-[5px]">
-            <button id="vehicles" className="bg-[#595959] rounded-[50%] h-[55px] w-[55px]">a</button>
-            <p className="flex justify-center items-center text-[12px]">Carros</p>
+            <button
+              id="vehicles"
+              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+            >
+              a
+            </button>
+            <button className="flex justify-center items-center text-[12px]">
+              Carros
+            </button>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <button id="home" className="bg-[#595959] rounded-[50%] h-[55px] w-[55px]">a</button>
-            <p className="flex justify-center items-center text-[12px]">Hogar</p>
+            <button
+              id="home"
+              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+            >
+              a
+            </button>
+            <button className="flex justify-center items-center text-[12px]">
+              Hogar
+            </button>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <button id="phones" className="bg-[#595959] rounded-[50%] h-[55px] w-[55px]">a</button>
-            <p className="flex justify-center items-center text-[12px]">Telefonos</p>
+            <button
+              id="phones"
+              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+            >
+              a
+            </button>
+            <button className="flex justify-center items-center text-[12px]">
+              Telefonos
+            </button>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <button id="computers" className="bg-[#595959] rounded-[50%] h-[55px] w-[55px]">a</button>
-            <p className="flex justify-center items-center text-[12px]">Comida</p>
+            <button
+              id="computers"
+              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+            >
+              a
+            </button>
+            <button className="flex justify-center items-center text-[12px]">
+              Comida
+            </button>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <button id="fashion" className="bg-[#595959] rounded-[50%] h-[55px] w-[55px]">a</button>
-            <p className="flex justify-center items-center text-[12px]">Moda</p>
+            <button
+              id="fashion"
+              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+            >
+              a
+            </button>
+            <button className="flex justify-center items-center text-[12px]">Moda</button>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <button
+              id="beauty"
+              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+            >
+              a
+            </button>
+            <button className="flex justify-center items-center text-[12px]">Belleza</button>
           </div>
         </div>
         <button className="flex justify-center items-center bg-white text-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px] mb-[10px]">
