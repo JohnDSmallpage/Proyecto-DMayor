@@ -8,4 +8,5 @@ export const REGISTER = "/register"
 export const LOGIN = "/login"
 export const APPLICATION ="/application"
 export const ADMIN = "/admin"
+export const PRODUCT_PAGE = "/product/:id"
 
