@@ -4,7 +4,7 @@ import './index.css'
 import {BrowserRouter} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 
-import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN} from './routes/Url';
+import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE} from './routes/Url';
 import {LandingPage} from './views/LandingPage';
 import {Layout} from './views/Layout';
 import {Providers} from './views/Providers';
@@ -16,7 +16,7 @@ import { LoginPage } from './views/LoginPage';
 import { ApplicationPage } from './views/ApplicationPage';
 import { PrivateRouteDoc } from './components/PrivateRoute';
 import { AdminView } from './views/adminView';
-
+import { ProductPage } from './views/ProductPage';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -33,6 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={LOGIN} element={<LoginPage/>}/>
           <Route path={APPLICATION} element={<ApplicationPage/>}/>
           <Route path={ADMIN} element={<PrivateRouteDoc><AdminView/></PrivateRouteDoc>}/>
+          <Route path={PRODUCT_PAGE} element={<ProductPage/>} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -23,7 +23,7 @@ export function SearchPage() {
 
       <p className="mt-4 text-center">Resultados encontrados</p>
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap">  
       {productSearched.products == null ? (
               <div>No hay resultados para su búsqueda</div>
             ) : (
