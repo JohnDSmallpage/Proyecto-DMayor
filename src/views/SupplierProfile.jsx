@@ -1,12 +1,21 @@
 import Inicio from "../images/home-2-line.png";
 import Perfil from "../images/account-circle-line.png";
 import Verified from "../images/shield-check-fill.png";
+import { useUser } from "../firebase models/userContext";
 
 
 export function SupplierProfile() {
+  const {user,isLoading}=useUser();
   
   return (
+    
     <div id="main-container" className="flex justify-center items-center">
+      {!user?.accepted? (
+        <div className="flex flex-col justify-center items-center h-screen ">
+          <p className="text-[30px] font-bold text-[#ff7a00]">Su solicitud esta siendo Revisada</p>
+          <p className="text-[15px] ">Por favor espere a que sea aceptada para acceder a las opciones de su perfil!</p>
+        </div>
+      ) : (
       <div
         id="internal-container"
         className="flex flex-col justify-center items-center w-[366px] mt-[28px] mb-[28px] gap-[15px]"
@@ -152,6 +161,8 @@ export function SupplierProfile() {
           </button>
         </div>
       </div>
+       ) 
+      }
     </div>
   );
 }

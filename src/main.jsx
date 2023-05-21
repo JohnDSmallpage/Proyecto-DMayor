@@ -4,7 +4,7 @@ import './index.css'
 import {BrowserRouter} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 
-import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE} from './routes/Url';
+import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE} from './routes/Url';
 import {LandingPage} from './views/LandingPage';
 import {Layout} from './views/Layout';
 import {Providers} from './views/Providers';
@@ -14,10 +14,13 @@ import { Error } from './views/Error';
 import {RegisterPage} from './views/RegisterPage'
 import { LoginPage } from './views/LoginPage';
 import { ApplicationPage } from './views/ApplicationPage';
-import { PrivateRouteDoc } from './components/PrivateRoute';
+import { PrivateRoute } from './components/PrivateRoute';
 import { AdminView } from './views/adminView';
 import { ProductPage } from './views/ProductPage';
 import {SupplierProfile} from './views/SupplierProfile';
+import { PrivateSupplier } from './components/PrivateSupplier';
+import { ClientProfile } from './views/ClientProfile';
+import { PrivateRouteClient } from './components/PrivateRouteClient';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -33,9 +36,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={REGISTER} element={<RegisterPage/>}/>
           <Route path={LOGIN} element={<LoginPage/>}/>
           <Route path={APPLICATION} element={<ApplicationPage/>}/>
-          <Route path={ADMIN} element={<PrivateRouteDoc><AdminView/></PrivateRouteDoc>}/>
+          <Route path={ADMIN} element={<PrivateRoute><AdminView/></PrivateRoute>}/>
           <Route path={PRODUCT_PAGE} element={<ProductPage/>} />
-          <Route path={SUPPLIER_PROFILE} element={<SupplierProfile/>} />
+          <Route path={SUPPLIER_PROFILE} element={<PrivateSupplier><SupplierProfile/></PrivateSupplier>} />
+          <Route path={CLIENT_PROFILE} element={<PrivateRouteClient><ClientProfile/></PrivateRouteClient>}/>
         </Route>
       </Routes>
     </BrowserRouter>

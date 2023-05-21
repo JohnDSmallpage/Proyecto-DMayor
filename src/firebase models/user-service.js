@@ -5,6 +5,9 @@ import { db } from "./Config";
 export async function createUserProfile(userId,data){
     return setDoc(doc(db,'users',userId),data);
 }
+export async function createSupplierProfile(userId,data){
+    return setDoc(doc(db,'suppliers',userId),data);
+}
 
 export async function getProductsByName(textSearched){
     textSearched = textSearched.toLowerCase();
@@ -27,8 +30,21 @@ export async function getProductsByName(textSearched){
 }
 export async function getUserProfile(email){
     const userQuery = query(collection(db,"users"), where("email","==",email));
-
-    const results = await getDocs(userQuery);
+         const results = await getDocs(userQuery);
+         console.log("hola")
+ 
+    
+    if(results.size>0){
+        const users = results.docs.map((item)=>({
+            ...item.data(),
+            id: item.id,
+        }));
+        const [user] = users;
+        return user;
+    }else{
+        const userQuery = query(collection(db,"suppliers"), where("email","==",email));
+         const results = await getDocs(userQuery);
+ 
     
     if(results.size>0){
         const users = results.docs.map((item)=>({
@@ -39,7 +55,8 @@ export async function getUserProfile(email){
         return user;
     }else{
         return null;
-    }    
+    }   
+} 
 }
 
 export async function getProductById(id){

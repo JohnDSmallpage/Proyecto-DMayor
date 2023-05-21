@@ -6,7 +6,7 @@ import {
   signInWithPopup, 
   signOut } from "@firebase/auth";
 import { auth } from "./Config";
-import { createUserProfile } from "./user-service";
+import { createSupplierProfile, createUserProfile } from "./user-service";
 
   export const signInWithGoogle = async()=>{
      const googleProvider = new GoogleAuthProvider();
@@ -33,12 +33,21 @@ export const registerWithEmailAndPassword = async(
   )=>{
   try {
     const result = await createUserWithEmailAndPassword(auth,email,password,extraData);
-    await createUserProfile(result.user.uid,{
-      uid:result.user.uid,
-      email,
-      password,
-      ...extraData,
-    })
+    if(extraData?.Company != undefined){
+      await createSupplierProfile(result.user.uid,{
+        uid:result.user.uid,
+        email,
+        password,
+        ...extraData,
+      })
+    }else{
+      await createUserProfile(result.user.uid,{
+        uid:result.user.uid,
+        email,
+        password,
+        ...extraData,
+      })
+    }
   } catch (error) {
   } 
 };

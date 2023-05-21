@@ -9,7 +9,8 @@ import {
   REGISTER,
   LOGIN,
   ADMIN,
-  SUPPLIER_PROFILE
+  SUPPLIER_PROFILE,
+  CLIENT_PROFILE
 } from "../routes/Url";
 import DMAYOR_LOGO from "../images/DMAYOR_logo.png";
 import { useUser } from "../firebase models/userContext";
@@ -158,17 +159,37 @@ export function Navbar() {
                     </div>
                   ) : (
                     <div className="flex flex-col text-white text-xl  cursor-pointer ">
-                      <Link
+                        {user.Company?(
+                        <Link
                         className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        
                         to={SUPPLIER_PROFILE}
+                        
                       >
                         <img
                           className="ml-[15px] w-[24px] h-[24px]"
                           src={Perfil}
                           alt=""
                         />
-                        Perfil
+                        <p>{user.Company}</p>
                       </Link>
+                      ):(
+                        <Link
+                        className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        
+                        to={CLIENT_PROFILE}
+                        
+                      >
+                        <img
+                          className="ml-[15px] w-[24px] h-[24px]"
+                          src={Perfil}
+                          alt=""
+                        />
+                        <p className="text-black">{user.name}</p>
+                      </Link>
+                      )}
+                      
+                      
                       <button
                         className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         onClick={handleLogout}
@@ -227,22 +248,46 @@ export function Navbar() {
             </div>
           ) : (
             <div id="profile-container" className="flex flex-row gap-[7px]">
-              <Link
-                id="profile"
-                className="bg-black h-[38px] lg:h-[48px] w-[38px] lg:w-[48px] rounded-[50%] hidden md:block"
-                to={SUPPLIER_PROFILE}
-              >
-                <img id="profile-pic" className="" src=""></img>
-              </Link>
+              {user.Company?(
+                        <Link
+                        className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        
+                        to={SUPPLIER_PROFILE}
+                        
+                      >
+                        <img
+                          className="ml-[15px] w-[24px] h-[24px]"
+                          src={Perfil}
+                          alt=""
+                        />
+                        <p>{user.Company}</p>
+                      </Link>
+                      ):(
+                        <Link
+                        className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        
+                        to={CLIENT_PROFILE}
+                        
+                      >
+                        <img
+                          className="ml-[15px] w-[24px] h-[24px]"
+                          src={Perfil}
+                          alt=""
+                        />
+                        <p className="text-black">{user.name}</p>
+                      </Link>
+                      )}
               <button
                 onClick={handleLogout}
                 className="h-[38px] lg:h-[48px] bg-[#FF914D] text-white  p-2 rounded  hover:underline font-bold hidden md:block"
               >
                 Cerrar Sesión{" "}
               </button>
+              {user?.admin && <Link className="self-center"  to={ADMIN}>adminView</Link>}
             </div>
+            
           )}
-          {user?.admin && <Link to={ADMIN}>adminView</Link>}
+          
         </div>
       </div>
     </header>
