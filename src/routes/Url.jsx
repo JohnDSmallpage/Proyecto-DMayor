@@ -12,4 +12,5 @@ export const PRODUCT_PAGE = "/product/:id";
 export const SUPPLIER_PROFILE = "/supplierProfile";
 export const CHECKOUT = "/checkout";
 export const CLIENT_PROFILE = "/clientProfile"
+export const CHAT = "/chat"
 

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { productContext } from "../firebase models/ProductContext";
 import { useState } from "react";
+import {PaypalCheckout} from "../components/PaypalCheckout";
 
 export function CheckoutPage() {
   const selectProduct = useContext(productContext);
@@ -157,7 +158,7 @@ export function CheckoutPage() {
                     Método de pago:
                   </h2>
                   <div className="mt-5 flex justify-center h-min">
-                    {/* <Checkout price={price} /> */} prueba
+                    <PaypalCheckout price={finalPrice} />
                   </div>
                 </div>
               </label>
