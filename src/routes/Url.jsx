@@ -6,4 +6,4 @@ export const SEARCH_PAGE = "/search";
 export const DEFAULT = "*";
 export const REGISTER = "/register"
 export const LOGIN = "/login"
-
+export const ADD_PRODUCT = "/addproduct"

@@ -3,6 +3,8 @@ import { Searchbar } from "../components/Searchbar";
 import { Product } from "../components/Product";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
+import { Link } from "react-router-dom";
+import { ADD_PRODUCT } from "../routes/Url";
 
 export function LandingPage() {
 
@@ -33,6 +35,9 @@ export function LandingPage() {
 
         </section>
 
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+          <Link to={ADD_PRODUCT}>Añadir</Link>
+        </button>
     </>
   );
 }
