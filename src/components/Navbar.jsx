@@ -9,6 +9,7 @@ import {
   REGISTER,
   LOGIN,
   ADMIN,
+  SUPPLIER_PROFILE
 } from "../routes/Url";
 import DMAYOR_LOGO from "../images/DMAYOR_logo.png";
 import { useUser } from "../firebase models/userContext";
@@ -159,7 +160,7 @@ export function Navbar() {
                     <div className="flex flex-col text-white text-xl  cursor-pointer ">
                       <Link
                         className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
-                        to={LANDING_PAGE}
+                        to={SUPPLIER_PROFILE}
                       >
                         <img
                           className="ml-[15px] w-[24px] h-[24px]"
@@ -229,7 +230,7 @@ export function Navbar() {
               <Link
                 id="profile"
                 className="bg-black h-[38px] lg:h-[48px] w-[38px] lg:w-[48px] rounded-[50%] hidden md:block"
-                to={LOGIN}
+                to={SUPPLIER_PROFILE}
               >
                 <img id="profile-pic" className="" src=""></img>
               </Link>
