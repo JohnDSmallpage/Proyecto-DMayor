@@ -40,7 +40,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={ADMIN} element={<PrivateRoute><AdminView/></PrivateRoute>}/>
           <Route path={PRODUCT_PAGE} element={<ProductPage/>} />
           <Route path={SUPPLIER_PROFILE} element={<PrivateSupplier><SupplierProfile/></PrivateSupplier>} />
-          <Route path={CHECKOUT} element={<CheckoutPage/>} /> 
+          <Route path={CHECKOUT} element={<PrivateRouteClient> <CheckoutPage/> </PrivateRouteClient>} /> 
           <Route path={CLIENT_PROFILE} element={<PrivateRouteClient><ClientProfile/></PrivateRouteClient>}/>
         </Route>
       </Routes>
