@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
-import { LANDING_PAGE, REGISTER } from "../routes/Url";
+import { LANDING_PAGE, REGISTER, SUPPLIER_PROFILE } from "../routes/Url";
 import { registerWithEmailAndPassword} from "../firebase models/auth-service";
 import { useForm, useWatch } from "react-hook-form";
 
@@ -40,6 +40,7 @@ export function ApplicationPage() {
       Password,
       extraData
     );
+    navigate(SUPPLIER_PROFILE)
   };
 
 
