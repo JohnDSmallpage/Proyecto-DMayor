@@ -1,5 +1,7 @@
+import { uploadBytes } from "firebase/storage";
 import React, {useState} from "react";
 import {store, db} from "../firebase models/Config"
+
 
 
 
@@ -158,13 +160,13 @@ export const AddProduct = () => {
             
           </label> 
 
-          <label htmlFor="image">
+          <label htmlFor="photo">
             <div className="flex flex-row">
               <h1 className="font-medium text-slate-700 pb-2">Imagen del producto.</h1>
             </div>
             
             <input
-              id="file"
+              id="photo"
               type="file"
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="Ingresa la imagen del producto. Ej: 350"
