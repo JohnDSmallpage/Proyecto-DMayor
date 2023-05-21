@@ -1,4 +1,4 @@
-import { uploadBytes } from "firebase/storage";
+import { ref} from "../../node_modules/firebase/storage";
 import React, {useState} from "react";
 import {store, db} from "../firebase models/Config"
 
