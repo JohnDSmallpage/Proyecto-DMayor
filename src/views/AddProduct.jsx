@@ -5,25 +5,25 @@ import {store, db} from "../firebase models/Config"
 
 export const AddProduct = () => {
 
-    const [productName, setProductName] = useState("");
+    const [name, setName] = useState("");
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
     const [unity, setUnity] = useState("");
-    const [stock, setStock] = useState(0);
-    const [image, setImage] = useState(null);
+    const [discount, setDiscount] = useState(0);
+    const [photo, setPhoto] = useState(null);
     const [error, setError] = useState("");
 
     const types = ["image/png", "image/jpeg"] //tipo de imagen
 
-    const imageHandler = (e) => {
+    const photoHandler = (e) => {
         let selectedFile = e.target.files[0];
         if (selectedFile && types.includes(selectedFile.type)){
-            setImage(selectedFile);
+            setPhoto(selectedFile);
             setError("")
         } 
         else{
-            setImage(null);
+            setPhoto(null);
             setError("Por favor selecciona un tipo de imagen válido: png o jpeg")
         }
     }
@@ -31,31 +31,31 @@ export const AddProduct = () => {
     //Añadir producto
     const addProduct = (e) => {
         e.preventDefault();
-        console.log(productName,category,description,price,unity,stock,image)
-        const uploadTask = ref(store, `product-image/${image.name}`).put(image);
+        console.log(name,category,description,price,unity,discount,photo)
+        const uploadTask = ref(store, `product-image/${photo.name}`).put(photo);
         uploadTask.on("state_changed", snapshot => {
             const progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
             console.log(progress);
         }, err => {
             setError(err.message)
         }, ()=>{
-            ref(store,'product-image').child(image.name).getDownloadURL().then(url =>{
+            ref(store,'product-image').child(photo.name).getDownloadURL().then(url =>{
                 db.collection("products").add({
-                    productName: productName,
+                    name: name,
                     category: category,
                     description: description,
                     price: Number(price),
                     unity: unity,
-                    stock: Number(stock),
+                    discount: Number(discount),
                     image: url
                 }).then(()=>{
-                    setProductName("");
+                    setName("");
                     setCategory("");
                     setDescription("");
                     setPrice(0);
                     setUnity("");
-                    setStock(0);
-                    setImage("");
+                    setDiscount(0);
+                    setPhoto("");
                     setError("");
                     document.getElementById("file").value = "";
                 }).catch(err=> setError(err.message));
@@ -79,7 +79,7 @@ export const AddProduct = () => {
               type="text"
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="Ingresa el nombre del producto. Ej: Licuadora. "
-              onChange={(e) => setProductName(e.target.value)} value={productName}
+              onChange={(e) => setName(e.target.value)} value={name}
             />
             
           </label>
@@ -143,17 +143,17 @@ export const AddProduct = () => {
             
           </label> 
 
-          <label htmlFor="stock">
+          <label htmlFor="discount">
             <div className="flex flex-row">
-              <h1 className="font-medium text-slate-700 pb-2">Disponibilidad en stock.</h1>
+              <h1 className="font-medium text-slate-700 pb-2">Porcentaje de Descuento.</h1>
             </div>
             
             <input
-              id="stock"
+              id="discount"
               type="number"
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-              placeholder="Ingresa la cantidad de productos disponibles. Ej: 350"
-              onChange={(e) => setStock(e.target.value)} value={stock}
+              placeholder="Ingresa el porcentaje de descuento. Ej: 50"
+              onChange={(e) => setDiscount(e.target.value)} value={discount}
             />
             
           </label> 
@@ -168,7 +168,7 @@ export const AddProduct = () => {
               type="file"
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="Ingresa la imagen del producto. Ej: 350"
-              onChange={imageHandler}
+              onChange={photoHandler}
             />
             
           </label> 
