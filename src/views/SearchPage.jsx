@@ -14,7 +14,6 @@ export function SearchPage() {
 
   const productSearched = useContext(searchContext);
 
-
   return (
     <>
       <div className=" mt-4 container mx-auto bg-[#ff7a00] rounded-lg p-10">
@@ -23,18 +22,16 @@ export function SearchPage() {
 
       <p className="mt-4 text-center">Resultados encontrados</p>
 
-      <div className="flex flex-wrap">  
-      {productSearched.products == null ? (
-              <div>No hay resultados para su búsqueda</div>
-            ) : (
-              productSearched.products?.map((product, idx) => (
-                <>
-                  
-                    <Product info={product} key={idx} />
-                  
-                </>
-              ))
-            )}
+      <div className="flex flex-wrap">
+        {productSearched.products == null ? (
+          <div>No hay resultados para su búsqueda</div>
+        ) : (
+          productSearched.products?.map((product, idx) => (
+            <>
+              <Product info={product} key={idx} />
+            </>
+          ))
+        )}
       </div>
     </>
   );

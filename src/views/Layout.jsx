@@ -3,14 +3,17 @@ import { Outlet } from "react-router-dom";
 import { Navbar } from "../components/Navbar";
 import { UserContextProvider } from "../firebase models/userContext";
 import { SearchContextProvider } from "../firebase models/SearchContext";
+import { ProductContextProvider } from "../firebase models/ProductContext";
 
 export function Layout() {
   return (
     <main>
       <UserContextProvider>
         <SearchContextProvider>
-          <Navbar />
-          <Outlet />
+          <ProductContextProvider>
+            <Navbar />
+            <Outlet />
+          </ProductContextProvider>
         </SearchContextProvider>
       </UserContextProvider>
     </main>
