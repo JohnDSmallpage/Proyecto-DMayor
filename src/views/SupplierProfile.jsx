@@ -1,6 +1,7 @@
 import Inicio from "../images/home-2-line.png";
-import Perfil from "../images/account-circle-line.png";
+import Perfil from "../images/user-3-line.png";
 import Verified from "../images/shield-check-fill.png";
+import Catalogo from "../images/file-list-3-line.png";
 import { useUser } from "../firebase models/userContext";
 import { Link } from "react-router-dom";
 import { CATALOG } from "../routes/Url";
@@ -24,11 +25,11 @@ export function SupplierProfile() {
       ) : (
         <div
           id="internal-container"
-          className="flex flex-col justify-center items-center w-[366px] mt-[28px] mb-[28px] gap-[15px]"
+          className="flex flex-col justify-center items-center w-screen mx-[14px]  md:mx-[150px] gap-[15px] mt-[29px]"
         >
           <div
             id="top-container"
-            className="flex flex-row w-[366px] h-[115px] bg-[#F3F5F6] rounded-[17px] border-2 gap-[14px]"
+            className="flex flex-row w-full h-[115px] bg-[#F3F5F6] rounded-[17px] border-2 gap-[14px]"
           >
             <div
               id="profile-pic"
@@ -52,25 +53,25 @@ export function SupplierProfile() {
             </div>
           </div>
 
-          <div id="bottom-container" className="flex flex-wrap gap-[6px]">
+          <div id="bottom-container" className="flex flex-wrap justify-between w-full gap-[15px]">
             <Link to={CATALOG}>
               <button
                 id="option-1"
-                className="flex flex-col justify-center items-center w-[180px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+                className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
               >
-                <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
+                <img className="w-[30px] h-[30px]" src={Catalogo} alt="" />
                 <h2
-                  id="option-1-name"
+                  id="catalogo"
                   className="flex justify-center items-center w-[125px] h-[19px] text-[15px] font-semibold"
                 >
                   Catalogo
                 </h2>
 
                 <h4
-                  id="option-1-description"
+                  id="catalogo-description"
                   className="flex justify-center items-center w-[151px] h-[31px] text-[10px]"
                 >
-                  En esta opcion podras ver tu catalogo de productos
+                  Aca podras ver tu catalogo y listar o eliminar productos
                 </h4>
               </button>
             </Link>
@@ -78,27 +79,27 @@ export function SupplierProfile() {
             <Link to={SUPPLIER_INFO}>
               <button
                 id="option-2"
-                className="flex flex-col justify-center items-center w-[180px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+                className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
               >
-                <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
+                <img className="w-[30px] h-[30px]" src={Perfil} alt="" />
                 <h2
-                  id="option-2-name"
+                  id="datos"
                   className="flex justify-center items-center w-[125px] h-[19px] text-[15px] font-semibold"
                 >
                   Datos
                 </h2>
                 <h4
-                  id="option-2-description"
+                  id="datos-description"
                   className="flex justify-center items-center w-[151px] h-[31px] text-[10px]"
                 >
-                  Ver informacion de la compañia
+                  Ver y editar datos de la cuenta del usuario
                 </h4>
               </button>
             </Link>
 
             <button
               id="option-3"
-              className="flex flex-col justify-center items-center w-[180px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+              className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
             >
               <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
               <h2
@@ -116,7 +117,7 @@ export function SupplierProfile() {
             </button>
             <button
               id="option-4"
-              className="flex flex-col justify-center items-center w-[180px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+              className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
             >
               <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
               <h2
@@ -135,7 +136,7 @@ export function SupplierProfile() {
 
             <button
               id="option-5"
-              className="flex flex-col justify-center items-center w-[180px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+              className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
             >
               <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
               <h2
@@ -154,7 +155,7 @@ export function SupplierProfile() {
 
             <button
               id="option-6"
-              className="flex flex-col justify-center items-center w-[180px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+              className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
             >
               <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
               <h2
