@@ -9,6 +9,7 @@ export const LOGIN = "/login";
 export const APPLICATION ="/application";
 export const ADMIN = "/admin";
 export const PRODUCT_PAGE = "/product/:id";
+export const SUPPLIER_PRODUCT = "/supplierProduct/:id";
 export const SUPPLIER_PROFILE = "/supplierProfile";
 export const CHECKOUT = "/checkout";
 export const CLIENT_PROFILE = "/clientProfile"

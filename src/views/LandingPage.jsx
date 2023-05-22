@@ -12,6 +12,7 @@ export function LandingPage() {
   let product = {
     name: "Maizoritos® Chocosafari - Caja De 12 Unidades De 240g",
     price: "35$",
+    photos: [ "https://dummyimage.com/420x260" ],
   };
   const textSearched = useContext(searchContext);
 

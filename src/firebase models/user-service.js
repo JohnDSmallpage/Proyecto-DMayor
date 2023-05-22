@@ -136,3 +136,19 @@ export const addProductToCatalog = async (id, user) => {
     console.log("Producto agregado al catalogo");
     return result;
   }
+
+  export const getProductsBySupplier = async (idProducts) => {
+    const userQuery = query(collection(db,"products"), where("id","in",idProducts));
+    const results = await getDocs(userQuery);
+    
+    if(results.size>0){
+        const products = results.docs.map((item)=>({
+            ...item.data(),
+            id: item.id,
+        }));
+        return products;
+    }else{
+        return null;
+    }
+
+}
