@@ -27,6 +27,8 @@ import { AddProduct } from './views/AddProduct';
 import { ADD_PRODUCT }   from './routes/Url';
 import { CATALOG } from './routes/Url';
 import { SupplierCatalog } from './views/SupplierCatalog';
+import { SUPPLIER_INFO } from './routes/Url';
+import { SupplierInfo } from './views/SupplierInfo';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -52,6 +54,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={ADD_PRODUCT} element={<PrivateSupplier><AddProduct/></PrivateSupplier>}/>
           <Route path={CATALOG} element={<PrivateSupplier><SupplierCatalog/></PrivateSupplier>}/>
           <Route path={SUPPLIER_PRODUCT} element={<PrivateSupplier><ProductPage/></PrivateSupplier>}/>
+          <Route path={SUPPLIER_INFO} element={<PrivateSupplier><SupplierInfo/></PrivateSupplier>}/>
 
         </Route>
       </Routes>
