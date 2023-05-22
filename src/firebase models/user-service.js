@@ -1,5 +1,10 @@
 import { doc, setDoc, collection,query, getDocs, where, updateDoc } from "firebase/firestore";
 import { db } from "./Config";
+import { store } from "./Config";
+import { v4 } from "uuid";
+import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
+
+
 
 // Crea el perfil de usuario en el firestore
 export async function createUserProfile(userId,data){
@@ -7,6 +12,10 @@ export async function createUserProfile(userId,data){
 }
 export async function createSupplierProfile(userId,data){
     return setDoc(doc(db,'suppliers',userId),data);
+}
+
+export async function addNewProduct(productId,data){
+    return setDoc(doc(db,'products',productId),data);
 }
 
 export async function getProductsByName(textSearched){
@@ -106,3 +115,11 @@ export async function updateApplications(uid){
         return null;
     }    
 }
+
+export const uploadPhoto = async (file) => {
+    const storageRef = ref(store, `product-image/${v4()}`);
+    await uploadBytes(storageRef, file);
+    const url =  await getDownloadURL(storageRef);
+    console.log("Nueva imagen cargada");
+    return url;
+  }

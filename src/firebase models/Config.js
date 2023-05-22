@@ -3,6 +3,10 @@ import {getAuth, GoogleAuthProvider} from "firebase/auth"
 import {getFirestore} from "firebase/firestore"
 import {getStorage} from "firebase/storage"
 
+
+
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyCJoOaknb9ouhkLMxI_wmTSmLz6F_yyn5s",
     authDomain: "d-mayor-ad6ee.firebaseapp.com",

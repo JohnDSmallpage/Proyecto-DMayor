@@ -89,7 +89,7 @@ export function Navbar() {
                 </button>
                 <div className="flex flex-col text-white text-xl  cursor-pointer ">
                   <Link
-                    className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                    className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                     to={LANDING_PAGE}
                   >
                     <img
@@ -100,7 +100,7 @@ export function Navbar() {
                     Inicio
                   </Link>
                   <Link
-                    className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                    className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                     to={CATEGORIAS}
                   >
                     <img
@@ -111,7 +111,7 @@ export function Navbar() {
                     Categorías
                   </Link>
                   <Link
-                    className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                    className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                     to={PROVEEDORES}
                   >
                     <img
@@ -122,7 +122,7 @@ export function Navbar() {
                     Proveedores
                   </Link>
                   <Link
-                    className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                    className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                     to={FAQ}
                   >
                     <img
@@ -135,7 +135,7 @@ export function Navbar() {
                   {!user ? (
                     <div className="flex flex-col  text-white text-xl  cursor-pointer ">
                       <Link
-                        className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         to={LOGIN}
                       >
                         <img
@@ -146,7 +146,7 @@ export function Navbar() {
                         Iniciar Sesion
                       </Link>
                       <Link
-                        className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         to={REGISTER}
                       >
                         <img
@@ -161,7 +161,7 @@ export function Navbar() {
                     <div className="flex flex-col text-white text-xl  cursor-pointer ">
                         {user.Company?(
                         <Link
-                        className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         
                         to={SUPPLIER_PROFILE}
                         
@@ -175,7 +175,7 @@ export function Navbar() {
                       </Link>
                       ):(
                         <Link
-                        className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         
                         to={CLIENT_PROFILE}
                         
@@ -191,7 +191,7 @@ export function Navbar() {
                       
                       
                       <button
-                        className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         onClick={handleLogout}
                       >
                         <img
@@ -250,7 +250,7 @@ export function Navbar() {
             <div id="profile-container" className="flex flex-row gap-[7px]">
               {user.Company?(
                         <Link
-                        className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         
                         to={SUPPLIER_PROFILE}
                         
@@ -264,7 +264,7 @@ export function Navbar() {
                       </Link>
                       ):(
                         <Link
-                        className="flex flex row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         
                         to={CLIENT_PROFILE}
                         

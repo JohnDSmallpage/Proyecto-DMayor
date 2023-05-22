@@ -3,6 +3,8 @@ import { Searchbar } from "../components/Searchbar";
 import { Product } from "../components/Product";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
+import { Link } from "react-router-dom";
+import { ADD_PRODUCT } from "../routes/Url";
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
@@ -169,6 +171,21 @@ export function LandingPage() {
           VER MÁS
         </button>
       </div>
+      <h2 className="text-xl font-bold text-gray-800 text-center mt-3">Productos destacados</h2>
+        <section className="flex justify-center mt-4"> 
+        
+         {/* <Product info={product}/> */}
+
+        </section>
+
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+          <Link to={ADD_PRODUCT}>Añadir</Link>
+        </button>
     </div>
+
+
+
+        
+    
   );
 }

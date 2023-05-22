@@ -7,6 +7,8 @@ import {
   signOut } from "@firebase/auth";
 import { auth } from "./Config";
 import { createSupplierProfile, createUserProfile } from "./user-service";
+import { v4 } from "uuid";
+import { addNewProduct } from "./user-service";
 
   export const signInWithGoogle = async()=>{
      const googleProvider = new GoogleAuthProvider();
@@ -63,4 +65,22 @@ export const logout = async()=>{
     await signOut(auth);
   } catch (error) {
   }
+};
+
+
+export const registerProduct = async(
+  data
+  )=>{
+    let id = v4();
+    console.log(id);
+  try {
+    console.log(data);
+    await addNewProduct(id,{
+      id:id,
+      ...data,
+    })
+    console.log("Producto registrado");
+  } catch (error) {
+    console.log(error);
+  } 
 };

@@ -23,6 +23,9 @@ import { ClientProfile } from './views/ClientProfile';
 import { PrivateRouteClient } from './components/PrivateRouteClient';
 import { CheckoutPage } from './views/CheckoutPage';
 import { Chat } from './components/Chat';
+import { AddProduct } from './views/AddProduct';
+import { ADD_PRODUCT }   from './routes/Url';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -44,6 +47,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={CHECKOUT} element={<PrivateRouteClient> <CheckoutPage/> </PrivateRouteClient>} /> 
           <Route path={CLIENT_PROFILE} element={<PrivateRouteClient><ClientProfile/></PrivateRouteClient>}/>
           <Route path={CHAT} element={<PrivateRouteClient><Chat/></PrivateRouteClient>}/>
+          <Route path={ADD_PRODUCT} element={<AddProduct/>}/>
+
         </Route>
       </Routes>
     </BrowserRouter>
