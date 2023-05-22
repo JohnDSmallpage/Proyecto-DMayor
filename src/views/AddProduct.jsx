@@ -1,170 +1,286 @@
-import { ref} from "../../node_modules/firebase/storage";
-import React, {useState} from "react";
-import {store, db} from "../firebase models/Config"
-
-
-
+import { ref } from "../../node_modules/firebase/storage";
+import React, { useState } from "react";
+import { store, db } from "../firebase models/Config";
+import { useForm, useWatch } from "react-hook-form";
+import { registerProduct } from "../firebase models/auth-service";
 
 export const AddProduct = () => {
+  const [error, setError] = useState("");
+  const [values, setValues] = useState({});
+  const [keyInput, setKeyInput] = useState("");
+  const [valueInput, setValueInput] = useState("");
+  const [errors2, setErrors] = useState({});
 
-    const [name, setName] = useState("");
-    const [category, setCategory] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(0);
-    const [unity, setUnity] = useState("");
-    const [discount, setDiscount] = useState(0);
-    const [photo, setPhoto] = useState(null);
-    const [error, setError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {},
+  });
 
-    const types = ["image/png", "image/jpeg"] //tipo de imagen
+  const types = ["image/png", "image/jpeg"]; //tipo de imagen
 
-    const photoHandler = (e) => {
-        let selectedFile = e.target.files[0];
-        if (selectedFile && types.includes(selectedFile.type)){
-            setPhoto(selectedFile);
-            setError("")
-        } 
-        else{
-            setPhoto(null);
-            setError("Por favor selecciona un tipo de imagen válido: png o jpeg")
-        }
+  // const photoHandler = (e) => {
+  //   let selectedFile = e.target.files[0];
+  //   if (selectedFile && types.includes(selectedFile.type)) {
+  //     setPhoto(selectedFile);
+  //     setError("");
+  //   } else {
+  //     setPhoto(null);
+  //     setError("Por favor selecciona un tipo de imagen válido: png o jpeg");
+  //   }
+  // };
+
+  const handleKeyInputChange = (event) => {
+    setKeyInput(event.target.value);
+    setErrors((prevState) => ({
+      ...prevState,
+      key: !Number.isInteger(Number(event.target.value)),
+    }));
+  };
+
+  const handleValueInputChange = (event) => {
+    setValueInput(event.target.value);
+    setErrors((prevState) => ({
+      ...prevState,
+      value:
+        isNaN(Number(event.target.value)) ||
+        Number(event.target.value) < 1 ||
+        Number(event.target.value) > 99 
+    }));
+  };
+
+  const handleAddKeyValue = () => {
+    if (keyInput && valueInput) {
+      setValues((prevState) => ({ ...prevState, [keyInput]: valueInput }));
+      setKeyInput("");
+      setValueInput("");
+      setErrors({});
+    } else {
+      setErrors((prevState) => ({
+        ...prevState,
+        key: !keyInput,
+        value: !valueInput,
+      }));
     }
+  };
 
-    //Añadir producto
-    const addProduct = (e) => {
-        e.preventDefault();
-        console.log(name,category,description,price,unity,discount,photo)
-        const uploadTask = ref(store, `product-image/${photo.name}`).put(photo);
-        uploadTask.on("state_changed", snapshot => {
-            const progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
-            console.log(progress);
-        }, err => {
-            setError(err.message)
-        }, ()=>{
-            ref(store,'product-image').child(photo.name).getDownloadURL().then(url =>{
-                db.collection("products").add({
-                    name: name,
-                    category: category,
-                    description: description,
-                    price: Number(price),
-                    unity: unity,
-                    discount: Number(discount),
-                    image: url
-                }).then(()=>{
-                    setName("");
-                    setCategory("");
-                    setDescription("");
-                    setPrice(0);
-                    setUnity("");
-                    setDiscount(0);
-                    setPhoto("");
-                    setError("");
-                    document.getElementById("file").value = "";
-                }).catch(err=> setError(err.message));
-            } )
-        })
-    } 
+  const handleRemoveKeyValue = (key) => {
+    const { [key]: removedValue, ...rest } = values;
+    setValues(rest);
+  };
+
+
+
+  //Añadir producto
+  const addProduct = (data) => {
+
+    const { ...extraData } = data; //form destructurado
+    data= {...data, discounts: values};
+    data.name = data.name.toLowerCase();
+    data.category = data.category.toLowerCase();
+    data.description = data.description.toLowerCase();
+    for (let key in data.discounts) {
+      if (data.discounts.hasOwnProperty(key)) {
+        const value = data.discounts[key];
+          const percentValue = parseFloat(value) / 100;
+          data.discounts[key] = percentValue.toString();
+        }
+      }
+    
+
+    registerProduct(data);
+    
+  };
 
   return (
     <div className="md:max-w-lg max-w-sm mx-auto bg-white p-8 rounded-xl shadow shadow-slate-300 mt-2">
-      <h1 className="text-3xl lg:text-4xl font-medium text-center p-2">Añadir Nuevo Producto</h1>
+      <h1 className="text-3xl lg:text-4xl font-medium text-center p-2">
+        Añadir Nuevo Producto
+      </h1>
 
-      <form action="" id="form" onSubmit={addProduct}>
+      <form action="" id="form" onSubmit={handleSubmit(addProduct)}>
         <div className="flex flex-col space-y-5">
           <label htmlFor="productName">
             <div className="flex flex-row">
-              <h1 className="font-medium text-slate-700 pb-2">Nombre del producto</h1>
+              <h1 className="font-medium text-slate-700 pb-2">
+                Nombre del producto
+              </h1>
             </div>
-            
+
             <input
-              id="productName"
+              id="name"
               type="text"
+              name="name"
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="Ingresa el nombre del producto. Ej: Licuadora. "
-              onChange={(e) => setName(e.target.value)} value={name}
+              {...register("name", {
+                required: "Este campo no puede estar vacio",
+              })}
+              
             />
-            
+            <p className="text-red-600">{errors.name?.message}</p>
           </label>
 
           <label htmlFor="category">
             <div className="flex flex-row">
               <h1 className="font-medium text-slate-700 pb-2">Categoría.</h1>
             </div>
-            
+
             <input
               id="category"
               type="text"
+              name="category"
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="Ingresa la categoría del producto. Ej: Electrodomésticos. "
-              onChange={(e) => setCategory(e.target.value)} value={category}
+              {...register("category", {
+                required: "Este campo no puede estar vacio",
+              })}
+             
             />
-            
+            <p className="text-red-600">{errors.category?.message}</p>
           </label>
           <label htmlFor="description">
             <div className="flex flex-row">
               <h1 className="font-medium text-slate-700 pb-2">Descripción.</h1>
             </div>
-            
+
             <input
               id="description"
               type="text"
+              name="description"
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="Ingresa la descripción del producto. Ej: Color rojo "
-              onChange={(e) => setDescription(e.target.value)} value={description}
+              {...register("description", {
+                required: "Este campo no puede estar vacio",
+                maxLength: { value: 250, message: "Máximo 100 caracteres" },
+              })}
+              
             />
-            
+            <p className="text-red-600">{errors.description?.message}</p>
           </label>
 
           <label htmlFor="price">
             <div className="flex flex-row">
-              <h1 className="font-medium text-slate-700 pb-2">Precio.</h1>
+              <h1 className="font-medium text-slate-700 pb-2">Precio ($).</h1>
             </div>
-            
+
             <input
               id="price"
               type="number"
+              name="price"
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="Ingresa el precio del producto. Ej: 45"
-              onChange={(e) => setPrice(e.target.value)} value={price}
+              {...register("price", {
+                required: "Este campo no puede estar vacio",
+                pattern: {
+                  value: /^[0-9]+(\.[0-9]+)?$/,
+                  message: "El precio debe ser un número",
+                }
+              })}
+              
             />
-            
-          </label> 
+            <p className="text-red-600">{errors.price?.message}</p>
+          </label>
 
           <label htmlFor="unity">
             <div className="flex flex-row">
-              <h1 className="font-medium text-slate-700 pb-2">Unidad de venta.</h1>
+              <h1 className="font-medium text-slate-700 pb-2">
+                Unidad de venta.
+              </h1>
             </div>
-            
+
             <input
               id="unity"
               type="text"
+              name="unity"
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="Ingresa la unidad del producto. Ej: Kilos/Toneladas"
-              onChange={(e) => setUnity(e.target.value)} value={unity}
-            />
+              {...register("unity", {
+                required: "Este campo no puede estar vacio",
+              })}
             
-          </label> 
+            />
+            <p className="text-red-600">{errors.unity?.message}</p>
+          </label>
 
           <label htmlFor="discount">
             <div className="flex flex-row">
-              <h1 className="font-medium text-slate-700 pb-2">Porcentaje de Descuento.</h1>
+              <h1 className="font-medium text-slate-700 pb-2">
+                Porcentaje de Descuento.
+              </h1>
             </div>
-            
-            <input
-              id="discount"
-              type="number"
-              className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-              placeholder="Ingresa el porcentaje de descuento. Ej: 50"
-              onChange={(e) => setDiscount(e.target.value)} value={discount}
-            />
-            
-          </label> 
 
-          <label htmlFor="photo">
             <div className="flex flex-row">
-              <h1 className="font-medium text-slate-700 pb-2">Imagen del producto.</h1>
+              <div>
+                <input
+                  type="text"
+                  name="keyInput"
+                  value={keyInput}
+                  onChange={handleKeyInputChange} 
+                  className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                  placeholder="Cantidad de productos"
+                />
+                {errors2.key && <span>La clave debe ser un número entero</span>}
+                <input
+                  type="text"
+                  name="valueInput"
+                  value={valueInput}
+                  onChange={handleValueInputChange}
+                  className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                  placeholder="Porcentaje de descuento (Rangos)"
+                />
+                {errors2.value && (
+                  <span>El valor debe ser un número entre 1 y 99</span>
+                )}
+                <button 
+                  onClick={handleAddKeyValue}
+                  type="button"
+                  disabled={errors2.key || errors2.value}
+                  className="w-full py-2 mt-2 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
+                >
+                  Agregar rango
+                </button>
+                <ul>
+                  {Object.entries(values).map(([key, value]) => (
+                    <li key={key}>
+                      {key}: {value}{" "}
+                      <button type="button" className=" ml-2 p-2 mt-2 font-medium text-white bg-red-800 hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center" onClick={() => handleRemoveKeyValue(key)}>
+                        Eliminar
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {/* <input
+                id="Cantidad"
+                type="number"
+                className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                placeholder="Ingresa el porcentaje de descuento. Ej: 50"
+                onChange={(e) => setDiscount(e.target.value)}
+                value={discount}
+              />
+              <input
+                id="Discount"
+                type="number"
+                className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+                placeholder="Ingresa el porcentaje de descuento. Ej: 50"
+                onChange={(e) => setDiscount(e.target.value)}
+                value={discount}
+              /> */}
             </div>
-            
+          </label>
+          {/* <div> prueba</div> */}
+
+          {/* <label htmlFor="photo">
+            <div className="flex flex-row">
+              <h1 className="font-medium text-slate-700 pb-2">
+                Imagen del producto.
+              </h1>
+            </div>
+
             <input
               id="photo"
               type="file"
@@ -172,10 +288,7 @@ export const AddProduct = () => {
               placeholder="Ingresa la imagen del producto. Ej: 350"
               onChange={photoHandler}
             />
-            
-          </label> 
-
-           
+          </label> */}
 
           <button
             className="w-full py-3 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
@@ -197,11 +310,9 @@ export const AddProduct = () => {
             </svg>
             <span>Añadir producto</span>
           </button>
-          
-          
         </div>
       </form>
       {error && <span>{error}</span>}
     </div>
   );
-}
+};

@@ -6,6 +6,10 @@ export async function createUserProfile(userId,data){
     return setDoc(doc(db,'users',userId),data);
 }
 
+export async function addNewProduct(productId,data){
+    return setDoc(doc(db,'products',productId),data);
+}
+
 export async function getProductsByName(textSearched){
     textSearched = textSearched.toLowerCase();
 
