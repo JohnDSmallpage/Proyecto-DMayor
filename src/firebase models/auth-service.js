@@ -73,6 +73,7 @@ export const registerProduct = async(
   data,
   user
   )=>{
+    console.log(data);
     let id = v4();
     console.log(id);
   try {

@@ -5,10 +5,27 @@ import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
 import { Link } from "react-router-dom";
 import { ADD_PRODUCT } from "../routes/Url";
+import { useEffect } from "react";
+import { getAllProducts } from "../firebase models/user-service";
+import { useState } from "react";
+
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
 
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+    const data = await getAllProducts();
+    setProducts(data);
+
+  };
+
+  useEffect(() => {
+    getProducts();
+    textSearched.setSupplierMode(false);
+  }, []);
+  
   let product = {
     name: "Maizoritos® Chocosafari - Caja De 12 Unidades De 240g",
     price: "35$",
@@ -50,42 +67,16 @@ export function LandingPage() {
         </h2>
         <section className="flex flex-row flex-wrap justify-between  gap-[10px] ">
           {/* Poner que se muestren maximo 6 productos */}
-          <div>
-            <Product info={product} />
-          </div>
-          <div>
-            <Product info={product} />
-          </div>
-          <div>
-            <Product info={product} />
-          </div>
-          <div>
-            <Product info={product} />
-          </div>
-          <div>
-            <Product info={product} />
-          </div>
-          <div>
-            <Product info={product} />
-          </div>
-          <div className="hidden md:block">
-            <Product info={product} />
-          </div>
-          <div className="hidden md:block">
-            <Product info={product} />
-          </div>
-          <div className="hidden lg:block">
-            <Product info={product} />
-          </div>
-          <div className="hidden lg:block">
-            <Product info={product} />
-          </div>
-          <div className="hidden lg:block">
-            <Product info={product} />
-          </div>
-          <div className="hidden lg:block">
-            <Product info={product} />
-          </div>
+          {products == null ? (
+          <div>No hay resultados para su búsqueda</div>
+        ) : (
+          products?.map((product, idx) => (
+            <>
+              <Product info={product} key={idx} />
+            </>
+          ))
+        )}
+          
         </section>
         <button className="flex justify-center items-center font-bold text-white bg-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
           VER MÁS

@@ -4,11 +4,13 @@ import { getProductById } from "../firebase models/user-service";
 import { useState } from "react";
 import { set } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { CHECKOUT } from "../routes/Url";
+import { CATALOG, CHECKOUT } from "../routes/Url";
 import { useContext } from "react";
 import { productContext } from "../firebase models/ProductContext";
 import { useUser } from "../firebase models/userContext";
 import { searchContext } from "../firebase models/SearchContext";
+import { deleteProduct } from "../firebase models/user-service";
+
 
 export function ProductPage() {
   const { id } = useParams();
@@ -42,7 +44,13 @@ export function ProductPage() {
   const handleClick = () => {
     selectProduct.setSelectedProduct(product);
     selectProduct.setQuantity(cantidad);
+    
     navigate(CHECKOUT);
+  };
+
+  const handleDeleteProduct = () => {
+    deleteProduct(product.id, user.user);
+    navigate(CATALOG);
   };
 
   const getDiscountJson = () => {};
@@ -193,7 +201,7 @@ export function ProductPage() {
                 </div>
 
                 <button
-                  onClick={handleClick}
+                  onClick={handleDeleteProduct}
                   className="flex ml-auto text-white bg-[#ff7a00] border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded "
                 >
                   Eliminar producto

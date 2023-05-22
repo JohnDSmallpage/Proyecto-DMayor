@@ -5,8 +5,13 @@ import { useForm, useWatch } from "react-hook-form";
 import { registerProduct } from "../firebase models/auth-service";
 import { uploadPhoto } from "../firebase models/user-service";
 import { useUser } from "../firebase models/userContext";
+import { useNavigate } from "react-router-dom";
+import { CATALOG } from "../routes/Url";
 
 export const AddProduct = () => {
+
+  const navigate = useNavigate();
+
   const {user} = useUser();
   const [error, setError] = useState("");
   const [values, setValues] = useState({});
@@ -24,6 +29,7 @@ export const AddProduct = () => {
   } = useForm({
     defaultValues: {},
   });
+  
 
   const types = ["image/png", "image/jpeg"]; //tipo de imagen
 
@@ -87,6 +93,8 @@ export const AddProduct = () => {
     data.name = data.name.toLowerCase();
     data.category = data.category.toLowerCase();
     data.description = data.description.toLowerCase();
+    data.supplierName = user.Company;
+    data.supplierId = user.uid;
     data.photos = [];
     const result = await uploadPhoto(file);
     data.photos.push(result);
@@ -101,6 +109,7 @@ export const AddProduct = () => {
     
 
     registerProduct(data, user);
+    setTimeout(navigate(CATALOG), 2000)
     
   };
 
