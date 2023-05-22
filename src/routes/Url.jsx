@@ -10,4 +10,4 @@ export const APPLICATION ="/application";
 export const ADMIN = "/admin";
 export const PRODUCT_PAGE = "/product/:id";
 export const SUPPLIER_PROFILE = "/supplierProfile";
-export const CATALOGO = "/catalogo";
+

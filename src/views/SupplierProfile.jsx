@@ -1,8 +1,7 @@
 import Inicio from "../images/home-2-line.png";
 import Perfil from "../images/account-circle-line.png";
 import Verified from "../images/shield-check-fill.png";
-import { Link } from "react-router-dom";
-import { CATALOGO } from "../routes/Url";
+
 
 export function SupplierProfile() {
   
@@ -39,11 +38,10 @@ export function SupplierProfile() {
         </div>
 
         <div id="bottom-container" className="flex flex-wrap gap-[6px]">
-          <button 
+          <button
             id="option-1"
             className="flex flex-col justify-center items-center w-[180px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
           >
-            <Link to={CATALOGO}>holalkjfas</Link>
             <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
             <h2
               id="option-1-name"
