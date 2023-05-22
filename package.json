@@ -17,11 +17,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
-<<<<<<< HEAD
     "uuidv4": "^6.2.13"
-=======
     "react-stroke-line": "^0.2.3"
->>>>>>> 7801a758b4b80294c0c624af4f45e61cfca59a94
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
