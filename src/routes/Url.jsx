@@ -15,5 +15,3 @@ export const CLIENT_PROFILE = "/clientProfile"
 export const CHAT = "/chat"
 export const ADD_PRODUCT = "/addproduct"
 export const CATALOG = "/catalog"
-export const CHAT3 = "/chat3"
-
