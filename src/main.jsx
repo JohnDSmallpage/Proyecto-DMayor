@@ -4,7 +4,7 @@ import './index.css'
 import {BrowserRouter} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 
-import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT, CHAT} from './routes/Url';
+import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT, CHAT, CHAT3} from './routes/Url';
 import {LandingPage} from './views/LandingPage';
 import {Layout} from './views/Layout';
 import {Providers} from './views/Providers';
@@ -23,6 +23,7 @@ import { ClientProfile } from './views/ClientProfile';
 import { PrivateRouteClient } from './components/PrivateRouteClient';
 import { CheckoutPage } from './views/CheckoutPage';
 import { Chat } from './components/Chat';
+import  Chat3 from './components/Chat3';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -44,6 +45,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={CHECKOUT} element={<PrivateRouteClient> <CheckoutPage/> </PrivateRouteClient>} /> 
           <Route path={CLIENT_PROFILE} element={<PrivateRouteClient><ClientProfile/></PrivateRouteClient>}/>
           <Route path={CHAT} element={<PrivateRouteClient><Chat/></PrivateRouteClient>}/>
+          <Route path={CHAT3} element={<PrivateRouteClient><Chat3/></PrivateRouteClient>}/>
+        
         </Route>
       </Routes>
     </BrowserRouter>
