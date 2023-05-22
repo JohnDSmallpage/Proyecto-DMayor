@@ -4,6 +4,7 @@ export const searchContext = createContext();
 
 export function SearchContextProvider({children}) {
 
+    
     const [searchText, setSearchText] = useState("");
     const [products, setProducts] = useState([]);
 

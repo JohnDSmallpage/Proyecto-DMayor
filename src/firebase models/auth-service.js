@@ -6,7 +6,10 @@ import {
   signInWithPopup, 
   signOut } from "@firebase/auth";
 import { auth } from "./Config";
-import { createUserProfile } from "./user-service";
+import { addProductToCatalog, createSupplierProfile, createUserProfile } from "./user-service";
+import { v4 } from "uuid";
+import { addNewProduct } from "./user-service";
+
 
   export const signInWithGoogle = async()=>{
      const googleProvider = new GoogleAuthProvider();
@@ -33,12 +36,21 @@ export const registerWithEmailAndPassword = async(
   )=>{
   try {
     const result = await createUserWithEmailAndPassword(auth,email,password,extraData);
-    await createUserProfile(result.user.uid,{
-      uid:result.user.uid,
-      email,
-      password,
-      ...extraData,
-    })
+    if(extraData?.Company != undefined){
+      await createSupplierProfile(result.user.uid,{
+        uid:result.user.uid,
+        email,
+        password,
+        ...extraData,
+      })
+    }else{
+      await createUserProfile(result.user.uid,{
+        uid:result.user.uid,
+        email,
+        password,
+        ...extraData,
+      })
+    }
   } catch (error) {
   } 
 };
@@ -54,4 +66,24 @@ export const logout = async()=>{
     await signOut(auth);
   } catch (error) {
   }
+};
+
+
+export const registerProduct = async(
+  data,
+  user
+  )=>{
+    let id = v4();
+    console.log(id);
+  try {
+    console.log(data);
+    await addNewProduct(id,{
+      id:id,
+      ...data,
+    })
+    await addProductToCatalog(id, user);
+    console.log("Producto registrado");
+  } catch (error) {
+    console.log(error);
+  } 
 };

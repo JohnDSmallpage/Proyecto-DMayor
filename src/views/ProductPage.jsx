@@ -3,18 +3,43 @@ import { useParams } from "react-router-dom";
 import { getProductById } from "../firebase models/user-service";
 import { useState } from "react";
 import { set } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { CHECKOUT } from "../routes/Url";
+import { useContext } from "react";
+import { productContext } from "../firebase models/ProductContext";
 
 export function ProductPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const selectProduct = useContext(productContext)
 
   const [product, setProduct] = useState([]);
   const [descuentos, setDescuentos] = useState("");
+  const [cantidad, setCantidad] = useState(1);
 
   const getProduct = async (id) => {
     const data = await getProductById(id);
     console.log(data);
     setProduct(data);
   };
+
+  const handleInputChange = (e) => {
+    const nuevoValor = e.target.value;
+    const regex = /^[0-9]+$/;
+    if (isNaN(nuevoValor) || nuevoValor <= 0 || !regex.test(nuevoValor)) {
+      setCantidad("");
+    } else {
+      setCantidad(nuevoValor);
+    }
+  };
+
+  const handleClick = () => {
+    selectProduct.setSelectedProduct(product);
+    selectProduct.setQuantity(cantidad);
+    navigate(CHECKOUT)
+  };
+
 
   const getDiscountJson = () => {};
 
@@ -24,6 +49,7 @@ export function ProductPage() {
 
   useEffect(() => {
     const objetoJSON = product.discount;
+    selectProduct.setDiscounts(objetoJSON);
 
     let descuento = "";
 
@@ -155,10 +181,14 @@ export function ProductPage() {
 
                   
                 </div>
+                
+                
+                
 
-                <button className="flex ml-auto text-white bg-[#ff7a00] border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
+                <button onClick={handleClick} className="flex ml-auto text-white bg-[#ff7a00] border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded ">
                   Comprar
                 </button>
+                
                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                   <svg
                     fill="currentColor"
@@ -172,7 +202,16 @@ export function ProductPage() {
                   </svg>
                 </button>
               </div>
-              <span className=" mt text-left whitespace-pre-line title-font font-medium text-xl text-gray-900">
+              
+              <div className="flex flex-row mt-2">
+                
+                <div className=" mt-1 title-font font-medium text-xl text-gray-900">Cantidad: </div>
+
+                <input type="number" className=" ml-4 border border-gray-400 p-2" value={cantidad} onChange={handleInputChange} />
+      {!isNaN(cantidad) ? null : <div>Por favor, introduzca solo números.</div>}
+
+              </div>
+              <span className="text-left whitespace-pre-line title-font font-medium text-xl text-gray-900">
                     {product.length == [] ? (
                       <div>
                         <p>Loading...</p>
