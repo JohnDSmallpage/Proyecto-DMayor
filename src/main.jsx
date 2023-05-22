@@ -4,7 +4,7 @@ import './index.css'
 import {BrowserRouter} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 
-import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT, CHAT} from './routes/Url';
+import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT, CHAT, CHAT3} from './routes/Url';
 import {LandingPage} from './views/LandingPage';
 import {Layout} from './views/Layout';
 import {Providers} from './views/Providers';
@@ -28,6 +28,7 @@ import { ADD_PRODUCT }   from './routes/Url';
 import { CATALOG } from './routes/Url';
 import { SupplierCatalog } from './views/SupplierCatalog';
 
+import  Chat3 from './components/Chat3';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -52,6 +53,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={ADD_PRODUCT} element={<PrivateSupplier><AddProduct/></PrivateSupplier>}/>
           <Route path={CATALOG} element={<PrivateSupplier><SupplierCatalog/></PrivateSupplier>}/>
 
+          <Route path={CHAT3} element={<PrivateRouteClient><Chat3/></PrivateRouteClient>}/>
+        
         </Route>
       </Routes>
     </BrowserRouter>
