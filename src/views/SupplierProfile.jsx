@@ -2,6 +2,8 @@ import Inicio from "../images/home-2-line.png";
 import Perfil from "../images/account-circle-line.png";
 import Verified from "../images/shield-check-fill.png";
 import { useUser } from "../firebase models/userContext";
+import { Link } from "react-router-dom";
+import { CATALOG } from "../routes/Url";
 
 
 export function SupplierProfile() {
@@ -47,6 +49,7 @@ export function SupplierProfile() {
         </div>
 
         <div id="bottom-container" className="flex flex-wrap gap-[6px]">
+          <Link to={CATALOG}>
           <button
             id="option-1"
             className="flex flex-col justify-center items-center w-[180px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
@@ -58,6 +61,7 @@ export function SupplierProfile() {
             >
               Catalogo
             </h2>
+            
             <h4
               id="option-1-description"
               className="flex justify-center items-center w-[151px] h-[31px] text-[10px]"
@@ -65,6 +69,7 @@ export function SupplierProfile() {
               En esta opcion podras ver tu catalogo de productos
             </h4>
           </button>
+          </Link>
 
           <button
             id="option-2"

@@ -4,8 +4,10 @@ import { store, db } from "../firebase models/Config";
 import { useForm, useWatch } from "react-hook-form";
 import { registerProduct } from "../firebase models/auth-service";
 import { uploadPhoto } from "../firebase models/user-service";
+import { useUser } from "../firebase models/userContext";
 
 export const AddProduct = () => {
+  const {user} = useUser();
   const [error, setError] = useState("");
   const [values, setValues] = useState({});
   const [keyInput, setKeyInput] = useState("");
@@ -98,7 +100,7 @@ export const AddProduct = () => {
       }
     
 
-    registerProduct(data);
+    registerProduct(data, user);
     
   };
 

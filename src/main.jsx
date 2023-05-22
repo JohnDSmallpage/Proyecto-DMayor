@@ -25,6 +25,8 @@ import { CheckoutPage } from './views/CheckoutPage';
 import { Chat } from './components/Chat';
 import { AddProduct } from './views/AddProduct';
 import { ADD_PRODUCT }   from './routes/Url';
+import { CATALOG } from './routes/Url';
+import { SupplierCatalog } from './views/SupplierCatalog';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -47,7 +49,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={CHECKOUT} element={<PrivateRouteClient> <CheckoutPage/> </PrivateRouteClient>} /> 
           <Route path={CLIENT_PROFILE} element={<PrivateRouteClient><ClientProfile/></PrivateRouteClient>}/>
           <Route path={CHAT} element={<PrivateRouteClient><Chat/></PrivateRouteClient>}/>
-          <Route path={ADD_PRODUCT} element={<AddProduct/>}/>
+          <Route path={ADD_PRODUCT} element={<PrivateSupplier><AddProduct/></PrivateSupplier>}/>
+          <Route path={CATALOG} element={<PrivateSupplier><SupplierCatalog/></PrivateSupplier>}/>
 
         </Route>
       </Routes>

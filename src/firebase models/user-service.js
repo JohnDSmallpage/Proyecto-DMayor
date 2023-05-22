@@ -6,6 +6,10 @@ import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 
 
 
+
+
+
+
 // Crea el perfil de usuario en el firestore
 export async function createUserProfile(userId,data){
     return setDoc(doc(db,'users',userId),data);
@@ -122,4 +126,13 @@ export const uploadPhoto = async (file) => {
     const url =  await getDownloadURL(storageRef);
     console.log("Nueva imagen cargada");
     return url;
+  }
+
+export const addProductToCatalog = async (id, user) => {
+    const reference = doc(db, "suppliers", user.uid);
+    
+    user.catalog.push(id);
+    const result = await updateDoc(reference, user);
+    console.log("Producto agregado al catalogo");
+    return result;
   }

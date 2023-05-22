@@ -27,6 +27,7 @@ export function ApplicationPage() {
         Rif:"",
         WorkField:"",
         accepted:false,
+        catalog:[],
     },
   });
   const password = useRef({});

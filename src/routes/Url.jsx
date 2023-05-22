@@ -14,3 +14,4 @@ export const CHECKOUT = "/checkout";
 export const CLIENT_PROFILE = "/clientProfile"
 export const CHAT = "/chat"
 export const ADD_PRODUCT = "/addproduct"
+export const CATALOG = "/catalog"
