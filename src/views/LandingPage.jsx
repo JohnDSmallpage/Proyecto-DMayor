@@ -3,6 +3,7 @@ import { Searchbar } from "../components/Searchbar";
 import { Product } from "../components/Product";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
+import Carrousel from "../components/Carrousel";
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
@@ -35,7 +36,7 @@ export function LandingPage() {
         id="carrusel-container"
         className="flex justify-center items-center font-bold"
       >
-        (Carrusel fotos)
+        <Carrousel />
       </div>
 
       <div
