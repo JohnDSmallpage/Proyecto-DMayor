@@ -18,7 +18,9 @@ export function SupplierProfile() {
   const { user, isLoading } = useUser();
 
   return (
+   
     <div id="main-container" className="flex justify-center items-center">
+      {!user.accepted? (
         <div className="flex flex-col justify-center items-center h-screen ">
           <p className="text-[30px] font-bold text-[#ff7a00]">
             Su solicitud esta siendo Revisada
@@ -180,7 +182,9 @@ export function SupplierProfile() {
           </div>
         </div>
       )
+      }
     </div>
+      
   );
 }
 
