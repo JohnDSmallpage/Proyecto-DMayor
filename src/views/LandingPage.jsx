@@ -3,6 +3,7 @@ import { Searchbar } from "../components/Searchbar";
 import { Product } from "../components/Product";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
+import Carrousel from "../components/Carrousel";
 import { Link } from "react-router-dom";
 import { ADD_PRODUCT } from "../routes/Url";
 import { useEffect } from "react";
@@ -55,7 +56,7 @@ export function LandingPage() {
         id="carrusel-container"
         className="flex justify-center items-center font-bold"
       >
-        (Carrusel fotos)
+        <Carrousel />
       </div>
 
       <div
