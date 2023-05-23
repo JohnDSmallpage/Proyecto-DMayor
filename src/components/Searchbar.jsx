@@ -21,9 +21,9 @@ export function Searchbar() {
   };
 
   return (
-    <div id="main-container" className="flex flex-row bg-white">
+    <div id="main-container" className="flex flex-row bg-white w-full rounded-full">
       <input
-        className="text-base text-gray-400 px-2"
+        className="bg-white h-10 pl-5 font-semibold rounded-full text-xl focus:outline-none w-full"
         type="text"
         placeholder="Busca tus productos"
         onChange={handleInputChange}
@@ -31,7 +31,7 @@ export function Searchbar() {
       />
 
       <button
-        className="bg-indigo-500 text-white text-base px-4 py-2 font-thin"
+        className="bg-[#2757c6] text-white text-base px-4 py-2 font-bold rounded-r-full"
         onClick={() => getProducts(productSearched.searchText)}
       >
         <Link to={SEARCH_PAGE}>Buscar</Link>

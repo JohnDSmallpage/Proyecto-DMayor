@@ -43,7 +43,7 @@ const Carrousel = () => {
     };
 
     return (
-    <div className='max-w-full h-[500px] w-full m-auto relative group'>
+    <div className='max-w-full h-[500px] w-full m-auto  group'>
         <div 
             style={{backgroundImage: `url(${slides[currentIndex].url})`}} 
             className='w-full h-full bg-center bg-cover duration-500'>
