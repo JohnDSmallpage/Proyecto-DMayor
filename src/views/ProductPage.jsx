@@ -56,7 +56,12 @@ export function ProductPage() {
   const getDiscountJson = () => {};
 
   useEffect(() => {
-    getProduct(id);
+    if (selectProduct != null && productSearched!=null) {
+      getProduct(id);
+    }
+    else{
+      navigate(CATALOG);
+    }
   }, []);
 
   useEffect(() => {
@@ -221,21 +226,7 @@ export function ProductPage() {
                 </button>
               </div>
 
-              <div className="flex flex-row mt-2">
-                <div className=" mt-1 title-font font-medium text-xl text-gray-900">
-                  Cantidad:{" "}
-                </div>
-
-                <input
-                  type="number"
-                  className=" ml-4 border border-gray-400 p-2"
-                  value={cantidad}
-                  onChange={handleInputChange}
-                />
-                {!isNaN(cantidad) ? null : (
-                  <div>Por favor, introduzca solo números.</div>
-                )}
-              </div>
+              
               <span className="text-left whitespace-pre-line title-font font-medium text-xl text-gray-900">
                 {product.discounts == [] ? (
                   <div>
