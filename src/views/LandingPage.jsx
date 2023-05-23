@@ -10,6 +10,12 @@ import { useEffect } from "react";
 import { getAllProducts } from "../firebase models/user-service";
 import { useState } from "react";
 import productsimg from "../images/products.jpg"
+import visa from "../images/visa.png"
+import masterCard from "../images/mastercard.png"
+import paypal from "../images/logo-Paypal.png"
+import phone from "../images/phone.png"
+import location from "../images/location.png"
+import email from "../images/email.png"
 
 
 
@@ -43,7 +49,7 @@ export function LandingPage() {
     >
       <div
         id="search-container"
-        className="flex flex-col justify-center items-center  bg-[#ff7a00]  p-5 gap-[5px]"
+        className="flex flex-col justify-center items-center shadow-2xl shadow-white bg-gradient-to-b from-orange-400 to-orange-600  p-5 gap-[5px]"
       >
         <h1
           className="w-full text-3xl font-bold text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-4"
@@ -97,7 +103,7 @@ export function LandingPage() {
 
       <div
         id="categories-container"
-        className="flex flex-col justify-center items-center bg-[#FF7A00] gap-[13px] font-bold text-white"
+        className="flex flex-col justify-center items-center bg-gradient-to-b from-orange-500 to-orange-600 gap-[13px] font-bold text-white"
       >
         <h2 className="text-[20px] text-center mt-3">Categorias</h2>
         <div
@@ -178,7 +184,7 @@ export function LandingPage() {
       <footer className="bg-[#f3efef] flex flex-col gap-[20px] p-5">
       <h2 className="text-xl font-bold text-gray-800 text-center mt-3">Get in touch</h2>
             <div className="flex flex-row justify-around">
-              <div className="flex flex-col justify-around">
+              <div className="flex flex-col justify-around h-full">
                 <p className="text-xl font-bold">Quick Links</p>
               <ol className="flex flex-col justify-around gap-[10px]">
                 <li>Privacy Policy</li>
@@ -187,18 +193,21 @@ export function LandingPage() {
                 <li>Contact</li>
               </ol>
             </div>
-            <div>
+            <div className="h-full">
               <p className="text-xl font-bold">Contact Us</p>
             <ol className="flex flex-col justify-around gap-[10px]">
-                <li>1060, Miranda
+                <li className="flex items-center"><img className="w-[30px]" src={location} alt="" /> 1060, Miranda
                 Distribuidor metropolitano
                 Caracas</li>
-                <li>0212-2403260</li>
-                <li>Support@d.mayor.com</li>
+                <li className="flex items-center"><img className="w-[30px]" src={phone} alt="" /> 0212-2403260</li>
+                <li className="flex items-center"><img className="w-[30px]" src={email} alt="" /> Support@d.mayor.com</li>
               </ol>
             </div>
-            <div>
+            <div className="h-full">
               <p className="text-xl font-bold">We Accept</p>
+              <img className="w-[70px]" src={visa} alt="" />
+              <img className="w-[70px]" src={masterCard} alt="" />
+              <img className="w-[70px]" src={paypal} alt="" />
             </div>
             </div>
         </footer>
