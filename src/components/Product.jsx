@@ -29,7 +29,7 @@ export function Product({ info }) {
           </div>
 
           <div id="info-container" className="flex flex-row justify-between">
-            <h2 className="text-gray-900 text-[8px]">
+            <h2 className="text-gray-900 text-[12px]">
               {info.name.charAt(0).toUpperCase() + info.name.slice(1)}
             </h2>
             <p className="mt-1 text-[#FF7A00]">{"$" + info.price}</p>

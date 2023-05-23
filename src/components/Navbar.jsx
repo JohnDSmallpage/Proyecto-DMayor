@@ -25,10 +25,11 @@ import Faq from "../images/question-answer-line.png";
 import Categorias from "../images/store-line.png";
 
 export function Navbar() {
-  const { user, setUser } = useUser();
-  const [open, setOpen] = useState(false);
+  const [open,setOpen]=useState(false);
+  const {user, setUser } = useUser();
   const handleLogout = async () => {
     await logout();
+    setOpen(false)
   };
   return (
     <header aria-label="Site Header" className="shadow-md">
@@ -91,6 +92,7 @@ export function Navbar() {
                   <Link
                     className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                     to={LANDING_PAGE}
+                    onClick={() => setOpen(false)}
                   >
                     <img
                       className="ml-[15px] w-[24px] h-[24px]"
@@ -102,6 +104,7 @@ export function Navbar() {
                   <Link
                     className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                     to={CATEGORIAS}
+                    onClick={() => setOpen(false)}
                   >
                     <img
                       className="ml-[15px] w-[24px] h-[24px]"
@@ -113,6 +116,7 @@ export function Navbar() {
                   <Link
                     className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                     to={PROVEEDORES}
+                    onClick={() => setOpen(false)}
                   >
                     <img
                       className="ml-[15px] w-[24px] h-[24px]"
@@ -124,6 +128,7 @@ export function Navbar() {
                   <Link
                     className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                     to={FAQ}
+                    onClick={() => setOpen(false)}
                   >
                     <img
                       className="ml-[15px] w-[24px] h-[24px]"
@@ -137,6 +142,7 @@ export function Navbar() {
                       <Link
                         className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         to={LOGIN}
+                        onClick={() => setOpen(false)}
                       >
                         <img
                           className="ml-[15px] w-[24px] h-[24px]"
@@ -148,6 +154,7 @@ export function Navbar() {
                       <Link
                         className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         to={REGISTER}
+                        onClick={() => setOpen(false)}
                       >
                         <img
                           className="ml-[15px] w-[24px] h-[24px]"
@@ -162,8 +169,8 @@ export function Navbar() {
                         {user.Company?(
                         <Link
                         className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
-                        
                         to={SUPPLIER_PROFILE}
+                        onClick={() => setOpen(false)}
                         
                       >
                         <img
@@ -176,7 +183,7 @@ export function Navbar() {
                       ):(
                         <Link
                         className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
-                        
+                        onClick={() => setOpen(false)}
                         to={CLIENT_PROFILE}
                         
                       >
@@ -193,6 +200,7 @@ export function Navbar() {
                       <button
                         className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         onClick={handleLogout}
+                        
                       >
                         <img
                           className="ml-[15px] w-[24px] h-[24px]"
@@ -220,24 +228,24 @@ export function Navbar() {
             <span className="sr-only">Home</span>
           </div>
 
-          <nav
-            id="navbar-options"
-            aria-label="Site Nav"
-            className="hidden gap-8 text-sm font-medium md:flex"
-          >
-            <Link className="hover:underline" to={LANDING_PAGE}>Inicio</Link>
-            <Link className="hover:underline" to={CATEGORIAS}>Categorías</Link>
-            <Link className="hover:underline" to={PROVEEDORES}>Proveedores</Link>
-            <Link className="hover:underline" to={FAQ}>FAQ</Link>
-          </nav>
-          {!user ? (
-            <div className="flex items-end gap-4">
-              <Link
-                className=" hidden rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-500 md:flex hover:underline"
-                to={LOGIN}
-              >
-                Iniciar Sesion
-              </Link>
+      <nav
+        aria-label="Site Nav"
+        className="hidden gap-8 text-sm font-medium md:flex"
+      >
+        <Link to={LANDING_PAGE}>Home</Link>
+        <Link to={CATEGORIAS}>Categorías</Link>
+        <Link to={PROVEEDORES}>Proveedores</Link>
+        <Link to={FAQ}>Faq</Link>
+
+      </nav>
+    {!user? (
+      <div className=" flex-1 items-end justify-end gap-4  sm:flex">
+        <Link
+          className=" hidden rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-500 md:flex"
+          to={LOGIN}
+        >
+          Log in
+        </Link>
 
               <Link
                 className="hidden md:flex rounded-lg bg-[#ff7a00] px-5 py-2 text-sm font-medium text-white hover:underline"
@@ -293,3 +301,4 @@ export function Navbar() {
     </header>
   );
 }
+
