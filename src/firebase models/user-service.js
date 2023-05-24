@@ -1,5 +1,14 @@
-import { doc, setDoc, collection,query, getDocs, where, updateDoc } from "firebase/firestore";
+import { doc, setDoc, collection,query, getDocs, where, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "./Config";
+import { store } from "./Config";
+import { v4 } from "uuid";
+import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
+
+
+
+
+
+
 
 // Crea el perfil de usuario en el firestore
 export async function createUserProfile(userId,data){
@@ -7,6 +16,10 @@ export async function createUserProfile(userId,data){
 }
 export async function createSupplierProfile(userId,data){
     return setDoc(doc(db,'suppliers',userId),data);
+}
+
+export async function addNewProduct(productId,data){
+    return setDoc(doc(db,'products',productId),data);
 }
 
 export async function getProductsByName(textSearched){
@@ -106,3 +119,68 @@ export async function updateApplications(uid){
         return null;
     }    
 }
+
+export const uploadPhoto = async (file) => {
+    const storageRef = ref(store, `product-image/${v4()}`);
+    await uploadBytes(storageRef, file);
+    const url =  await getDownloadURL(storageRef);
+    console.log("Nueva imagen cargada");
+    return url;
+  }
+
+export const addProductToCatalog = async (id, user) => {
+    const reference = doc(db, "suppliers", user.uid);
+    
+    user.catalog.push(id);
+    const result = await updateDoc(reference, user);
+    console.log("Producto agregado al catalogo");
+    return result;
+  }
+
+  export const getProductsBySupplier = async (idProducts) => {
+    const userQuery = query(collection(db,"products"), where("id","in",idProducts));
+    const results = await getDocs(userQuery);
+    
+    if(results.size>0){
+        const products = results.docs.map((item)=>({
+            ...item.data(),
+            id: item.id,
+        }));
+        return products;
+    }else{
+        return null;
+    }
+
+    
+
+}
+
+export const getAllProducts = async () => {
+    const userQuery = collection(db,"products");
+    const results = await getDocs(userQuery);
+    
+    if(results.size>0){
+        const products = results.docs.map((item)=>({
+            ...item.data(),
+            id: item.id,
+        }));
+        return products;
+    }else{
+        return null;
+    }
+}
+
+export const deleteProduct = async (productId, user) => {
+    await deleteDoc(doc(db, "products", productId));
+
+    const reference = doc(db, "suppliers", user.uid);
+    console.log(productId);
+    user.catalog =user.catalog.filter((elemento) => elemento !== productId);
+  console.log(user.catalog);
+    await updateDoc(reference, user);
+    console.log("Producto eliminado del catalogo");
+
+}
+
+
+

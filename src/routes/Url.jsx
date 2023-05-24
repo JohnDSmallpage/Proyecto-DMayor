@@ -9,9 +9,13 @@ export const LOGIN = "/login";
 export const APPLICATION ="/application";
 export const ADMIN = "/admin";
 export const PRODUCT_PAGE = "/product/:id";
+export const SUPPLIER_PRODUCT = "/supplierProduct/:id";
 export const SUPPLIER_PROFILE = "/supplierProfile";
 export const CHECKOUT = "/checkout";
 export const CLIENT_PROFILE = "/clientProfile"
 export const CHAT = "/chat"
-export const CHAT3 = "/chat3"
-
+export const ADD_PRODUCT = "/addproduct"
+export const CATALOG = "/catalog"
+export const SUPPLIER_INFO = "/supplierInfo"
+export const CLIENT_CHAT = "/clientChat"
+export const CLIENT_INFO = "/clientInfo"

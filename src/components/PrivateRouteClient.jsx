@@ -1,6 +1,6 @@
 import { Navigate } from "react-router";
 import { useUser } from "../firebase models/userContext";
-import { LANDING_PAGE } from "../routes/Url";
+import { LANDING_PAGE, LOGIN } from "../routes/Url";
 
 
 export function PrivateRouteClient({children}){
@@ -10,7 +10,7 @@ export function PrivateRouteClient({children}){
     }
 
     if(!isLoading && !user){
-        return <Navigate to={LANDING_PAGE}/>;
+        return <Navigate to={LOGIN}/>;
     }
     if(user && user?.Company!=undefined){
         return <Navigate to={LANDING_PAGE}/>

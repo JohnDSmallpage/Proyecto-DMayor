@@ -136,7 +136,7 @@ export function CheckoutPage() {
                           .split(" ")[1]
                           .split(":")[0]}{" "}
                       horas */}{" "}
-                    prueba
+                    {selectProduct.selectedProduct.supplierName}
                   </p>
                 </div>
               </label>

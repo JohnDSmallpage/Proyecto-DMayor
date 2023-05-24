@@ -3,28 +3,56 @@ import { Searchbar } from "../components/Searchbar";
 import { Product } from "../components/Product";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
+import Carrousel from "../components/Carrousel";
+import { Link } from "react-router-dom";
+import { ADD_PRODUCT } from "../routes/Url";
+import { useEffect } from "react";
+import { getAllProducts } from "../firebase models/user-service";
+import { useState } from "react";
+import productsimg from "../images/products.jpg"
+import visa from "../images/visa.png"
+import masterCard from "../images/mastercard.png"
+import paypal from "../images/logo-Paypal.png"
+import phone from "../images/phone.png"
+import location from "../images/location.png"
+import email from "../images/email.png"
+
+
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
 
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+    const data = await getAllProducts();
+    setProducts(data);
+
+  };
+
+  useEffect(() => {
+    getProducts();
+    textSearched.setSupplierMode(false);
+  }, []);
+  
   let product = {
     name: "Maizoritos® Chocosafari - Caja De 12 Unidades De 240g",
     price: "35$",
+    photos: [ "https://dummyimage.com/420x260" ],
   };
   const textSearched = useContext(searchContext);
 
   return (
     <div
       id="main-container"
-      className="flex flex-col justify-center gap-[13px] py-[17px]"
+      className="flex flex-col justify-center"
     >
       <div
         id="search-container"
-        className="flex flex-col justify-center items-center  bg-[#ff7a00]  p-5 gap-[5px]"
+        className="flex flex-col justify-center items-center shadow-2xl shadow-white bg-gradient-to-b from-orange-400 to-orange-600  p-5 gap-[5px]"
       >
         <h1
-          className="text-center font-bold text-white 
-        text-[20px]"
+          className="w-full text-3xl font-bold text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-4"
         >
           Consigue lo que tu negocio necesita para crecer
         </h1>
@@ -33,57 +61,41 @@ export function LandingPage() {
 
       <div
         id="carrusel-container"
-        className="flex justify-center items-center font-bold"
+        className="flex justify-center items-center font-bold "
       >
-        (Carrusel fotos)
+        <Carrousel />
       </div>
 
       <div
         id="products-container"
-        className="flex flex-col justify-center items-center mx-[15px] gap-[13px]"
+        className="flex flex-col justify-center items-center mx-[15px] gap-[13px] p-4"
       >
         <h2 className="text-[20px] font-bold text-gray-800 text-center mt-3">
           Productos destacados
         </h2>
-        <section className="flex flex-row flex-wrap justify-between  gap-[10px] ">
+        <div className="flex flex-row ">
+          <div className="w-1/2 flex justify-center items-center">
+        <img className="h-full rounded-3xl blur-[2px] " src={productsimg} alt="" />
+        <p className="absolute text-2xl text-white font-bold ">Descubre nuevos productos</p>
+        </div>
+        <section className="flex flex-row flex-wrap justify-around  w-1/2 gap-[5px] p-5 ">
+          
+
           {/* Poner que se muestren maximo 6 productos */}
-          <div>
-            <Product info={product} />
-          </div>
-          <div>
-            <Product info={product} />
-          </div>
-          <div>
-            <Product info={product} />
-          </div>
-          <div>
-            <Product info={product} />
-          </div>
-          <div>
-            <Product info={product} />
-          </div>
-          <div>
-            <Product info={product} />
-          </div>
-          <div className="hidden md:block">
-            <Product info={product} />
-          </div>
-          <div className="hidden md:block">
-            <Product info={product} />
-          </div>
-          <div className="hidden lg:block">
-            <Product info={product} />
-          </div>
-          <div className="hidden lg:block">
-            <Product info={product} />
-          </div>
-          <div className="hidden lg:block">
-            <Product info={product} />
-          </div>
-          <div className="hidden lg:block">
-            <Product info={product} />
-          </div>
+          {products == null ? (
+          <div>No hay resultados para su búsqueda</div>
+        ) : (
+          products?.map((product, idx) => (
+            <>
+              <Product info={product} key={idx} />
+            </>
+          ))
+        )}
+        
+
+          
         </section>
+        </div>
         <button className="flex justify-center items-center font-bold text-white bg-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
           VER MÁS
         </button>
@@ -91,7 +103,7 @@ export function LandingPage() {
 
       <div
         id="categories-container"
-        className="flex flex-col justify-center items-center bg-[#FF7A00] gap-[13px] font-bold text-white"
+        className="flex flex-col justify-center items-center bg-gradient-to-b from-orange-500 to-orange-600 gap-[13px] font-bold text-white"
       >
         <h2 className="text-[20px] text-center mt-3">Categorias</h2>
         <div
@@ -169,6 +181,43 @@ export function LandingPage() {
           VER MÁS
         </button>
       </div>
+      <footer className="bg-[#f3efef] flex flex-col gap-[20px] p-5">
+      <h2 className="text-xl font-bold text-gray-800 text-center mt-3">Get in touch</h2>
+            <div className="flex flex-row justify-around">
+              <div className="flex flex-col justify-around h-full">
+                <p className="text-xl font-bold">Quick Links</p>
+              <ol className="flex flex-col justify-around gap-[10px]">
+                <li>Privacy Policy</li>
+                <li>Return Policy</li>
+                <li>Terms of Service</li>
+                <li>Contact</li>
+              </ol>
+            </div>
+            <div className="h-full">
+              <p className="text-xl font-bold">Contact Us</p>
+            <ol className="flex flex-col justify-around gap-[10px]">
+                <li className="flex items-center"><img className="w-[30px]" src={location} alt="" /> 1060, Miranda
+                Distribuidor metropolitano
+                Caracas</li>
+                <li className="flex items-center"><img className="w-[30px]" src={phone} alt="" /> 0212-2403260</li>
+                <li className="flex items-center"><img className="w-[30px]" src={email} alt="" /> Support@d.mayor.com</li>
+              </ol>
+            </div>
+            <div className="h-full">
+              <p className="text-xl font-bold">We Accept</p>
+              <img className="w-[70px]" src={visa} alt="" />
+              <img className="w-[70px]" src={masterCard} alt="" />
+              <img className="w-[70px]" src={paypal} alt="" />
+            </div>
+            </div>
+        </footer>
+
+        
     </div>
+
+
+
+        
+    
   );
 }

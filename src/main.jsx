@@ -4,7 +4,7 @@ import './index.css'
 import {BrowserRouter} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 
-import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT, CHAT, CHAT3} from './routes/Url';
+import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT, CHAT, SUPPLIER_PRODUCT} from './routes/Url';
 import {LandingPage} from './views/LandingPage';
 import {Layout} from './views/Layout';
 import {Providers} from './views/Providers';
@@ -20,10 +20,21 @@ import { ProductPage } from './views/ProductPage';
 import {SupplierProfile} from './views/SupplierProfile';
 import { PrivateSupplier } from './components/PrivateSupplier';
 import { ClientProfile } from './views/ClientProfile';
+import { CLIENT_CHAT } from "./routes/Url";
+import { CLIENT_INFO } from "./routes/Url";
+import { ClientChat } from './views/ClientChat';
+import { ClientInfo } from './views/ClientInfo';
 import { PrivateRouteClient } from './components/PrivateRouteClient';
 import { CheckoutPage } from './views/CheckoutPage';
 import { Chat } from './components/Chat';
-import  Chat3 from './components/Chat3';
+import { AddProduct } from './views/AddProduct';
+import { ADD_PRODUCT }   from './routes/Url';
+import { CATALOG } from './routes/Url';
+import { SupplierCatalog } from './views/SupplierCatalog';
+import { SUPPLIER_INFO } from './routes/Url';
+import { SupplierInfo } from './views/SupplierInfo';
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -45,8 +56,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={CHECKOUT} element={<PrivateRouteClient> <CheckoutPage/> </PrivateRouteClient>} /> 
           <Route path={CLIENT_PROFILE} element={<PrivateRouteClient><ClientProfile/></PrivateRouteClient>}/>
           <Route path={CHAT} element={<PrivateRouteClient><Chat/></PrivateRouteClient>}/>
-          <Route path={CHAT3} element={<PrivateRouteClient><Chat3/></PrivateRouteClient>}/>
-        
+          <Route path={ADD_PRODUCT} element={<PrivateSupplier><AddProduct/></PrivateSupplier>}/>
+          <Route path={CATALOG} element={<PrivateSupplier><SupplierCatalog/></PrivateSupplier>}/>
+          <Route path={SUPPLIER_PRODUCT} element={<PrivateSupplier><ProductPage/></PrivateSupplier>}/>
+          <Route path={SUPPLIER_INFO} element={<PrivateSupplier><SupplierInfo/></PrivateSupplier>}/>
+          <Route path={CLIENT_CHAT} element={<PrivateRouteClient><ClientChat/></PrivateRouteClient>}/>
+          <Route path={CLIENT_INFO} element={<PrivateRouteClient><ClientInfo/></PrivateRouteClient>}/>
+
+
+
         </Route>
       </Routes>
     </BrowserRouter>
