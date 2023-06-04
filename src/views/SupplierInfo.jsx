@@ -1,15 +1,107 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useUser } from "../firebase models/userContext";
+import dmayor from "../images/dmayor.png"
+import phone from "../images/phone.png"
+import location from "../images/location.png"
+import email from "../images/email.png"
+import Carrousel from "../components/Carrousel";
+import { getProductsBySupplier } from "../firebase models/user-service";
+import { searchContext } from "../firebase models/SearchContext";
+import { Product } from "../components/Product";
+import { Link } from "react-router-dom";
+import { CATALOG } from "../routes/Url";
 
 export function SupplierInfo() {
   const { user, isLoading } = useUser();
+  const slides = [
+    {
+        url: 'https://wallpapercave.com/wp/wp7832396.jpg'
+    },
+    {
+        url: 'https://wallpapercave.com/wp/wp7530211.jpg'
+    },
+    {
+        url: 'https://wallpapercave.com/wp/wp6836093.jpg'
+    },
+    {
+        url: 'https://wallpapercave.com/wp/wp7110711.jpg'
+    },
+    {
+        url: 'https://wallpapercave.com/wp/wp3079202.jpg'
+    },
+
+];
+const [products, setProducts] = useState([]);
+
+  const productSearched = useContext(searchContext);
+
+
+  const getSupplierProducts = async () => {
+    const idProducts = user.catalog
+    const data = await getProductsBySupplier(idProducts)
+    setProducts(data)
+
+  }
+
+  useEffect (() => {
+    getSupplierProducts();
+    productSearched.setSupplierMode(true);
+  }, [products])
 
   return (
     <div
       id="main-container"
-      className="flex justify-center items-center mt-[29px]"
+      className="flex flex-col  bg-gray-100 "
     >
-      <div
+      <header className="h-[200px] w-full flex items-center justify-center p-3 pb-0 bg-white shadow-xl">
+        <img src={dmayor} alt="" 
+        className="h-full w-1/3 "/>
+        <div className="w-2/3 p-2">
+          <h1 className="text-2xl font-bold text-gray-800 font-serif">{user.Company}</h1>
+          <p className="mb-4 text-xs text-gray-500 ">Desde {user.CreationDate}</p>
+            <ol className="flex flex-col justify-around gap-[8px]">
+                <li className="flex items-center font-serif gap-2"><img className="w-[25px]" src={location} alt="" /> 
+                {user.Address}
+                </li>
+                <li className="flex items-center font-serif gap-2"><img className="w-[25px]" src={phone} alt="" /> 
+                {user.phone}
+                </li>
+                <li className="flex items-center font-serif gap-2"><img className="w-[25px]" src={email} alt="" />
+                 {user.email}
+                 </li>
+              </ol>
+
+        </div>
+      </header>
+      <article className=" flex gap-3 p-3 h-[400px] w-full0">
+        <div className="bg-white h-full w-1/2 p-2 shadow-xl">
+            <h1 className="text-2xl text-center text-gray-800 font-serif">Acerca de nosotros</h1>
+            <p>{user.Description}</p>
+        </div>
+        <div className="bg-white h-full w-1/2 relative shadow-xl">
+        <Carrousel photos={slides} />
+        </div>
+      </article>
+      <section className="flex flex-col items-center justify-center p-3">
+        <div className="flex flex-col w-full gap-4 items-center justify-center p-3 pb-0 bg-white shadow-xl">
+          <h1 className="text-2xl text-center text-gray-800 font-serif">Nuestros productos</h1>
+          <div className='flex flex-wrap'>
+
+        {products == null ? (
+          <div>No hay resultados para su búsqueda</div>
+        ) : (
+          products?.map((product, idx) => (
+            <>
+              <Product info={product} key={idx} />
+            </>
+          ))
+        )}
+        </div>
+        <Link to={CATALOG} className="text-orange-600 text-center font-bold">Ver catalogo Completo{">"}</Link>
+        </div>
+      </section>
+
+      {/* <div
         id="internal-container"
         className="flex flex-col w-screen mx-[14px]  md:mx-[150px] gap-[10px]"
       >
@@ -104,7 +196,7 @@ export function SupplierInfo() {
             Editar datos
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -21,6 +21,24 @@ import email from "../images/email.png"
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
+  const slides = [
+    {
+        url: 'https://wallpapercave.com/wp/wp7832396.jpg'
+    },
+    {
+        url: 'https://wallpapercave.com/wp/wp7530211.jpg'
+    },
+    {
+        url: 'https://wallpapercave.com/wp/wp6836093.jpg'
+    },
+    {
+        url: 'https://wallpapercave.com/wp/wp7110711.jpg'
+    },
+    {
+        url: 'https://wallpapercave.com/wp/wp3079202.jpg'
+    },
+
+];
 
   const [products, setProducts] = useState([]);
 
@@ -61,9 +79,9 @@ export function LandingPage() {
 
       <div
         id="carrusel-container"
-        className="flex justify-center items-center font-bold "
+        className="flex justify-center items-center font-bold h-[500px] relative"
       >
-        <Carrousel />
+        <Carrousel photos={slides} bool={true} />
       </div>
 
       <div

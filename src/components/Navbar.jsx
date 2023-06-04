@@ -32,7 +32,7 @@ export function Navbar() {
     setOpen(false)
   };
   return (
-    <header aria-label="Site Header" className="shadow-md">
+    <header aria-label="Site Header" className="shadow-md sticky top-0 z-10 bg-white">
       <div id="main-container" className="mx-auto max-w-screen-xl p-4">
         <div
           id="internal-container"
