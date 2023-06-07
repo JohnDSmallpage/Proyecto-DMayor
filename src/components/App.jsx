@@ -5,7 +5,7 @@ import  Layout  from "../views/Layout";
 import  Providers  from "../views/Providers";
 import  Faq  from "../views/Faq";
 import SupplierProfile from "../views/SupplierProfile";
-
+import './style.scss';
 
 export function App() {
 

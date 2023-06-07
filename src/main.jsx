@@ -4,7 +4,7 @@ import './index.css'
 import {BrowserRouter} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 
-import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT, CHAT, SUPPLIER_PRODUCT} from './routes/Url';
+import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT,CHATPAGE, SUPPLIER_PRODUCT} from './routes/Url';
 import {LandingPage} from './views/LandingPage';
 import {Layout} from './views/Layout';
 import {Providers} from './views/Providers';
@@ -26,14 +26,14 @@ import { ClientChat } from './views/ClientChat';
 import { ClientInfo } from './views/ClientInfo';
 import { PrivateRouteClient } from './components/PrivateRouteClient';
 import { CheckoutPage } from './views/CheckoutPage';
-import { Chat } from './components/Chat';
 import { AddProduct } from './views/AddProduct';
 import { ADD_PRODUCT }   from './routes/Url';
 import { CATALOG } from './routes/Url';
 import { SupplierCatalog } from './views/SupplierCatalog';
 import { SUPPLIER_INFO } from './routes/Url';
 import { SupplierInfo } from './views/SupplierInfo';
-
+import './components/style.scss'
+import ChatPage from './views/ChatPage';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -55,7 +55,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={SUPPLIER_PROFILE} element={<PrivateSupplier><SupplierProfile/></PrivateSupplier>} />
           <Route path={CHECKOUT} element={<PrivateRouteClient> <CheckoutPage/> </PrivateRouteClient>} /> 
           <Route path={CLIENT_PROFILE} element={<PrivateRouteClient><ClientProfile/></PrivateRouteClient>}/>
-          <Route path={CHAT} element={<PrivateRouteClient><Chat/></PrivateRouteClient>}/>
+          <Route path={CHATPAGE} element={<PrivateRouteClient><ChatPage></ChatPage></PrivateRouteClient>}/>
           <Route path={ADD_PRODUCT} element={<PrivateSupplier><AddProduct/></PrivateSupplier>}/>
           <Route path={CATALOG} element={<PrivateSupplier><SupplierCatalog/></PrivateSupplier>}/>
           <Route path={SUPPLIER_PRODUCT} element={<PrivateSupplier><ProductPage/></PrivateSupplier>}/>

@@ -2,9 +2,8 @@
 import React, { useState, useEffect, useContext } from "react" ;
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router";
-import { SEARCH_PAGE } from "../routes/Url";
+import { CHATPAGE, SEARCH_PAGE } from "../routes/Url";
 import { productContext } from "../firebase models/ProductContext";
-import { CHAT } from "../routes/Url";
 
 
 export function PaypalCheckout({price}) {
@@ -50,7 +49,7 @@ export function PaypalCheckout({price}) {
         if (success) {
             
             console.log('Order successful . Your order id is--', orderID);
-            navigate(CHAT);
+            navigate(CHATPAGE);
         }
         
     },[success]);
