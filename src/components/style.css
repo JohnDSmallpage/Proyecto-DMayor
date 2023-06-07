@@ -1,0 +1,210 @@
+.chatpage {
+  background-color: #a7bcff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatpage .container {
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 65%;
+  height: 80%;
+  display: flex;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .chatpage .container {
+    width: 90%;
+  }
+}
+
+.chatpage .sidebar {
+  flex: 1;
+  background-color: #3e3c61;
+}
+
+.chatpage .sidebar .navbarchat {
+  display: flex;
+  align-items: center;
+  background-color: #2f2d52;
+  height: 50px;
+  padding: 10px;
+  justify-content: space-between;
+  color: #ddddf7;
+}
+
+.chatpage .sidebar .navbarchat .logo {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .chatpage .sidebar .navbarchat .logo {
+    display: none;
+  }
+}
+
+.chatpage .sidebar .navbarchat .user {
+  display: flex;
+  gap: 10px;
+}
+
+.chatpage .sidebar .navbarchat .user img {
+  background-color: #ddddf7;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chatpage .sidebar .search {
+  border-bottom: 1px solid gray;
+}
+
+.chatpage .sidebar .search .searchForm {
+  padding: 10px;
+}
+
+.chatpage .sidebar .search .searchForm input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
+}
+
+.chatpage .sidebar .search .searchForm input::placeholder {
+  color: lightgrey;
+}
+
+.chatpage .sidebar .userChat {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.chatpage .sidebar .userChat:hover {
+  background-color: #2f2d52;
+}
+
+.chatpage .sidebar .userChat img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chatpage .sidebar .userChat .userChatInfo span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.chatpage .sidebar .userChat .userChatInfo p {
+  font-size: 14px;
+  color: lightgray;
+}
+
+.chatpage .chat1 {
+  flex: 2;
+}
+
+.chatpage .chat1 .chatInfo {
+  height: 50px;
+  background-color: #5d5b8d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  color: lightgray;
+}
+
+.chatpage .chat1 .messages {
+  background-color: #ddddf7;
+  padding: 10px;
+  height: calc(100% - 100px);
+  overflow: scroll;
+}
+
+.chatpage .chat1 .messages .message {
+  display: flex;
+  gap: 20px;
+  padding: 6px;
+}
+
+.chatpage .chat1 .messages .message .messageInfo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chatpage .chat1 .messages .message .messageContent {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chatpage .chat1 .messages .message .messageContent p {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 0px 10px 10px 10px;
+  max-width: max-content;
+}
+
+.chatpage .chat1 .messages .message .messageContent img {
+  width: 50%;
+}
+
+.chatpage .chat1 .messages .message.owner {
+  flex-direction: row-reverse;
+}
+
+.chatpage .chat1 .messages .message.owner .messageContent {
+  align-items: flex-end;
+}
+
+.chatpage .chat1 .messages .message.owner .messageContent p {
+  background-color: #8da4f1;
+  color: white;
+  border-radius: 10px 0px 10px 10px;
+}
+
+.chatpage .chat1 .input {
+  height: 50px;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatpage .chat1 .input input {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: #2f2d52;
+  font-size: 18px;
+}
+
+.chatpage .chat1 .input input::placeholder {
+  color: lightgray;
+}
+
+.chatpage .chat1 .input .send {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chatpage .chat1 .input .send button {
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  background-color: #8da4f1;
+}
