@@ -136,6 +136,12 @@ export const addProductToCatalog = async (id, user) => {
     console.log("Producto agregado al catalogo");
     return result;
   }
+  export const UpdateProfile = async (user) => {
+    const reference = doc(db, "suppliers", user.uid);
+    const result = await updateDoc(reference, user);
+    alert("Datos modificados exitosamente");
+    return result;
+  }
 
   export const getProductsBySupplier = async (idProducts) => {
     const userQuery = query(collection(db,"products"), where("id","in",idProducts));
