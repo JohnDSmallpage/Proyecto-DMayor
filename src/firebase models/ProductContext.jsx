@@ -6,10 +6,11 @@ export function ProductContextProvider({children}) {
     const [discounts, setDiscounts] = useState([]); 
     const [quantity, setQuantity] = useState(1);
     const [selectedProduct, setSelectedProduct] = useState([]);
+    const [finalPrice, setFinalPrice] = useState(1);
 
   return (
     
-    <productContext.Provider value={{selectedProduct, setSelectedProduct, quantity, setQuantity, discounts, setDiscounts}}>
+    <productContext.Provider value={{selectedProduct, setSelectedProduct, quantity, setQuantity, discounts, setDiscounts, finalPrice, setFinalPrice}}>
         {children}
     </productContext.Provider>
 

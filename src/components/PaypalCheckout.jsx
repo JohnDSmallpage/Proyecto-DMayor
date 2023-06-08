@@ -16,13 +16,15 @@ export function PaypalCheckout({price}) {
 
     // creates a paypal order
     const createOrder = (data, actions) => {
+        console.log(selectProduct.finalPrice);
+        console.log("Precio " + price);
         return actions.order.create({
             purchase_units: [
                 {
                     description: "Compra",
                     amount: {
                         currency_code: "USD",
-                        value: price,
+                        value: selectProduct.finalPrice,
                     },
                 },
             ],
@@ -48,7 +50,7 @@ export function PaypalCheckout({price}) {
    
     useEffect(() => {
         if (success) {
-            
+            console.log(selectProduct.finalPrice);
             console.log('Order successful . Your order id is--', orderID);
             navigate(CHAT);
         }
