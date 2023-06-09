@@ -218,7 +218,7 @@ export function Navbar() {
                           src={CerrarSesion}
                           alt=""
                         />
-                        Cerrar Sesion
+                        Cerrar Sesión
                       </button>
                     </div>
                   )}
@@ -280,7 +280,7 @@ export function Navbar() {
                   className="pl-[10px] pr-[2.5px] py-[10px]"
                   src={IniciarSesionNav}
                 ></img>
-                <p className="pr-[10px] pl-[2.5px]">Inicio Sesión</p>
+                <p className="pr-[10px] pl-[2.5px]">Iniciar Sesión</p>
               </Link>
 
               <Link
@@ -291,7 +291,7 @@ export function Navbar() {
                   className="pl-[10px] pr-[2.5px] py-[10px]"
                   src={RegistroNav}
                 ></img>
-                <p className="pr-[10px] pl-[2.5px]">Registro</p>
+                <p className="pr-[10px] pl-[2.5px]">Registrarse</p>
               </Link>
             </div>
           ) : (

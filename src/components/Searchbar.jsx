@@ -25,7 +25,7 @@ export function Searchbar() {
   return (
     <div
       id="main-container"
-      className="flex flex-row bg-white md:w-[350px] rounded-full border-2"
+      className="flex flex-row bg-white md:w-[400px] rounded-full border-2"
     >
       <input
         className="bg-white h-10 pl-5 font-semibold rounded-full text-sm focus:outline-none w-full"
