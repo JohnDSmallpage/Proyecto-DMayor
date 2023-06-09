@@ -11,8 +11,10 @@ export function Layout() {
       <UserContextProvider>
         <SearchContextProvider>
           <ProductContextProvider>
-            <Navbar />
-            <Outlet />
+            <section className="font-robotoSlab">
+              <Navbar />
+              <Outlet />
+            </section>
           </ProductContextProvider>
         </SearchContextProvider>
       </UserContextProvider>
