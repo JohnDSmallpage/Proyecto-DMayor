@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
 import { getProductsByName } from "../firebase models/user-service";
+import Lupa from "../images/search-line-nav.png";
+
 
 export function Searchbar() {
   const [text, setText] = useState("");
@@ -21,21 +23,25 @@ export function Searchbar() {
   };
 
   return (
-    <div id="main-container" className="flex flex-row bg-white w-full rounded-full">
+    <div
+      id="main-container"
+      className="flex flex-row bg-white md:w-[350px] rounded-full border-2"
+    >
       <input
-        className="bg-white h-10 pl-5 font-semibold rounded-full text-xl focus:outline-none w-full"
+        className="bg-white h-10 pl-5 font-semibold rounded-full text-sm focus:outline-none w-full"
         type="text"
-        placeholder="Busca tus productos"
+        placeholder="Busca en D'Mayor"
         onChange={handleInputChange}
         value={productSearched.searchText}
       />
-
-      <button
-        className="bg-[#2757c6] text-white text-base px-4 py-2 font-bold rounded-r-full"
-        onClick={() => getProducts(productSearched.searchText)}
-      >
-        <Link to={SEARCH_PAGE}>Buscar</Link>
-      </button>
+      <div id="boton-buscar" className="flex items-center pr-[5px]">
+        <button
+          className="bg-[#ff7a00] text-white text-sm  font-semibold rounded-full w-[30px] h-[30px] flex justify-center items-center"
+          onClick={() => getProducts(productSearched.searchText)}
+        >
+          <Link to={SEARCH_PAGE}><img src={Lupa}/></Link>
+        </button>
+      </div>
     </div>
   );
 }
