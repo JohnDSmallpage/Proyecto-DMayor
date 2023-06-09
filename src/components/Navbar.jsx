@@ -10,9 +10,17 @@ import {
   LOGIN,
   ADMIN,
   SUPPLIER_PROFILE,
-  CLIENT_PROFILE
+  CLIENT_PROFILE,
 } from "../routes/Url";
 import DMAYOR_LOGO from "../images/DMAYOR_logo.png";
+import Departamentos from "../images/database-line.png";
+import Faq2 from "../images/question-line.png";
+import RegistroNav from "../images/clipboard-line-nav.png";
+import IniciarSesionNav from "../images/login-box-line-nav.png";
+import CerrarSesionNav from "../images/logout-box-line-nav.png";
+import ClientNav from "../images/user-client-line-nav.png";
+import ProvNav from "../images/user-prov-line-nav.png";
+import Camioncito from "../images/truck-line-nav.png";
 import { useUser } from "../firebase models/userContext";
 import { logout } from "../firebase models/auth-service";
 import Perfil from "../images/account-circle-line.png";
@@ -23,20 +31,27 @@ import IniciarSesion from "../images/login-box-line.png";
 import CerrarSesion from "../images/logout-box-line.png";
 import Faq from "../images/question-answer-line.png";
 import Categorias from "../images/store-line.png";
+import { Searchbar } from "../components/Searchbar";
 
 export function Navbar() {
-  const [open,setOpen]=useState(false);
-  const {user, setUser } = useUser();
+  const [open, setOpen] = useState(false);
+  const { user, setUser } = useUser();
   const handleLogout = async () => {
     await logout();
-    setOpen(false)
+    setOpen(false);
   };
   return (
-    <header aria-label="Site Header" className="shadow-md sticky top-0 z-10 bg-white">
-      <div id="main-container" className="mx-auto max-w-screen-xl p-4">
+    <header
+      aria-label="Site Header"
+      className="shadow-md sticky top-0 z-10 bg-white"
+    >
+      <div
+        id="main-container"
+        className="flex justify-center items-center mx-auto max-w-screen-xl h-[75px] "
+      >
         <div
           id="internal-container"
-          className="flex items-center justify-between gap-4 lg:gap-10"
+          className="flex items-center justify-between lg:justify-center gap-2"
         >
           <div id="hamburguer-menu" className="md:hidden">
             <button className="ml-4" onClick={() => setOpen(true)}>
@@ -111,7 +126,7 @@ export function Navbar() {
                       src={Categorias}
                       alt=""
                     />
-                    Categorías
+                    Departamentos
                   </Link>
                   <Link
                     className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
@@ -165,42 +180,38 @@ export function Navbar() {
                       </Link>
                     </div>
                   ) : (
-                    <div className="flex flex-col text-white text-xl  cursor-pointer ">
-                        {user.Company?(
+                    <div className="flex flex-col text-white text-xl  cursor-pointer">
+                      {user.Company ? (
                         <Link
-                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
-                        to={SUPPLIER_PROFILE}
-                        onClick={() => setOpen(false)}
-                        
-                      >
-                        <img
-                          className="ml-[15px] w-[24px] h-[24px]"
-                          src={Perfil}
-                          alt=""
-                        />
-                        <p>{user.Company}</p>
-                      </Link>
-                      ):(
+                          className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                          to={SUPPLIER_PROFILE}
+                          onClick={() => setOpen(false)}
+                        >
+                          <img
+                            className="ml-[15px] w-[24px] h-[24px]"
+                            src={Perfil}
+                            alt=""
+                          />
+                          <p>{user.Company}</p>
+                        </Link>
+                      ) : (
                         <Link
-                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
-                        onClick={() => setOpen(false)}
-                        to={CLIENT_PROFILE}
-                        
-                      >
-                        <img
-                          className="ml-[15px] w-[24px] h-[24px]"
-                          src={Perfil}
-                          alt=""
-                        />
-                        <p className="text-black">{user.name}</p>
-                      </Link>
+                          className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                          onClick={() => setOpen(false)}
+                          to={CLIENT_PROFILE}
+                        >
+                          <img
+                            className="ml-[15px] w-[24px] h-[24px]"
+                            src={Perfil}
+                            alt=""
+                          />
+                          <p>{user.name}</p>
+                        </Link>
                       )}
-                      
-                      
+
                       <button
                         className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         onClick={handleLogout}
-                        
                       >
                         <img
                           className="ml-[15px] w-[24px] h-[24px]"
@@ -216,89 +227,136 @@ export function Navbar() {
             </div>
           </div>
 
-          <div id="logo" className="flex">
+          <div
+            id="logo"
+            className="flex rounded-full hover:bg-[#F3F5F6] px-[8px] hidden md:flex"
+          >
             <Link to={LANDING_PAGE}>
               {" "}
               <img
                 src={DMAYOR_LOGO}
                 alt="LOGO DMAYOR"
-                className="w-[180px]"
+                className="w-[150px]"
               />{" "}
             </Link>
             <span className="sr-only">Home</span>
           </div>
 
-      <nav
-        aria-label="Site Nav"
-        className="hidden gap-8 text-sm font-medium md:flex"
-      >
-        <Link to={LANDING_PAGE}>Home</Link>
-        <Link to={CATEGORIAS}>Categorías</Link>
-        <Link to={PROVEEDORES}>Proveedores</Link>
-        <Link to={FAQ}>Faq</Link>
+          <nav
+            aria-label="Site Nav"
+            className="hidden text-sm font-bold md:flex"
+          >
+            <Link
+              className="flex flex-row items-center bg-white  rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
+              to={CATEGORIAS}
+            >
+              <img
+                className="pl-[10px] pr-[2.5px] py-[10px]"
+                src={Departamentos}
+              ></img>
+              <p className="pr-[10px] pl-[2.5px]">Departamentos</p>
+            </Link>
 
-      </nav>
-    {!user? (
-      <div className=" flex-1 items-end justify-end gap-4  sm:flex">
-        <Link
-          className=" hidden rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-500 md:flex"
-          to={LOGIN}
-        >
-          Log in
-        </Link>
+            <Link
+              className="flex flex-row items-center bg-white   rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
+              to={FAQ}
+            >
+              <img className="pl-[10px] pr-[2.5px] py-[10px]" src={Faq2}></img>
+              <p className="pr-[10px] pl-[2.5px]">FAQ</p>
+            </Link>
+          </nav>
+
+          <div id="buscador" className="">
+            <Searchbar />
+          </div>
+
+          {!user ? (
+            <div className="text-sm font-bold flex-1 items-end justify-end hidden md:flex">
+              <Link
+                className="flex flex-row items-center bg-white  rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
+                to={LOGIN}
+              >
+                <img
+                  className="pl-[10px] pr-[2.5px] py-[10px]"
+                  src={IniciarSesionNav}
+                ></img>
+                <p className="pr-[10px] pl-[2.5px]">Inicio Sesión</p>
+              </Link>
 
               <Link
-                className="hidden md:flex rounded-lg bg-[#ff7a00] px-5 py-2 text-sm font-medium text-white hover:underline"
+                className="flex flex-row items-center bg-white  rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
                 to={REGISTER}
               >
-                Registrarse
+                <img
+                  className="pl-[10px] pr-[2.5px] py-[10px]"
+                  src={RegistroNav}
+                ></img>
+                <p className="pr-[10px] pl-[2.5px]">Registro</p>
               </Link>
             </div>
           ) : (
-            <div id="profile-container" className="flex flex-row gap-[7px]">
-              {user.Company?(
-                        <Link
-                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
-                        
-                        to={SUPPLIER_PROFILE}
-                        
-                      >
-                        <img
-                          className="ml-[15px] w-[24px] h-[24px]"
-                          src={Perfil}
-                          alt=""
-                        />
-                        <p>{user.Company}</p>
-                      </Link>
-                      ):(
-                        <Link
-                        className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
-                        
-                        to={CLIENT_PROFILE}
-                        
-                      >
-                        <img
-                          className="ml-[15px] w-[24px] h-[24px]"
-                          src={Perfil}
-                          alt=""
-                        />
-                        <p className="text-black">{user.name}</p>
-                      </Link>
-                      )}
+            <div
+              id="profile-container"
+              className="text-sm font-bold flex-1 items-center justify-center  hidden md:flex"
+            >
+              {user.Company ? (
+                <Link
+                  className="flex flex-row items-center bg-white  rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
+                  to={SUPPLIER_PROFILE}
+                >
+                  <img
+                    className="pl-[10px] pr-[2.5px] py-[10px]"
+                    src={ProvNav}
+                  ></img>
+                  <p className="pr-[10px] pl-[2.5px]">{user.Company}</p>
+                </Link>
+              ) : (
+                <Link
+                  className="flex flex-row items-center bg-white  rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
+                  to={CLIENT_PROFILE}
+                >
+                  <img
+                    className="pl-[10px] pr-[2.5px] py-[10px]"
+                    src={ClientNav}
+                  ></img>
+                  <p className="pr-[10px] pl-[2.5px]">{user.name}</p>
+                </Link>
+              )}
               <button
                 onClick={handleLogout}
-                className="h-[38px] lg:h-[48px] bg-[#FF914D] text-white  p-2 rounded  hover:underline font-bold hidden md:block"
+                className="hidden text-sm font-bold md:flex flex flex-row items-center bg-white  rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
               >
-                Cerrar Sesión{" "}
+                <img
+                  className="pl-[10px] pr-[2.5px] py-[10px]"
+                  src={CerrarSesionNav}
+                ></img>
+                <p className="pr-[10px] pl-[2.5px]">Cerrar Sesión</p>
               </button>
-              {user?.admin && <Link className="self-center"  to={ADMIN}>adminView</Link>}
+              {user?.admin && (
+                <Link className="self-center" to={ADMIN}>
+                  adminView
+                </Link>
+              )}
             </div>
-            
           )}
-          
+          <div id="camioncito-compras" className="">
+            <Link
+              to={Inicio}
+              className="flex flex-row items-center bg-white  rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
+            >
+              <img
+                className="pl-[10px] pr-[2.5px] py-[10px]"
+                src={Camioncito}
+              />
+              <div id="cantidad-productos" className="pr-[10px] pl-[2.5px]">
+                <p className="flex items-center justify-center bg-black rounded-full text-white text-sm w-[25px] h-[25px]">
+                  0
+                </p>
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </header>
   );
 }
-
