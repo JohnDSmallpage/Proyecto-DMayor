@@ -33,6 +33,8 @@ import { CATALOG } from './routes/Url';
 import { SupplierCatalog } from './views/SupplierCatalog';
 import { SUPPLIER_INFO } from './routes/Url';
 import { SupplierInfo } from './views/SupplierInfo';
+import  { PAY_ORDER } from './routes/Url';
+import { PurchasePage } from './views/PurchasePage';
 
 
 
@@ -62,6 +64,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={SUPPLIER_INFO} element={<PrivateSupplier><SupplierInfo/></PrivateSupplier>}/>
           <Route path={CLIENT_CHAT} element={<PrivateRouteClient><ClientChat/></PrivateRouteClient>}/>
           <Route path={CLIENT_INFO} element={<PrivateRouteClient><ClientInfo/></PrivateRouteClient>}/>
+          <Route path={PAY_ORDER} element={<PrivateRouteClient><PurchasePage/></PrivateRouteClient>}/>
 
 
 

@@ -4,13 +4,15 @@ import { useContext } from "react";
 import { productContext } from "../firebase models/ProductContext";
 import { useState } from "react";
 import {PaypalCheckout} from "../components/PaypalCheckout";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { PAY_ORDER } from "../routes/Url";
 
 export function CheckoutPage() {
   const selectProduct = useContext(productContext);
   const [finalDiscount, setFinalDiscount] = useState(1);
-  const [finalPrice, setFinalPrice] = useState(
-    selectProduct.selectedProduct.price
-  );
+  const navigate = useNavigate();
+
 
   const handleDiscount = () => {
     const discounts = selectProduct.discounts;
@@ -22,16 +24,18 @@ export function CheckoutPage() {
         setFinalDiscount(discounts[clave]);
       }
     }
+    handleFinalPrice();
+    
   };
 
   const handleFinalPrice = () => {
     if (finalDiscount == 1) {
-      setFinalPrice(
+      selectProduct.setFinalPrice(
         parseFloat(selectProduct.quantity) *
           parseFloat(selectProduct.selectedProduct.price)
       );
     } else {
-      setFinalPrice(
+      selectProduct.setFinalPrice(
         parseFloat(selectProduct.quantity) *
           parseFloat(selectProduct.selectedProduct.price) -
           parseFloat(selectProduct.quantity) *
@@ -42,11 +46,11 @@ export function CheckoutPage() {
   };
 
   useEffect(() => {
+
     handleDiscount();
-    handleFinalPrice();
-    console.log(finalDiscount);
-    console.log(finalPrice);
-  }, [finalDiscount, selectProduct.selectedProduct.price]);
+    console.log(selectProduct.finalPrice);
+
+  }, [selectProduct]);
 
   return (
     <>
@@ -89,7 +93,7 @@ export function CheckoutPage() {
                   </h2>
 
                   <p className="text-base text-left px-6 font-bold">
-                    {selectProduct.quantity} unidad
+                    {selectProduct.quantity} unidad/es
                   </p>
                 </div>
               </label>
@@ -148,7 +152,7 @@ export function CheckoutPage() {
                     Total a pagar:
                   </h2>
                   <p className="text-base text-left px-6 font-bold">
-                    ${finalPrice}
+                    ${selectProduct.finalPrice}
                   </p>
                 </div>
               </label>
@@ -158,7 +162,7 @@ export function CheckoutPage() {
                     Método de pago:
                   </h2>
                   <div className="mt-5 flex justify-center h-min">
-                    <PaypalCheckout price={finalPrice} />
+                      <Link to={PAY_ORDER}>Completar compra</Link>
                   </div>
                 </div>
               </label>
