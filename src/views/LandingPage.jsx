@@ -21,7 +21,7 @@ export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
   const slides = [
     {
-      url: "https://wallpapercave.com/wp/wp7832396.jpg",
+      url: "https://img.freepik.com/foto-gratis/concepto-compras-carrito-compras-minimo-sobre-fondo-naranja-representacion-3d_56104-1396.jpg?w=900&t=st=1686440473~exp=1686441073~hmac=f608b53fabe280824e25f953f423c0c66c7e0313587c1de8cb6dde11818f837d",
     },
     {
       url: "https://wallpapercave.com/wp/wp7530211.jpg",
@@ -30,10 +30,10 @@ export function LandingPage() {
       url: "https://wallpapercave.com/wp/wp6836093.jpg",
     },
     {
-      url: "https://wallpapercave.com/wp/wp7110711.jpg",
+      url: "https://img.freepik.com/fotos-premium/imagen-fondo-hay-escenario-exhibir-productos-proteccion-solar-tonos-azules-naranjas_544235-336.jpg?w=826",
     },
     {
-      url: "https://wallpapercave.com/wp/wp3079202.jpg",
+      url: "https://img.freepik.com/fotos-premium/cinta-jugo-naranja-industria-alimentaria-productos-listos-envasado-automatico-concepto-produccion-alimentos-automatizada-ia-generativa_73944-32925.jpg?w=826",
     },
   ];
 
@@ -57,24 +57,27 @@ export function LandingPage() {
   const textSearched = useContext(searchContext);
 
   return (
-    <div id="main-container" className="flex flex-col justify-center gap-4">
+    <div id="main-container" className="flex flex-col justify-center">
+      
+      <div id="carrusel-container" className="flex justify-center items-center font-bold h-[300px] ">
+        
+        <Carrousel photos={slides} bool={true} />
+        {/* <Carrousel photos={slides} bool={true} />  */}
+      </div>
       <div
         id="message-container"
-        className="flex flex-col justify-center items-center shadow-2xl shadow-white bg-gradient-to-b from-orange-400 to-orange-600  p-5 gap-[5px]"
+        className="flex flex-col justify-center items-center shadow-2xl shadow-white bg-gradient-to-b from-orange-400 to-orange-600  p-5 gap-[5px] mb-4"
       >
-        <h1 className="w-full text-3xl font-bold text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-2">
+        <h1 className="w-full text-3xl font-bold text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-2 ">
           Consigue lo que tu negocio necesita para crecer
         </h1>
       </div>
 
-      <div id="carrusel-container" className="flex  font-bold ">
-        carrusel
-        {/* <Carrousel photos={slides} bool={true} />  */}
-      </div>
+      
 
       <div
         id="ofertas-container"
-        className="flex flex-row justify-between w-full h-[500px] px-5 gap-5"
+        className="flex flex-row justify-between w-full h-[500px] px-5 gap-5 "
       >
         <div id="izq-cont" className="flex flex-col w-1/4  rounded-sm gap-5">
           <Link className="h-1/5 rounded ">
@@ -93,7 +96,7 @@ export function LandingPage() {
           className="flex flex-col w-2/4 h-full rounded-sm gap-5"
         >
           <Link className="h-[300px] rounded">
-            <img className="h-full w-full rounded " src={productsimg}/>
+            <img className="h-full w-full rounded " src={productsimg} />
           </Link>
           <div className="flex flex-row gap-5">
             <Link className="h-[180px] w-1/2 rounded">
@@ -115,9 +118,11 @@ export function LandingPage() {
         </div>
       </div>
 
-      <div id="products-container" className="flex flex-col mx-5 gap-2">
+      <div id="products-container" className="flex flex-col mx-5 gap-2 py-4">
         <div className="flex flex-row justify-between">
-          <h1 className="font-semibold text-lg">Productos destacados en D'Mayor</h1>
+          <h1 className="font-semibold text-lg">
+            Productos destacados en D'Mayor
+          </h1>
           <button className="flex justify-center items-center font-bold text-white bg-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
             VER MÁS
           </button>
@@ -137,15 +142,17 @@ export function LandingPage() {
 
       <div
         id="departments-container"
-        className="flex flex-col bg-gradient-to-b from-orange-500 to-orange-600 gap-4 font-bold text-white "
+        className="flex flex-col bg-gradient-to-b from-orange-500 to-orange-600 gap-4 font-bold text-white"
       >
         <div className="flex flex-row justify-between mx-5 mt-5">
-        <h2 className="text-[20px] text-center">Consiguelo todo en nuestros departamentos</h2>
-        <button className="flex justify-center items-center bg-white text-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
-          VER MÁS
-        </button>
+          <h2 className="text-[20px] text-center">
+            Consiguelo todo en nuestros departamentos
+          </h2>
+          <button className="flex justify-center items-center bg-white text-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
+            VER MÁS
+          </button>
         </div>
-        
+
         <div
           id="category-buttons"
           className="flex  flex-row justify-between mx-5 mb-5"
@@ -168,9 +175,7 @@ export function LandingPage() {
             >
               FOTO
             </button>
-            <button className="flex justify-center items-center ">
-              Hogar
-            </button>
+            <button className="flex justify-center items-center ">Hogar</button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
@@ -201,9 +206,7 @@ export function LandingPage() {
             >
               FOTO
             </button>
-            <button className="flex justify-center items-center ">
-              Moda
-            </button>
+            <button className="flex justify-center items-center ">Moda</button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
@@ -239,7 +242,6 @@ export function LandingPage() {
             </button>
           </div>
         </div>
-        
       </div>
       <footer className="bg-[#f3efef] flex flex-col gap-[20px] p-5">
         <h2 className="text-xl font-bold text-gray-800 text-center mt-3">
