@@ -239,6 +239,33 @@ export const AddProduct = () => {
             <p className="text-red-600">{errors.unity?.message}</p>
           </label>
 
+          <label htmlFor="availableQuantity">
+            <div className="flex flex-row">
+              <h1 className="font-medium text-slate-700 pb-2">
+                Cantidad disponible
+              </h1>
+            </div>
+
+            <input
+              id="availableQuantity"
+              type="number"
+              name="availableQuantity"
+              className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+              placeholder="Ingresa la cantidad disponible de producto. Ej: 45"
+              {...register("availableQuantity", {
+                required: "Este campo no puede estar vacio",
+                pattern: {
+                  value: /^[0-9]+$/i,
+                  message: "La cantidad disponible no puede contener letras y debe ser un número entero",
+                },
+                min: { value: 0, message: "La cantidad disponible debe ser mayor a 0" },
+              })}
+            />
+            <p className="text-red-600">{errors.availableQuantity?.message}</p>
+          </label>
+
+          
+
           <label htmlFor="discount">
             <div className="flex flex-row">
               <h1 className="font-medium text-slate-700 pb-2">
