@@ -17,6 +17,17 @@ import phone from "../images/phone.png";
 import location from "../images/location.png";
 import email from "../images/email.png";
 
+import portada from "../images/portada.jpg";
+import camioncito from "../images/camioncito.jpg";
+import ejercicio from "../images/ejercicio.jpg";
+import electronicos from "../images/electronicos.jpg";
+import herramientas from "../images/herramientas.jpg";
+import maquillaje from "../images/maquillaje.jpg";
+import ropa from "../images/ropa.jpg";
+import home from "../images/home.jpg";
+
+
+
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
   const slides = [
@@ -81,13 +92,13 @@ export function LandingPage() {
       >
         <div id="izq-cont" className="flex flex-col w-1/4  rounded-sm gap-5">
           <Link className="h-1/5 rounded ">
-            <img className="h-full w-full rounded" src={productsimg} />
+            <img className="h-full w-full rounded" src={ejercicio} />
           </Link>
           <Link className="h-3/5 rounded ">
-            <img className="h-full w-full rounded" src={productsimg} />
+            <img className="h-full w-full rounded" src={ropa} />
           </Link>
           <Link className="h-1/5 rounded ">
-            <img className="h-full w-full rounded" src={productsimg} />
+            <img className="h-full w-full rounded" src={maquillaje} />
           </Link>
         </div>
 
@@ -96,21 +107,21 @@ export function LandingPage() {
           className="flex flex-col w-2/4 h-full rounded-sm gap-5"
         >
           <Link className="h-[300px] rounded">
-            <img className="h-full w-full rounded " src={productsimg} />
+            <img className="h-full w-full rounded " src={portada} />
           </Link>
           <div className="flex flex-row gap-5">
             <Link className="h-[180px] w-1/2 rounded">
-              <img className="h-full w-full rounded " src={productsimg} />
+              <img className="h-full w-full rounded " src={electronicos} />
             </Link>
             <Link className="h-[180px] w-1/2 rounded">
-              <img className="h-full w-full rounded " src={productsimg} />
+              <img className="h-full w-full rounded " src={herramientas} />
             </Link>
           </div>
         </div>
 
         <div id="der-cont" className="flex flex-col w-1/4 h-full gap-5">
           <Link className="h-2/5 rounded">
-            <img className="h-full w-full rounded " src={productsimg} />
+            <img className="h-full w-full rounded " src={home} />
           </Link>
           <Link className="h-3/5 rounded">
             <img className="h-full w-full rounded " src={productsimg} />
