@@ -1,18 +1,48 @@
 import React, {useEffect, useState} from 'react'
 import {BsChevronCompactLeft, BsChevronCompactRight} from 'react-icons/bs'
 import {RxDotFilled} from 'react-icons/rx'
+import { uploadProfilePic } from '../firebase models/user-service';
 
-const Carrousel = ({photos,bool}) => {
-    const [currentIndex, setCurrentIndex] = useState(0) 
+const Carrousel = ({photos,bool,editable,send}) => {
+    const [currentIndex, setCurrentIndex] = useState(0) ;
+    const [PhotoArray,setPhotoArray] = useState([]);
+
+    
+
+    useEffect(() => {
+        const copy = [...photos];
+        setPhotoArray(copy);
+        if(editable == false){
+            setCurrentIndex(0);
+        }
+    },[photos,editable]);
+
+    const handlePhotoChange = async (event) => {
+        const file = event.target.files[0];
+        const url = await uploadProfilePic(file);
+        PhotoArray[currentIndex] = url; 
+            setPhotoArray(PhotoArray);
+            send("PhotoArray",PhotoArray)
+      };
+      const handlePhotoAdd = async (event) => {
+        const file = event.target.files[0];
+        const index = PhotoArray.length;
+        const url = await uploadProfilePic(file);
+            PhotoArray[index] = url; 
+            setPhotoArray(PhotoArray); 
+            setCurrentIndex(index);
+            send("PhotoArray",PhotoArray)
+      };
+    
   
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;
-        const newIndex = isFirstSlide ? photos.length -1 : currentIndex - 1;
+        const newIndex = isFirstSlide ? PhotoArray.length -1 : currentIndex - 1;
         setCurrentIndex(newIndex);
     };
 
     const nextSlide = () => {
-        const isLastSlide = currentIndex === photos.length -1;
+        const isLastSlide = currentIndex === PhotoArray.length -1;
         const newIndex = isLastSlide ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
     };
@@ -23,9 +53,9 @@ const Carrousel = ({photos,bool}) => {
     };
 
     return (
-    <div className='max-w-full h-full w-full  group'>
+    <div className='max-w-full h-full  group flex-col flex items-center justify-center'>
         <div 
-            style={{backgroundImage: `url(${photos[currentIndex].url})`}} 
+            style={{backgroundImage: `url(${PhotoArray[currentIndex]})`}} 
             className='w-full h-full bg-center bg-cover duration-500'>
         </div>
         {/* Flecha izquierda  */}
@@ -38,7 +68,7 @@ const Carrousel = ({photos,bool}) => {
         </div> 
 
         <div className='flex top-4 justify-center py-2'>  
-            {photos.map((slide, slideIndex) => (
+            {PhotoArray.map((slide, slideIndex) => (
                 <div 
                     key={slideIndex} 
                     onClick={() => goToSlide(slideIndex)}
@@ -50,6 +80,28 @@ const Carrousel = ({photos,bool}) => {
                 </div>
             ))}
         </div>
+        {editable &&
+        <div className="flex flex-row gap-2 p-3">
+        {/* <label for="photo-select">Selecciona La foto que desea editar:</label>
+        <select id="photo-select" onChange={event => goToSlide(event.target.selectedIndex)}
+        >
+        {PhotoArray.map((url, index) => (
+          <option key={index} value={url}>{`photo ${index}`}</option>
+        ))}
+        </select> */}
+        <div className='flex flex-col items-center justify-center'>
+        <p>Cambiar foto actual</p>
+        <label for="photo-file">Selecciona una nueva foto:</label>
+        <input type="file" id="photo-file" onChange={handlePhotoChange}/>
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+        <p>Agregar Foto</p>
+        <label for="photo-file">Selecciona una nueva foto:</label>
+        <input type="file" id="photo-file" onChange={handlePhotoAdd}/>
+        </div>
+        </div>
+        
+        }
     </div>
   )
 }
