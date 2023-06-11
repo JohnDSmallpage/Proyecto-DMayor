@@ -2,7 +2,8 @@ import { doc, setDoc, collection,query, getDocs, where, updateDoc, deleteDoc } f
 import { db } from "./Config";
 import { store } from "./Config";
 import { v4 } from "uuid";
-import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "@firebase/storage";
+import { async } from "@firebase/util";
 
 
 
@@ -152,6 +153,12 @@ export const uploadPhoto = async (file) => {
     console.log("Nueva imagen cargada");
     return url;
   }
+export const uploadProfilePic = async (file)=>{
+    const storageRef = ref(store, `images/${v4()}`)
+      const uploadTask = await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(storageRef);
+      return downloadURL;
+}
 
 export const addProductToCatalog = async (id, user) => {
     const reference = doc(db, "suppliers", user.uid);

@@ -5,39 +5,28 @@ import phone from "../images/phone.png"
 import location from "../images/location.png"
 import email from "../images/email.png"
 import Carrousel from "../components/Carrousel";
-import { getProductsBySupplier, UpdateProfile } from "../firebase models/user-service";
+import { getProductsBySupplier, UpdateProfile, uploadProfilePic } from "../firebase models/user-service";
 import { searchContext } from "../firebase models/SearchContext";
 import { Product } from "../components/Product";
 import { Link } from "react-router-dom";
 import { CATALOG } from "../routes/Url";
 import { useForm } from "react-hook-form";
+import { store } from "../firebase models/Config";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export function SupplierInfo() {
   const { user, isLoading } = useUser();
-  const slides = [
-    {
-        url: 'https://wallpapercave.com/wp/wp7832396.jpg'
-    },
-    {
-        url: 'https://wallpapercave.com/wp/wp7530211.jpg'
-    },
-    {
-        url: 'https://wallpapercave.com/wp/wp6836093.jpg'
-    },
-    {
-        url: 'https://wallpapercave.com/wp/wp7110711.jpg'
-    },
-    {
-        url: 'https://wallpapercave.com/wp/wp3079202.jpg'
-    },
 
-];
 const [products, setProducts] = useState([]);
 const [editable, setEditable] = useState(false);
 const [resetForm, setResetForm] = useState(false);
+const [photoUrl, setPhotoUrl] = useState(null);
+const [photoArray, setPhotoArray] = useState(user.PhotoArray);
+
 
   const productSearched = useContext(searchContext);
   const {
+    setValue,
     register,
     handleSubmit,
     watch,
@@ -56,12 +45,13 @@ const [resetForm, setResetForm] = useState(false);
     }, [defaultValues]);
   }
   const handleResetForm = () => {
+    setEditable(false);
     setResetForm(true);
     setTimeout(() => setResetForm(false), 0);
-    setEditable(false)
   };
   const onSubmit = async (data) => { //form destructurado
     if(editable){
+      setPhotoArray(data.PhotoArray)
       UpdateProfile(data)
       setEditable(false)
     }else{
@@ -73,16 +63,25 @@ const [resetForm, setResetForm] = useState(false);
     const data = await getProductsBySupplier(idProducts)
     setProducts(data)
   }
-  // const editProfile = ()=>{
-  //   if(editable==false){
-  //     setEditable(true);
-  //   }
-  // }
+  
+
+
+  const handlePhotoChange = async (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPhotoUrl(reader.result);
+    };
+    const url = await uploadProfilePic(file);
+    setValue("ProfilePic",url);
+  };
 
   useEffect (() => {
     getSupplierProducts();
     productSearched.setSupplierMode(true);
   }, [products])
+
 
   return (
     <div
@@ -94,9 +93,20 @@ const [resetForm, setResetForm] = useState(false);
       })}>
         
       
-      <header className="h-[200px] w-full flex items-center justify-center p-3 pb-0 bg-white shadow-xl">
-        <img src={dmayor} alt="" 
+      <header className="h-[200px] w-full flex items-center justify-center pb-0 bg-white shadow-xl">
+        
+        {photoUrl !=null ? 
+        ( <img src={photoUrl} alt="Foto cargada"
+        className="h-full w-full " /> 
+        ):(
+        <img src={user.ProfilePic} alt="" 
         className="h-full w-full "/>
+        )}
+        {editable && (
+          <input id="ProfilePic" type="file" onChange={handlePhotoChange} 
+            />
+        )}
+        
         
       </header>
       <article className=" flex gap-3 p-3 h-[500px]  w-full ">
@@ -144,14 +154,8 @@ const [resetForm, setResetForm] = useState(false);
             <p className="text-red-600">{errors.phone?.message}</p>
             <div className="flex gap-2">
             <img className="w-[25px]" src={email} alt="" />
-            <input id="email"
-              {...register("email", {
-                pattern:{
-                  value:/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                  message:"El correo no es valido"}
-              })}
+            <input id="email" disabled
               type="email" placeholder={user.email} className="flex items-center font-serif gap-2 w-full border"/>
-              <p className="text-red-600">{errors.email?.message}</p>
             </div>
             <div>
             <h1 className="text-2xl font-bold mt-4 text-gray-800 font-serif">Acerca de nosotros</h1>
@@ -171,7 +175,12 @@ const [resetForm, setResetForm] = useState(false);
 
         </div>
         <div className="bg-white h-full w-1/2 relative shadow-xl rounded overflow-hidden">
-        <Carrousel photos={slides} />
+          {!editable? (
+          <Carrousel photos={photoArray} editable={editable} />
+          ):(
+              <Carrousel photos={photoArray} editable={editable} send={setValue}/>
+          )}
+
         </div>
       </article>
       <section className="flex flex-col items-center justify-center p-3">
@@ -192,10 +201,11 @@ const [resetForm, setResetForm] = useState(false);
         <Link to={CATALOG} className="text-orange-600 text-center font-bold">Ver catalogo Completo{">"}</Link>
         </div>
       </section>
-      {editable==true ?(
+      {editable ?(
         <div className="flex flex-row justify-evenly gap-5 p-3">
-        <button className="w-full py-3 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
-         onClick={handleResetForm} >cancel</button>
+        <Link className="w-full py-3 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
+         onClick={handleResetForm} 
+         type="button">cancel</Link>
         <button
             className="w-full py-3 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
             type="submit"

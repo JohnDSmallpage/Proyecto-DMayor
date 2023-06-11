@@ -31,21 +31,19 @@ import home from "../images/home.jpg";
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
   const slides = [
-    {
-      url: "https://img.freepik.com/foto-gratis/concepto-compras-carrito-compras-minimo-sobre-fondo-naranja-representacion-3d_56104-1396.jpg?w=900&t=st=1686440473~exp=1686441073~hmac=f608b53fabe280824e25f953f423c0c66c7e0313587c1de8cb6dde11818f837d",
-    },
-    {
-      url: "https://wallpapercave.com/wp/wp7530211.jpg",
-    },
-    {
-      url: "https://wallpapercave.com/wp/wp6836093.jpg",
-    },
-    {
-      url: "https://img.freepik.com/fotos-premium/imagen-fondo-hay-escenario-exhibir-productos-proteccion-solar-tonos-azules-naranjas_544235-336.jpg?w=826",
-    },
-    {
-      url: "https://img.freepik.com/fotos-premium/cinta-jugo-naranja-industria-alimentaria-productos-listos-envasado-automatico-concepto-produccion-alimentos-automatizada-ia-generativa_73944-32925.jpg?w=826",
-    },
+"https://img.freepik.com/foto-gratis/concepto-compras-carrito-compras-minimo-sobre-fondo-naranja-representacion-3d_56104-1396.jpg?w=900&t=st=1686440473~exp=1686441073~hmac=f608b53fabe280824e25f953f423c0c66c7e0313587c1de8cb6dde11818f837d",
+    
+    
+ "https://wallpapercave.com/wp/wp7530211.jpg",
+    
+    
+ "https://wallpapercave.com/wp/wp6836093.jpg",
+    
+    
+       "https://img.freepik.com/fotos-premium/imagen-fondo-hay-escenario-exhibir-productos-proteccion-solar-tonos-azules-naranjas_544235-336.jpg?w=826",
+    
+       "https://img.freepik.com/fotos-premium/cinta-jugo-naranja-industria-alimentaria-productos-listos-envasado-automatico-concepto-produccion-alimentos-automatizada-ia-generativa_73944-32925.jpg?w=826",
+
   ];
 
   const [products, setProducts] = useState([]);
@@ -70,7 +68,7 @@ export function LandingPage() {
   return (
     <div id="main-container" className="flex flex-col justify-center">
       
-      <div id="carrusel-container" className="flex justify-center items-center font-bold h-[300px] ">
+      <div id="carrusel-container" className="flex justify-center items-center font-bold h-[500px] w-full ">
         
         <Carrousel photos={slides} bool={true} />
         {/* <Carrousel photos={slides} bool={true} />  */}
