@@ -47,24 +47,23 @@ const Carrousel = ({photos,bool,editable,send}) => {
         setCurrentIndex(newIndex);
     };
 
-    const goToSlide = (slideIndex) => {
-        setCurrentIndex(slideIndex);
-
-    };
+  const goToSlide = (slideIndex) => {
+    setCurrentIndex(slideIndex);
+  };
 
     return (
-    <div className='max-w-full h-full  group flex-col flex items-center justify-center'>
+    <div className='w-full h-full  group flex-col flex items-center justify-center'>
         <div 
             style={{backgroundImage: `url(${PhotoArray[currentIndex]})`}} 
             className='w-full h-full bg-center bg-cover duration-500'>
-        </div>
+        
         {/* Flecha izquierda  */}
-        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 text-2.5 rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-            <BsChevronCompactLeft onClick={prevSlide} size={20}/>   
-        </div>   
+        <div className='hidden group-hover:block absolute top-[40%] left-0 text-2.5 rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+          <BsChevronCompactLeft onClick={prevSlide} size={30} />
+        </div>
         {/* Flecha derecha  */}
-        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 text-2.5 rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-            <BsChevronCompactRight onClick={nextSlide} size={20}/>   
+        <div className='hidden group-hover:block absolute top-[40%]  right-0 text-2.5 rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+            <BsChevronCompactRight onClick={nextSlide} size={30}/>   
         </div> 
 
         <div className='flex top-4 justify-center py-2'>  
@@ -72,13 +71,14 @@ const Carrousel = ({photos,bool,editable,send}) => {
                 <div 
                     key={slideIndex} 
                     onClick={() => goToSlide(slideIndex)}
-                    className='text-2x1 cursor-pointer'>
+                    className='text-2x1 cursor-pointer self-bottom group-hover:block hidden top-[40%]'>
                         {bool &&
-                        <RxDotFilled/>
+                        <RxDotFilled size={50}/>
                         }
                         
                 </div>
             ))}
+            </div>
         </div>
         {editable &&
         <div className="flex flex-row gap-2 p-3">
@@ -103,7 +103,7 @@ const Carrousel = ({photos,bool,editable,send}) => {
         
         }
     </div>
-  )
-}
+  );
+};
 
-export default Carrousel
+export default Carrousel;

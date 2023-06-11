@@ -12,7 +12,7 @@ export function Product({ info }) {
       <Link to={`/supplierProduct/${info.id}`}>
         <div
           id="main-container"
-          className="flex flex-col bg-[#F3F5F6] rounded-[10px] p-4 w-[174px] h-[134px]"
+          className="flex flex-col bg-[#F3F5F6] rounded-[10px] w-[174px] h-[134px]"
         >
           <div
             id="img-container"
@@ -40,11 +40,11 @@ export function Product({ info }) {
       <Link to={`/product/${info.id}`}>
         <div
           id="main-container"
-          className="flex flex-col bg-[#F3F5F6] rounded-[10px] p-4 w-[174px] h-[134px]"
+          className="flex flex-col bg-[#F3F5F6] rounded p-4 w-[200px] h-[250px]"
         >
           <div
             id="img-container"
-            className="flex justify-center items-center rounded-[5px] h-[90px]"
+            className="flex justify-center items-center rounded-[5px] h-[160px]"
           >
             <img
               className=" w-full h-full"
@@ -56,11 +56,11 @@ export function Product({ info }) {
             />
           </div>
 
-          <div id="info-container" className="flex flex-row justify-between">
-            <h2 className="text-gray-900 text-[8px]">
+          <div id="info-container" className="flex flex-col justify-between">
+            <h2 className="mt-1 text-gray-900 ">
               {info.name.charAt(0).toUpperCase() + info.name.slice(1)}
             </h2>
-            <p className="mt-1 text-[#FF7A00]">{"$" + info.price}</p>
+            <p className="mt-1 text-[#FF7A00] text-xl font-bold">{"$" + info.price}</p>
           </div>
         </div>
       </Link>

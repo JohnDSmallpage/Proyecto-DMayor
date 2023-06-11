@@ -9,233 +9,287 @@ import { ADD_PRODUCT } from "../routes/Url";
 import { useEffect } from "react";
 import { getAllProducts } from "../firebase models/user-service";
 import { useState } from "react";
-import productsimg from "../images/products.jpg"
-import visa from "../images/visa.png"
-import masterCard from "../images/mastercard.png"
-import paypal from "../images/logo-Paypal.png"
-import phone from "../images/phone.png"
-import location from "../images/location.png"
-import email from "../images/email.png"
+import productsimg from "../images/products.jpg";
+import visa from "../images/visa.png";
+import masterCard from "../images/mastercard.png";
+import paypal from "../images/logo-Paypal.png";
+import phone from "../images/phone.png";
+import location from "../images/location.png";
+import email from "../images/email.png";
+
+import portada from "../images/portada.jpg";
+import camioncito from "../images/camioncito.jpg";
+import ejercicio from "../images/ejercicio.jpg";
+import electronicos from "../images/electronicos.jpg";
+import herramientas from "../images/herramientas.jpg";
+import maquillaje from "../images/maquillaje.jpg";
+import ropa from "../images/ropa.jpg";
+import home from "../images/home.jpg";
 
 
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
   const slides = [
-    {
-        url: 'https://wallpapercave.com/wp/wp7832396.jpg'
-    },
-    {
-        url: 'https://wallpapercave.com/wp/wp7530211.jpg'
-    },
-    {
-        url: 'https://wallpapercave.com/wp/wp6836093.jpg'
-    },
-    {
-        url: 'https://wallpapercave.com/wp/wp7110711.jpg'
-    },
-    {
-        url: 'https://wallpapercave.com/wp/wp3079202.jpg'
-    },
+"https://img.freepik.com/foto-gratis/concepto-compras-carrito-compras-minimo-sobre-fondo-naranja-representacion-3d_56104-1396.jpg?w=900&t=st=1686440473~exp=1686441073~hmac=f608b53fabe280824e25f953f423c0c66c7e0313587c1de8cb6dde11818f837d",
+    
+    
+ "https://wallpapercave.com/wp/wp7530211.jpg",
+    
+    
+ "https://wallpapercave.com/wp/wp6836093.jpg",
+    
+    
+       "https://img.freepik.com/fotos-premium/imagen-fondo-hay-escenario-exhibir-productos-proteccion-solar-tonos-azules-naranjas_544235-336.jpg?w=826",
+    
+       "https://img.freepik.com/fotos-premium/cinta-jugo-naranja-industria-alimentaria-productos-listos-envasado-automatico-concepto-produccion-alimentos-automatizada-ia-generativa_73944-32925.jpg?w=826",
 
-];
+  ];
 
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
     const data = await getAllProducts();
     setProducts(data);
-
   };
 
   useEffect(() => {
     getProducts();
     textSearched.setSupplierMode(false);
   }, []);
-  
+
   let product = {
     name: "Maizoritos® Chocosafari - Caja De 12 Unidades De 240g",
     price: "35$",
-    photos: [ "https://dummyimage.com/420x260" ],
+    photos: ["https://dummyimage.com/420x260"],
   };
   const textSearched = useContext(searchContext);
 
   return (
-    <div
-      id="main-container"
-      className="flex flex-col justify-center"
-    >
+    <div id="main-container" className="flex flex-col justify-center">
+      
+      <div id="carrusel-container" className="flex justify-center items-center font-bold h-[500px] w-full ">
+        
+        <Carrousel photos={slides} bool={true} />
+        {/* <Carrousel photos={slides} bool={true} />  */}
+      </div>
       <div
-        id="search-container"
-        className="flex flex-col justify-center items-center shadow-2xl shadow-white bg-gradient-to-b from-orange-400 to-orange-600  p-5 gap-[5px]"
+        id="message-container"
+        className="flex flex-col justify-center items-center shadow-2xl shadow-white bg-gradient-to-b from-orange-400 to-orange-600  p-5 gap-[5px] mb-4"
       >
-        <h1
-          className="w-full text-3xl font-bold text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-4"
-        >
+        <h1 className="w-full text-3xl font-bold text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-2 ">
           Consigue lo que tu negocio necesita para crecer
         </h1>
-        <Searchbar />
       </div>
 
-      <div
-        id="carrusel-container"
-        className="flex justify-center items-center font-bold h-[500px] relative"
-      >
-        <Carrousel photos={slides} bool={true} />
-      </div>
+      
 
       <div
-        id="products-container"
-        className="flex flex-col justify-center items-center mx-[15px] gap-[13px] p-4"
+        id="ofertas-container"
+        className="flex flex-row justify-between w-full h-[500px] px-5 gap-5 "
       >
-        <h2 className="text-[20px] font-bold text-gray-800 text-center mt-3">
-          Productos destacados
-        </h2>
-        <div className="flex flex-row ">
-          <div className="w-1/2 flex justify-center items-center">
-        <img className="h-full rounded-3xl blur-[2px] " src={productsimg} alt="" />
-        <p className="absolute text-2xl text-white font-bold ">Descubre nuevos productos</p>
+        <div id="izq-cont" className="flex flex-col w-1/4  rounded-sm gap-5">
+          <Link className="h-1/5 rounded ">
+            <img className="h-full w-full rounded" src={ejercicio} />
+          </Link>
+          <Link className="h-3/5 rounded ">
+            <img className="h-full w-full rounded" src={ropa} />
+          </Link>
+          <Link className="h-1/5 rounded ">
+            <img className="h-full w-full rounded" src={maquillaje} />
+          </Link>
         </div>
-        <section className="flex flex-row flex-wrap justify-around  w-1/2 gap-[5px] p-5 ">
-          
 
-          {/* Poner que se muestren maximo 6 productos */}
+        <div
+          id="mid-cont"
+          className="flex flex-col w-2/4 h-full rounded-sm gap-5"
+        >
+          <Link className="h-[300px] rounded">
+            <img className="h-full w-full rounded " src={portada} />
+          </Link>
+          <div className="flex flex-row gap-5">
+            <Link className="h-[180px] w-1/2 rounded">
+              <img className="h-full w-full rounded " src={electronicos} />
+            </Link>
+            <Link className="h-[180px] w-1/2 rounded">
+              <img className="h-full w-full rounded " src={herramientas} />
+            </Link>
+          </div>
+        </div>
+
+        <div id="der-cont" className="flex flex-col w-1/4 h-full gap-5">
+          <Link className="h-2/5 rounded">
+            <img className="h-full w-full rounded " src={home} />
+          </Link>
+          <Link className="h-3/5 rounded">
+            <img className="h-full w-full rounded " src={productsimg} />
+          </Link>
+        </div>
+      </div>
+
+      <div id="products-container" className="flex flex-col mx-5 gap-2 py-4">
+        <div className="flex flex-row justify-between">
+          <h1 className="font-semibold text-lg">
+            Productos destacados en D'Mayor
+          </h1>
+          <button className="flex justify-center items-center font-bold text-white bg-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
+            VER MÁS
+          </button>
+        </div>
+        <section className="flex flex-row w-1/2 gap-[10px] ">
           {products == null ? (
-          <div>No hay resultados para su búsqueda</div>
-        ) : (
-          products?.map((product, idx) => (
-            <>
-              <Product info={product} key={idx} />
-            </>
-          ))
-        )}
-        
-
-          
+            <div>No hay resultados para su búsqueda</div>
+          ) : (
+            products?.map((product, idx) => (
+              <>
+                <Product info={product} key={idx} />
+              </>
+            ))
+          )}
         </section>
-        </div>
-        <button className="flex justify-center items-center font-bold text-white bg-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
-          VER MÁS
-        </button>
       </div>
 
       <div
-        id="categories-container"
-        className="flex flex-col justify-center items-center bg-gradient-to-b from-orange-500 to-orange-600 gap-[13px] font-bold text-white"
+        id="departments-container"
+        className="flex flex-col bg-gradient-to-b from-orange-500 to-orange-600 gap-4 font-bold text-white"
       >
-        <h2 className="text-[20px] text-center mt-3">Categorias</h2>
+        <div className="flex flex-row justify-between mx-5 mt-5">
+          <h2 className="text-[20px] text-center">
+            Consiguelo todo en nuestros departamentos
+          </h2>
+          <button className="flex justify-center items-center bg-white text-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
+            VER MÁS
+          </button>
+        </div>
+
         <div
           id="category-buttons"
-          className="flex justify-center items-center flex-row gap-[20px] lg:gap-[30px]"
+          className="flex  flex-row justify-between mx-5 mb-5"
         >
           <div className="flex flex-col gap-[5px]">
             <button
               id="vehicles"
-              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
-              a
+              FOTO
             </button>
-            <button className="flex justify-center items-center text-[12px]">
+            <button className="flex justify-center items-center ">
               Carros
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
               id="home"
-              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
-              a
+              FOTO
             </button>
-            <button className="flex justify-center items-center text-[12px]">
-              Hogar
-            </button>
+            <button className="flex justify-center items-center ">Hogar</button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
               id="phones"
-              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
-              a
+              FOTO
             </button>
-            <button className="flex justify-center items-center text-[12px]">
+            <button className="flex justify-center items-center ">
               Telefonos
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
               id="computers"
-              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
-              a
+              FOTO
             </button>
-            <button className="flex justify-center items-center text-[12px]">
+            <button className="flex justify-center items-center ">
               Comida
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
               id="fashion"
-              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px]"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
-              a
+              FOTO
             </button>
-            <button className="flex justify-center items-center text-[12px]">
-              Moda
+            <button className="flex justify-center items-center ">Moda</button>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <button
+              id="beauty"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
+            >
+              FOTO
+            </button>
+            <button className="flex justify-center items-center hidden sm:block">
+              Belleza
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
               id="beauty"
-              className="bg-gray-100 rounded-[50%] h-[55px] lg:h-[75px] w-[55px] lg:w-[75px] hidden sm:block"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
             >
-              a
+              FOTO
             </button>
-            <button className="flex justify-center items-center text-[12px] hidden sm:block">
+            <button className="flex justify-center items-center  hidden sm:block">
+              Belleza
+            </button>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <button
+              id="beauty"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
+            >
+              FOTO
+            </button>
+            <button className="flex justify-center items-center hidden sm:block">
               Belleza
             </button>
           </div>
         </div>
-        <button className="flex justify-center items-center bg-white text-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px] mb-[10px]">
-          VER MÁS
-        </button>
       </div>
       <footer className="bg-[#f3efef] flex flex-col gap-[20px] p-5">
-      <h2 className="text-xl font-bold text-gray-800 text-center mt-3">Get in touch</h2>
-            <div className="flex flex-row justify-around">
-              <div className="flex flex-col justify-around h-full">
-                <p className="text-xl font-bold">Quick Links</p>
-              <ol className="flex flex-col justify-around gap-[10px]">
-                <li>Privacy Policy</li>
-                <li>Return Policy</li>
-                <li>Terms of Service</li>
-                <li>Contact</li>
-              </ol>
-            </div>
-            <div className="h-full">
-              <p className="text-xl font-bold">Contact Us</p>
+        <h2 className="text-xl font-bold text-gray-800 text-center mt-3">
+          Mantente en contacto
+        </h2>
+        <div className="flex flex-row justify-around">
+          <div className="flex flex-col justify-around h-full">
+            <p className="text-xl font-bold">Accesos rapidos</p>
             <ol className="flex flex-col justify-around gap-[10px]">
-                <li className="flex items-center"><img className="w-[30px]" src={location} alt="" /> 1060, Miranda
-                Distribuidor metropolitano
-                Caracas</li>
-                <li className="flex items-center"><img className="w-[30px]" src={phone} alt="" /> 0212-2403260</li>
-                <li className="flex items-center"><img className="w-[30px]" src={email} alt="" /> Support@d.mayor.com</li>
-              </ol>
-            </div>
-            <div className="h-full">
-              <p className="text-xl font-bold">We Accept</p>
-              <img className="w-[70px]" src={visa} alt="" />
-              <img className="w-[70px]" src={masterCard} alt="" />
-              <img className="w-[70px]" src={paypal} alt="" />
-            </div>
-            </div>
-        </footer>
-
-        
+              <li>Politicas de Privacidad</li>
+              <li>Politicas de Retorno</li>
+              <li>Terminos y Servicios</li>
+              <li>Contacto</li>
+            </ol>
+          </div>
+          <div className="h-full">
+            <p className="text-xl font-bold">Contactanos</p>
+            <ol className="flex flex-col justify-around gap-[10px]">
+              <li className="flex items-center">
+                <img className="w-[30px]" src={location} alt="" /> 1060, Miranda
+                Distribuidor metropolitano Caracas
+              </li>
+              <li className="flex items-center">
+                <img className="w-[30px]" src={phone} alt="" /> 0212-2403260
+              </li>
+              <li className="flex items-center">
+                <img className="w-[30px]" src={email} alt="" />{" "}
+                Support@d.mayor.com
+              </li>
+            </ol>
+          </div>
+          <div className="h-full">
+            <p className="text-xl font-bold">Aceptamos</p>
+            <img className="w-[70px]" src={visa} alt="" />
+            <img className="w-[70px]" src={masterCard} alt="" />
+            <img className="w-[70px]" src={paypal} alt="" />
+          </div>
+        </div>
+      </footer>
     </div>
-
-
-
-        
-    
   );
 }
