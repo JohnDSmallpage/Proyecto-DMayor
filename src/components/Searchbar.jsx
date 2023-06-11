@@ -14,7 +14,6 @@ export function Searchbar() {
   const productSearched = useContext(searchContext);
 
   const handleInputChange = (event) => {
-    console.log(event.target.value);
     productSearched.setSearchText(event.target.value);
   };
 
