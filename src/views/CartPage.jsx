@@ -6,12 +6,58 @@ import { useState } from "react";
 import {PaypalCheckout} from "../components/PaypalCheckout";
 
 export const CartPage = () => {
+
+  const selectProduct = useContext(productContext);
+  const [finalDiscount, setFinalDiscount] = useState(1);
+  const navigate = useNavigate();
+
+
+  const handleDiscount = () => {
+    const discounts = selectProduct.discounts;
+    const unit = selectProduct.quantity;
+    for (const clave in discounts) {
+      if (parseInt(unit) < clave) {
+        break;
+      } else if (parseInt(unit) >= clave) {
+        setFinalDiscount(discounts[clave]);
+      }
+    }
+    handleFinalPrice();
+    
+  };
+
+  const handleFinalPrice = () => {
+    if (finalDiscount == 1) {
+      selectProduct.setFinalPrice(
+        parseFloat(selectProduct.quantity) *
+          parseFloat(selectProduct.selectedProduct.price)
+      );
+    } else {
+      selectProduct.setFinalPrice(
+        parseFloat(selectProduct.quantity) *
+          parseFloat(selectProduct.selectedProduct.price) -
+          parseFloat(selectProduct.quantity) *
+            parseFloat(selectProduct.selectedProduct.price) *
+            parseFloat(finalDiscount)
+      );
+    }
+  };
+
+  useEffect(() => {
+
+    handleDiscount();
+    console.log(selectProduct.finalPrice);
+
+  }, [selectProduct]);
+
+
+
+
   return (
     <section className='Section_cart mx-auto'>
         
         <h1 className='py-10 text-xs font-medium text-gray-500 uppercase text-center'>Resumen de compra</h1>
         <section className="min-h-screen  p-14">
-            
             <div>
                 <div className='flex flex-col'>
                     <div className='-m-1.5 overflow-x-auto'>
