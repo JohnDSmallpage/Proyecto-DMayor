@@ -9,10 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { CATALOG } from "../routes/Url";
 
 export const AddProduct = () => {
-
   const navigate = useNavigate();
 
-  const {user} = useUser();
+  const { user } = useUser();
   const [error, setError] = useState("");
   const [values, setValues] = useState({});
   const [keyInput, setKeyInput] = useState("");
@@ -29,7 +28,6 @@ export const AddProduct = () => {
   } = useForm({
     defaultValues: {},
   });
-  
 
   const types = ["image/png", "image/jpeg"]; //tipo de imagen
 
@@ -59,7 +57,7 @@ export const AddProduct = () => {
       value:
         isNaN(Number(event.target.value)) ||
         Number(event.target.value) < 1 ||
-        Number(event.target.value) > 99 
+        Number(event.target.value) > 99,
     }));
   };
 
@@ -83,13 +81,10 @@ export const AddProduct = () => {
     setValues(rest);
   };
 
-
-
   //Añadir producto
   const addProduct = async (data) => {
-
     const { ...extraData } = data; //form destructurado
-    data= {...data, discounts: values};
+    data = { ...data, discounts: values };
     data.name = data.name.toLowerCase();
     data.category = data.category.toLowerCase();
     data.description = data.description.toLowerCase();
@@ -102,15 +97,13 @@ export const AddProduct = () => {
     for (let key in data.discounts) {
       if (data.discounts.hasOwnProperty(key)) {
         const value = data.discounts[key];
-          const percentValue = parseFloat(value) / 100;
-          data.discounts[key] = percentValue.toString();
-        }
+        const percentValue = parseFloat(value) / 100;
+        data.discounts[key] = percentValue.toString();
       }
-    
+    }
 
     registerProduct(data, user);
-    setTimeout(navigate(CATALOG), 2000)
-    
+    setTimeout(navigate(CATALOG), 2000);
   };
 
   return (
@@ -137,7 +130,6 @@ export const AddProduct = () => {
               {...register("name", {
                 required: "Este campo no puede estar vacio",
               })}
-              
             />
             <p className="text-red-600">{errors.name?.message}</p>
           </label>
@@ -147,7 +139,7 @@ export const AddProduct = () => {
               <h1 className="font-medium text-slate-700 pb-2">Categoría.</h1>
             </div>
 
-            <input
+            <select
               id="category"
               type="text"
               name="category"
@@ -156,8 +148,18 @@ export const AddProduct = () => {
               {...register("category", {
                 required: "Este campo no puede estar vacio",
               })}
-             
-            />
+            >
+              <option value="Textiles">Textiles</option>
+              <option value="Construcción">Construcción</option>
+              <option value="Alimentos">Alimentos</option>
+              <option value="Electrodomésticos">Electrodomésticos</option>
+              <option value="Ganadería">Agricultura</option>
+              <option value="Agricultura">Ganadería</option>
+              <option value="Químicos">Químicos</option>
+              <option value="Salud">Salud</option>
+              <option value="Mecánica">Mecánica</option>
+            </select>
+
             <p className="text-red-600">{errors.category?.message}</p>
           </label>
           <label htmlFor="description">
@@ -175,14 +177,15 @@ export const AddProduct = () => {
                 required: "Este campo no puede estar vacio",
                 maxLength: { value: 250, message: "Máximo 100 caracteres" },
               })}
-              
             />
             <p className="text-red-600">{errors.description?.message}</p>
           </label>
 
           <label htmlFor="price">
             <div className="flex flex-row">
-              <h1 className="font-medium text-slate-700 pb-2">Precio ($).</h1>
+              <h1 className="font-medium text-slate-700 pb-2">
+                Precio por unidad ($).
+              </h1>
             </div>
 
             <input
@@ -199,7 +202,6 @@ export const AddProduct = () => {
                 },
                 min: { value: 0, message: "El precio debe ser mayor a 0" },
               })}
-              
             />
             <p className="text-red-600">{errors.price?.message}</p>
           </label>
@@ -211,7 +213,7 @@ export const AddProduct = () => {
               </h1>
             </div>
 
-            <input
+            <select
               id="unity"
               type="text"
               name="unity"
@@ -220,8 +222,20 @@ export const AddProduct = () => {
               {...register("unity", {
                 required: "Este campo no puede estar vacio",
               })}
-            
-            />
+            >
+
+              <option value="Metros">Metros</option>
+              <option value="Centrímetros">Centímetros</option>
+              <option value="Kg">Kg</option>
+              <option value="ft">ft</option>
+              <option value="gramos">gramos</option>
+              <option value="Cajas">Cajas</option>
+              <option value="Paletas">Paletas</option>
+              <option value="Unidades">Unidades</option>
+
+              </select>
+           
+
             <p className="text-red-600">{errors.unity?.message}</p>
           </label>
 
@@ -238,7 +252,7 @@ export const AddProduct = () => {
                   type="text"
                   name="keyInput"
                   value={keyInput}
-                  onChange={handleKeyInputChange} 
+                  onChange={handleKeyInputChange}
                   className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
                   placeholder="Cantidad de productos"
                 />
@@ -254,7 +268,7 @@ export const AddProduct = () => {
                 {errors2.value && (
                   <span>El valor debe ser un número entre 1 y 99</span>
                 )}
-                <button 
+                <button
                   onClick={handleAddKeyValue}
                   type="button"
                   disabled={errors2.key || errors2.value}
@@ -266,17 +280,19 @@ export const AddProduct = () => {
                   {Object.entries(values).map(([key, value]) => (
                     <li key={key}>
                       {key}: {value}{" "}
-                      <button type="button" className=" ml-2 p-2 mt-2 font-medium text-white bg-red-800 hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center" onClick={() => handleRemoveKeyValue(key)}>
+                      <button
+                        type="button"
+                        className=" ml-2 p-2 mt-2 font-medium text-white bg-red-800 hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
+                        onClick={() => handleRemoveKeyValue(key)}
+                      >
                         Eliminar
                       </button>
                     </li>
                   ))}
                 </ul>
               </div>
-              
             </div>
           </label>
-          
 
           <label htmlFor="photo">
             <div className="flex flex-row">
@@ -285,21 +301,26 @@ export const AddProduct = () => {
               </h1>
             </div>
 
-            <div className='flex flex-col  py-1 mt-2'>
-                  <h1 className="font-medium text-slate-700 pb-2 text-sm">Subir foto producto</h1>
-                  <div className="flex justify-center">
-                  <img className='w-[110px] h-[110px] mb-2' src={image} alt="" />
-                  </div>
+            <div className="flex flex-col  py-1 mt-2">
+              <h1 className="font-medium text-slate-700 pb-2 text-sm">
+                Subir foto producto
+              </h1>
+              <div className="flex justify-center">
+                <img className="w-[110px] h-[110px] mb-2" src={image} alt="" />
+              </div>
 
-                  <input type="file" name='profilePic' onChange={(e) => {setFile(e.target.files[0]), setImage(URL.createObjectURL(e.target.files[0]))}} className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"/>
+              <input
+                type="file"
+                name="profilePic"
+                onChange={(e) => {
+                  setFile(e.target.files[0]),
+                    setImage(URL.createObjectURL(e.target.files[0]));
+                }}
+                className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+              />
             </div>
 
-            <input
-              
-              
-              
-            />
-            
+            <input />
           </label>
 
           <button

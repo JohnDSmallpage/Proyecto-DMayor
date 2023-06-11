@@ -29,6 +29,7 @@ export async function getProductsByName(textSearched){
     const usersQuery = query(collection(db,"products"), where("name","==", textSearched));
     
     const results = await getDocs(usersQuery);
+    
 
     if(results.size>0){
         const products = results.docs.map((item, idx)=>({
@@ -36,11 +37,35 @@ export async function getProductsByName(textSearched){
             id: item.id,
         }
         ));
+
         return products;
     }else{
         return null;
     }    
 }
+
+export async function getProductsByCategory(categorySearched){
+    categorySearched = categorySearched.toLowerCase();
+    console.log(categorySearched);
+    const usersQuery = query(collection(db,"products"), where("category","==", categorySearched));
+    
+    const results = await getDocs(usersQuery);
+    
+
+    if(results.size>0){
+        const products = results.docs.map((item, idx)=>({
+            ...item.data(),
+            id: item.id,
+        }
+        ));
+
+        return products;
+    }else{
+        return null;
+    }    
+}
+
+
 export async function getUserProfile(email){
     const userQuery = query(collection(db,"users"), where("email","==",email));
          const results = await getDocs(userQuery);

@@ -162,7 +162,7 @@ export function CheckoutPage() {
                     Método de pago:
                   </h2>
                   <div className="mt-5 flex justify-center h-min">
-                      <Link to={PAY_ORDER}>Completar compra</Link>
+                      <Link to={PAY_ORDER}>Completar</Link>
                   </div>
                 </div>
               </label>
