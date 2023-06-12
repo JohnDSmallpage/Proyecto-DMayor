@@ -1,7 +1,7 @@
-import React from 'react'
-import Sidebar from '../components/Chat/Sidebar'
+/*import React from 'react'
+import Sidebar from '../components/Chat/SideBar'
 import Chat1 from '../components/Chat/Chat1'
-import "./ChatDesign.scss"
+import "../components/Chat/ChatDesign.scss"
 
 const ChatPage=() => {
   return (
@@ -13,4 +13,4 @@ const ChatPage=() => {
     </div>
   )
 }
-export default ChatPage
+export default ChatPage*/

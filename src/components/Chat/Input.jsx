@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-//import Img from "./img/img.png"
+import Img from "./../../images/karen.jpeg"
 //import Attach from "./img/attach.png"
 import { useUser } from '../../firebase models/userContext'
 import { useContext } from 'react'
@@ -13,7 +13,7 @@ import { serverTimestamp } from '@firebase/firestore'
 const Input = () => {
 
   const [text, setText] = useState('')
-  //const [img, setImg] = useState(null)
+  const [img, setImg] = useState(null)
 
   const {user} = useUser();
   const {data} = useContext(ChatContext)
@@ -38,7 +38,7 @@ const Input = () => {
                 text,
                 senderId: currentUser.uid,
                 date: Timestamp.now(),
-                //img: downloadURL,
+                img: downloadURL,
               }),
             });
           });
@@ -88,7 +88,7 @@ const Input = () => {
         {/*<img src={Attach} alt=""/>*/}
         <input type="file" style={{display: "none"}} id="file" onChange={e => setImg(e.target.files[0])}/>
         <label htmlFor='file'>
-          {/*<img src={Img} alt=""/>*/}
+          {<img src={Img} alt=""/>}
         </label>
         <button onClick={handleSend}>Enviar</button>
       </div>
