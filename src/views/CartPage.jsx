@@ -1,57 +1,56 @@
-import React from 'react'
+import React from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { productContext } from "../firebase models/ProductContext";
 import { useState } from "react";
 import {PaypalCheckout} from "../components/PaypalCheckout";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+{/* import { PAY_ORDER } from "../routes/Url"; */}
 
 export const CartPage = () => {
-
-  const selectProduct = useContext(productContext);
-  const [finalDiscount, setFinalDiscount] = useState(1);
-  const navigate = useNavigate();
-
-
-  const handleDiscount = () => {
-    const discounts = selectProduct.discounts;
-    const unit = selectProduct.quantity;
-    for (const clave in discounts) {
-      if (parseInt(unit) < clave) {
-        break;
-      } else if (parseInt(unit) >= clave) {
-        setFinalDiscount(discounts[clave]);
+    const selectProduct = useContext(productContext);
+    const [finalDiscount, setFinalDiscount] = useState(1);
+    const navigate = useNavigate();
+  
+  
+    const handleDiscount = () => {
+      const discounts = selectProduct.discounts;
+      const unit = selectProduct.quantity;
+      for (const clave in discounts) {
+        if (parseInt(unit) < clave) {
+          break;
+        } else if (parseInt(unit) >= clave) {
+          setFinalDiscount(discounts[clave]);
+        }
       }
-    }
-    handleFinalPrice();
-    
-  };
-
-  const handleFinalPrice = () => {
-    if (finalDiscount == 1) {
-      selectProduct.setFinalPrice(
-        parseFloat(selectProduct.quantity) *
-          parseFloat(selectProduct.selectedProduct.price)
-      );
-    } else {
-      selectProduct.setFinalPrice(
-        parseFloat(selectProduct.quantity) *
-          parseFloat(selectProduct.selectedProduct.price) -
+      handleFinalPrice();
+      
+    };
+  
+    const handleFinalPrice = () => {
+      if (finalDiscount == 1) {
+        selectProduct.setFinalPrice(
           parseFloat(selectProduct.quantity) *
-            parseFloat(selectProduct.selectedProduct.price) *
-            parseFloat(finalDiscount)
-      );
-    }
-  };
-
-  useEffect(() => {
-
-    handleDiscount();
-    console.log(selectProduct.finalPrice);
-
-  }, [selectProduct]);
-
-
-
+            parseFloat(selectProduct.selectedProduct.price)
+        );
+      } else {
+        selectProduct.setFinalPrice(
+          parseFloat(selectProduct.quantity) *
+            parseFloat(selectProduct.selectedProduct.price) -
+            parseFloat(selectProduct.quantity) *
+              parseFloat(selectProduct.selectedProduct.price) *
+              parseFloat(finalDiscount)
+        );
+      }
+    };
+  
+    useEffect(() => {
+  
+      handleDiscount();
+      console.log(selectProduct.finalPrice);
+  
+    }, [selectProduct]);
 
   return (
     <section className='Section_cart mx-auto'>
@@ -78,16 +77,65 @@ export const CartPage = () => {
                                     </thead>
                                     <tbody className='divide-y divide-gray-200 dark:divide-gray-700'>
                                         <tr className='hover:bg-gray-300 dark:hover:bg-gray-300 '>
-                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 w-[14%]'>
+                                            <td className='whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 w-[10%]'>
                                                 <img src="https://lh3.googleusercontent.com/EEnORFmYiOCheegKoFEnrDJn0rcJU_MvURWHuhsl5HLrXcDctEYjGojz0gqVXNjPHN05CwYeaOGrvq0cMEW_jpseJb2wGcv__QQdA64A8--ybao" alt="" className='w-50px m-auto'/>
                                             </td>
-                                            <td className=' px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 text-left'>Prod Name</td>
-                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600'>Prov Name</td>
-                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 text-center'>500</td>
-                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 text-center'>2</td>
-                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 text-center'>1000</td>
-                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600'>no hay descuento</td>
-                                            <td className='bpx-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 text-center'>1000</td> 
+                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 text-left'>
+                                                <div className="selectDoctor">
+                                                    {/* Prod Name */}
+                                                    {selectProduct.selectedProduct.name.charAt(0).toUpperCase() +
+                                                    selectProduct.selectedProduct.name.slice(1)}
+                                                </div>
+                                            </td>
+                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600'>
+                                                <label htmlFor="duration">
+                                                    {/* Prov Name */}
+                                                    {selectProduct.selectedProduct.supplierName} 
+                                                </label> 
+                                            </td>
+                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 text-center'>
+                                                <label htmlFor="date">
+                                                    {/* Precio por unidad */}
+                                                    ${selectProduct.selectedProduct.price}/
+                                                    {selectProduct.selectedProduct.unity}
+                                                </label>
+                                                
+                                            </td>
+                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 text-center'>
+                                                <label htmlFor="date">
+                                                    {/* Cantidad */}
+                                                    {selectProduct.quantity} unidad/es
+                                                </label>
+                                                
+                                            </td>
+                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 text-center'>
+                                                <label htmlFor="time">
+                                                    {/* Precio sin descuento */}
+                                                    $
+                                                    {parseFloat(selectProduct.quantity) *
+                                                        parseFloat(selectProduct.selectedProduct.price)}
+                                                </label>
+                                                
+                                            </td>
+                                            <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600'>
+                                                <label htmlFor="time">
+                                                    {/* Descuento */}
+                                                    {finalDiscount == 1 ? (
+                                                        <div>Sin descuento por unidad</div>
+                                                    ) : (
+                                                        <div>
+                                                            {finalDiscount * 100}% sobre el precio por unidad
+                                                        </div>
+                                                    )}
+                                                </label>
+                                                
+                                            </td>
+                                            <td className='bpx-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-600 text-center'>
+                                                <label htmlFor="motive">
+                                                    {/* Total a Pagar */}
+                                                    ${selectProduct.finalPrice}
+                                                </label>
+                                            </td> 
                                         </tr>
                                     </tbody>
                                 </table>
@@ -99,12 +147,12 @@ export const CartPage = () => {
                     <label htmlFor="paypal">
                         <div className="py-10 mt-2">
                             <h2 className="font-medium text-gray-500 uppercase text-right">
-                            Método de pago:
+                            completar compra:
                             </h2>
                             <div className="mt-5 flex justify-end text right h-min">
-
-                            { /* paypal checkout */ }
-
+                                <button className="bg-[#FF914D] hover:bg-[#ff7a00] text-white font-bold py-4 px-7 rounded inline-flex items-center"> 
+                                    {/* <Link to={PAY_ORDER}>Checkout</Link> */}
+                                </button>
                             </div>
                         </div>
                     </label>
