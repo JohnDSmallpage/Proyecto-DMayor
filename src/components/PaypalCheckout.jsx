@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { SEARCH_PAGE } from "../routes/Url";
 import { productContext } from "../firebase models/ProductContext";
 import { CHAT } from "../routes/Url";
+import { reduceAvailableQuantity } from "../firebase models/user-service";
 
 
 export function PaypalCheckout({price}) {
@@ -52,12 +53,14 @@ export function PaypalCheckout({price}) {
         if (success) {
             console.log(selectProduct.finalPrice);
             console.log('Order successful . Your order id is--', orderID);
+            reduceAvailableQuantity(selectProduct.selectedProduct, selectProduct.quantity)
             navigate(CHAT);
         }
         
     },[success]);
 
     return (
+    
         <div>
         {selectProduct &&
             <PayPalScriptProvider options={{ "client-id": "AY4b3NkjpyjDvNiwFBM8Zg9ka-BDgnW-l9yX82lZBrYZl4L89y9NQ2Ucbl1Nx5Ru8TNyxl6oa0Aw3Qls" }}>

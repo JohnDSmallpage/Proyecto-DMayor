@@ -168,6 +168,17 @@ export const addProductToCatalog = async (id, user) => {
     console.log("Producto agregado al catalogo");
     return result;
   }
+
+  export const reduceAvailableQuantity = async (selectedProduct, quantity) => {
+    const reference = doc(db, "products", selectedProduct.id);
+    selectedProduct.availableQuantity = parseInt(selectedProduct.availableQuantity) - quantity ;
+    selectedProduct.availableQuantity = selectedProduct.availableQuantity.toString();
+    
+    const result = await updateDoc(reference, selectedProduct);
+    console.log("Producto agregado al catalogo");
+    return result;
+  }
+
   export const UpdateProfile = async (user) => {
     const reference = doc(db, "suppliers", user.uid);
     const result = await updateDoc(reference, user);
