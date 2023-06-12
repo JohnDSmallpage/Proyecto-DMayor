@@ -1,26 +1,52 @@
-import React from 'react'
-import karen from '../../images/karen.jpeg'
+import React, { useContext, useEffect, useState } from 'react'
+import { useUser } from '../../firebase models/userContext';
+import { ChatContext } from '../../firebase models/ChatContext';
+import { db } from '../../firebase models/Config';
+import { doc, onSnapshot } from '@firebase/firestore';
 
-const Chats= () =>{
-    return(
-        <div className="chats">
-            <div className="userChat">
-                <img src={karen} alt="" />
-                <div className="userChatInfo">
-                    <span>Jennifer</span>
-                    <p>Hola</p>
-                </div>
-                
-            </div>
-            <div className="userChat">
-                <img src={karen} alt="" />
-                <div className="userChatInfo">
-                    <span>Jennifer</span>
-                    <p>Hola</p>
-                </div>
-                
-            </div>
+
+const Chats = () => {
+
+  const [chats, setChats] = useState([]);
+
+  const {user} = useUser()
+  const {dispatch} = useContext(ChatContext)
+
+  useEffect(() =>{
+    const getChats = () => {
+      const unsub = onSnapshot(doc(db, "userChats", user.uid), (doc) => {
+        setChats(doc.data());
+      });
+
+      return () => {
+        unsub();
+      };
+    };
+
+    user.uid && getChats();
+  }, [user.uid]);
+
+  const handleSelect = (u) => {
+    dispatch({ type: "CHANGE_USER", payload: u });
+  };
+
+
+
+  return (
+    <div className='chats'>
+      {Object.entries(chats)?.sort((a,b)=>a[1].date - b[1].date).map(chat =>(
+        <div className="userChat" key={chat[0]} onClick={() =>handleSelect(chat[1].userInfo)}>
+          <img src="" alt=""/>
+          <div className="userChatInfo">
+            <span>{chat[1].userInfo.name}</span>
+            <p>{chat[1].lastMessage?.text}</p>
+          </div>
         </div>
-    );
-};
+        
+      ))}
+
+    </div>
+  )
+}
+
 export default Chats

@@ -1,22 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
+//import Cam from "./img/cam.png"
+//import Add from "./img/add.png"
+//import More from "./img/more.png"
 import Messages from './Messages'
 import Input from './Input'
+import { ChatContext } from '../../firebase models/ChatContext'
 
-const Chat1= () =>{
-    return(
-        <div className="chat1">
-        <div className="chatInfo">
-            <span>Zulu</span>
-            <div className="chatIcons">
-            <img src="" alt="" />
-            <img src="" alt="" />
-            <img src="" alt="" />
-            </div>  
-        </div>
-        <Messages></Messages>
-        <Input></Input>
+const Chat1 = () => {
 
+    const {data} = useContext(ChatContext)
+
+    return (
+        <div className='chat'>
+            <div className="ChatInfo">
+                <span>{data.user?.name}</span>
+                <div className="chatIcons">
+                    {/*<img src={Cam} alt="" />
+                    <img src={Add}alt="" />
+    <img src={More} alt="" />*/}
+                </div>
+            </div>
+            <Messages/>
+            <Input/>
         </div>
     )
 }
+
 export default Chat1

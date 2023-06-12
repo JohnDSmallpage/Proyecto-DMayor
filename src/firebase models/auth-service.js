@@ -9,6 +9,8 @@ import { auth } from "./Config";
 import { addProductToCatalog, createSupplierProfile, createUserProfile } from "./user-service";
 import { v4 } from "uuid";
 import { addNewProduct } from "./user-service";
+import { doc, setDoc } from "firebase/firestore";
+
 
 
   export const signInWithGoogle = async()=>{
@@ -25,6 +27,8 @@ import { addNewProduct } from "./user-service";
             ID:"",
 
           })
+
+          await setDoc(doc(db, "userChats", result.user.uid), {});
         }
     } catch (error) { 
     }
@@ -51,6 +55,8 @@ export const registerWithEmailAndPassword = async(
         ...extraData,
       })
     }
+    await setDoc(doc(db, "userChats", result.user.uid), {});
+
   } catch (error) {
   } 
 };
