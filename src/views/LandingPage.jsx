@@ -16,7 +16,6 @@ import paypal from "../images/logo-Paypal.png";
 import phone from "../images/phone.png";
 import location from "../images/location.png";
 import email from "../images/email.png";
-
 import portada from "../images/portada.jpg";
 import camioncito from "../images/camioncito.jpg";
 import ejercicio from "../images/ejercicio.jpg";
