@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getProductById } from "../firebase models/user-service";
 import { useState } from "react";
 import { set } from "react-hook-form";
@@ -27,7 +27,7 @@ export function ProductPage() {
 
   const getProduct = async (id) => {
     const data = await getProductById(id);
-    console.log(data);
+    // console.log(data);
     setProduct(data);
   };
 
@@ -87,7 +87,7 @@ export function ProductPage() {
   useEffect(() => {
     const objetoJSON = product.discounts;
     selectProduct.setDiscounts(objetoJSON);
-    console.log(user);
+    // console.log(user);
 
     let descuento = "";
 
@@ -95,11 +95,11 @@ export function ProductPage() {
       descuento += `>=${clave} ${product.unity}: ${
         parseFloat(objetoJSON[clave]) * 100
       }% de descuento\n`;
-      console.log(descuento);
+      // console.log(descuento);
     }
 
     setDescuentos(descuento);
-    console.log(descuento);
+    // console.log(descuento);
   }, [product]);
 
   return (
@@ -310,6 +310,7 @@ export function ProductPage() {
                     <p>
                       {product.name.charAt(0).toUpperCase() +
                         product.name.slice(1)}
+                        
                     </p>
                   )}
                 </h1>
@@ -351,7 +352,9 @@ export function ProductPage() {
       </span> */}
                 </div>
                 <p className="leading-relaxed">{product.description}</p>
-                <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
+                <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5 gap-2">
+                  <p>Proveedor:  </p>
+                <Link to={`/supplierInfo/${product.supplierId}`} className="text-orange-500">{product.supplierName}</Link>
                   {/* <div className="flex">
         <span className="mr-3">Color</span>
         <button className="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>

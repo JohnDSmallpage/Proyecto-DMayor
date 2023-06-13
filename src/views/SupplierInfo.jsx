@@ -5,10 +5,10 @@ import phone from "../images/phone.png"
 import location from "../images/location.png"
 import email from "../images/email.png"
 import Carrousel from "../components/Carrousel";
-import { getProductsBySupplier, UpdateProfile, uploadProfilePic } from "../firebase models/user-service";
+import { getProductsBySupplier, getUserProfile, getUserProfileById, UpdateProfile, uploadProfilePic } from "../firebase models/user-service";
 import { searchContext } from "../firebase models/SearchContext";
 import { Product } from "../components/Product";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { CATALOG } from "../routes/Url";
 import { useForm } from "react-hook-form";
 import { store } from "../firebase models/Config";
@@ -16,13 +16,21 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export function SupplierInfo() {
   const { user, isLoading } = useUser();
+  const { id } = useParams();
 
-const [products, setProducts] = useState([]);
+const [products, setProducts] = useState();
 const [editable, setEditable] = useState(false);
 const [resetForm, setResetForm] = useState(false);
 const [photoUrl, setPhotoUrl] = useState(null);
-const [photoArray, setPhotoArray] = useState(user.PhotoArray);
+const [photoArray, setPhotoArray] = useState();
+const [profileUser, setProfileUser] = useState();
 
+  const getUserProfile = async (id) => {
+    const data = await getUserProfileById(id);
+    // console.log(data);
+    setProfileUser(data)
+    setPhotoArray(data.PhotoArray)
+  };
 
   const productSearched = useContext(searchContext);
   const {
@@ -59,9 +67,10 @@ const [photoArray, setPhotoArray] = useState(user.PhotoArray);
     }
   };
   const getSupplierProducts = async () => {
-    const idProducts = user.catalog
+    const idProducts = profileUser.catalog
     const data = await getProductsBySupplier(idProducts)
     setProducts(data)
+    
   }
   
 
@@ -78,9 +87,15 @@ const [photoArray, setPhotoArray] = useState(user.PhotoArray);
   };
 
   useEffect (() => {
+    if(!profileUser){
+      getUserProfile(id);
+    }
+    if(profileUser && !products){
+
     getSupplierProducts();
+    }
     productSearched.setSupplierMode(true);
-  }, [products])
+  }, [products,profileUser])
 
 
   return (
@@ -99,35 +114,38 @@ const [photoArray, setPhotoArray] = useState(user.PhotoArray);
         ( <img src={photoUrl} alt="Foto cargada"
         className="h-full w-full " /> 
         ):(
-        <img src={user.ProfilePic} alt="" 
+        <img src={profileUser?.ProfilePic} alt="" 
         className="h-full w-full "/>
         )}
         {editable && (
+          <div className="flex flex-col">
+          <p className='text-xl font-bold'>Agregar foto de Perfil</p>
           <input id="ProfilePic" type="file" onChange={handlePhotoChange} 
             />
+            </div>
         )}
         
         
       </header>
       <article className=" flex gap-3 p-3 h-[500px]  w-full ">
         <div className="bg-white  w-1/2 p-4 shadow-xl rounded">
-          <h1 className="text-2xl font-bold text-gray-800 font-serif">{user.Company}</h1>
-          <p className="mb-4 text-xs text-gray-500 ">Desde {user.CreationDate}</p>
+          <h1 className="text-2xl font-bold text-gray-800 font-serif">{profileUser?.Company}</h1>
+          <p className="mb-4 text-xs text-gray-500 ">Desde {profileUser?.CreationDate}</p>
           {!editable ? (
             <>
             <ol className="flex flex-col justify-around gap-[8px]">
             <li className="flex items-center font-serif gap-2"><img className="w-[25px]" src={location} alt="" /> 
-            {user.Address} 
+            {profileUser?.Address} 
             </li>
             <li className="flex items-center font-serif gap-2"><img className="w-[25px]" src={phone} alt="" /> 
-            {user.phone}
+            {profileUser?.phone}
             </li>
             <li className="flex items-center font-serif gap-2"><img className="w-[25px]" src={email} alt="" />
-             {user.email}
+             {profileUser?.email}
              </li>
           </ol>
           <h1 className="text-2xl font-bold mt-4 text-gray-800 font-serif">Acerca de nosotros</h1>
-        <p>{user.Description}</p>
+        <p>{profileUser?.Description}</p>
         </>
           ):(
 <>
@@ -137,7 +155,7 @@ const [photoArray, setPhotoArray] = useState(user.PhotoArray);
             <input id="Address"
               {...register("Address")}
               type="text"
-            placeholder={user.Address}  className="flex items-center font-serif gap-2 w-full border"/>
+            placeholder={profileUser?.Address}  className="flex items-center font-serif gap-2 w-full border"/>
             </div>
             <p className="text-red-600">{errors.Address?.message}</p>
             <div className="flex gap-2">
@@ -149,13 +167,13 @@ const [photoArray, setPhotoArray] = useState(user.PhotoArray);
                 maxLength:{value:11,message:"Ingrese un numero de telefono Valido"},
               })}
               type="text"
-             placeholder={user.phone} className="flex items-center font-serif gap-2 w-full border"/>
+             placeholder={profileUser?.phone} className="flex items-center font-serif gap-2 w-full border"/>
             </div>
             <p className="text-red-600">{errors.phone?.message}</p>
             <div className="flex gap-2">
             <img className="w-[25px]" src={email} alt="" />
             <input id="email" disabled
-              type="email" placeholder={user.email} className="flex items-center font-serif gap-2 w-full border"/>
+              type="email" placeholder={profileUser.email} className="flex items-center font-serif gap-2 w-full border"/>
             </div>
             <div>
             <h1 className="text-2xl font-bold mt-4 text-gray-800 font-serif">Acerca de nosotros</h1>
@@ -165,7 +183,7 @@ const [photoArray, setPhotoArray] = useState(user.PhotoArray);
                 minLength:{value:10,message:"Debe dar una descripcion mínima de 10 caracteres"},
                 maxLength:{value:200,message:"Descripcion no máxima de 200 caracteres"},
               })}
-            className="w-full h-full border" placeholder={user.Description}/>
+            className="w-full h-full border" placeholder={profileUser?.Description}/>
             
             </div>
           </div>
@@ -175,11 +193,16 @@ const [photoArray, setPhotoArray] = useState(user.PhotoArray);
 
         </div>
         <div className="bg-white h-full w-1/2 relative shadow-xl rounded overflow-hidden">
-          {!editable? (
-          <Carrousel photos={photoArray} editable={editable} />
+          {profileUser?.PhotoArray?(
+            !editable? (
+              <Carrousel photos={photoArray} editable={editable} />
+              ):(
+                  <Carrousel photos={photoArray} editable={editable} send={setValue}/>
+              )
           ):(
-              <Carrousel photos={photoArray} editable={editable} send={setValue}/>
+            <Carrousel photos={[]} editable={editable} send={setValue}/>
           )}
+          
 
         </div>
       </article>
@@ -198,10 +221,15 @@ const [photoArray, setPhotoArray] = useState(user.PhotoArray);
           ))
         )}
         </div>
+        {user?.id==profileUser?.id?(
         <Link to={CATALOG} className="text-orange-600 text-center font-bold">Ver catalogo Completo{">"}</Link>
+        ):(
+          <></>
+        )}
         </div>
       </section>
-      {editable ?(
+      {user?.id==profileUser?.id?(
+      editable?(
         <div className="flex flex-row justify-evenly gap-5 p-3">
         <Link className="w-full py-3 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
          onClick={handleResetForm} 
@@ -232,6 +260,9 @@ const [photoArray, setPhotoArray] = useState(user.PhotoArray);
         <button  className="w-3/4 self-center py-3 m-4  font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
          >Editar Perfil</button>
          </div>
+      )
+      ):(
+        <></>
       )
       }
           </form>  

@@ -96,6 +96,31 @@ export async function getUserProfile(email){
     }   
 } 
 }
+export async function getUserProfileById(id){
+    const userQuery = query(collection(db,"users"), where("ID","==",id));
+         const results = await getDocs(userQuery);
+    if(results.size>0){
+        const users = results.docs.map((item)=>({
+            ...item.data(),
+            id: item.id,
+        }));
+        const [user] = users;
+        return user;
+    }else{
+        const userQuery = query(collection(db,"suppliers"), where("id","==",id));
+         const results = await getDocs(userQuery);
+    if(results.size>0){
+        const users = results.docs.map((item)=>({
+            ...item.data(),
+            id: item.id,
+        }));
+        const [user] = users;
+        return user;
+    }else{
+        return null;
+    }   
+} 
+}
 
 export async function getProductById(id){
     const userQuery = query(collection(db,"products"), where("id","==",id));

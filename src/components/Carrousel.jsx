@@ -52,7 +52,7 @@ const Carrousel = ({photos,bool,editable,send}) => {
   };
 
     return (
-    <div className='w-full h-full  group flex-col flex items-center justify-center'>
+    <div className='w-full h-full  group flex-col flex items-center justify-center overflow-hidden'>
         <div 
             style={{backgroundImage: `url(${PhotoArray[currentIndex]})`}} 
             className='w-full h-full bg-center bg-cover duration-500'>
@@ -81,22 +81,13 @@ const Carrousel = ({photos,bool,editable,send}) => {
             </div>
         </div>
         {editable &&
-        <div className="flex flex-row gap-2 p-3">
-        {/* <label for="photo-select">Selecciona La foto que desea editar:</label>
-        <select id="photo-select" onChange={event => goToSlide(event.target.selectedIndex)}
-        >
-        {PhotoArray.map((url, index) => (
-          <option key={index} value={url}>{`photo ${index}`}</option>
-        ))}
-        </select> */}
-        <div className='flex flex-col items-center justify-center'>
-        <p>Cambiar foto actual</p>
-        <label for="photo-file">Selecciona una nueva foto:</label>
+        <div className="flex flex-row gap-2 p-3 w-full items-center justify-center">
+        <div className='flex flex-col  justify-center w-1/2'>
+        <p className='text-xl font-bold'>Cambiar foto actual</p>
         <input type="file" id="photo-file" onChange={handlePhotoChange}/>
         </div>
-        <div className='flex flex-col items-center justify-center'>
-        <p>Agregar Foto</p>
-        <label for="photo-file">Selecciona una nueva foto:</label>
+        <div className='flex flex-col  justify-center w-1/2'>
+        <p className='text-xl font-bold'>Agregar Foto</p>
         <input type="file" id="photo-file" onChange={handlePhotoAdd}/>
         </div>
         </div>

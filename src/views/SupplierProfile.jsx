@@ -84,7 +84,7 @@ export function SupplierProfile() {
               </button>
             </Link>
 
-            <Link to={SUPPLIER_INFO}>
+            <Link to={`/supplierInfo/${user.id}`}>
               <button
                 id="option-2"
                 className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"

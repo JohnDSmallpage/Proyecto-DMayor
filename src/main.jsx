@@ -61,7 +61,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={ADD_PRODUCT} element={<PrivateSupplier><AddProduct/></PrivateSupplier>}/>
           <Route path={CATALOG} element={<PrivateSupplier><SupplierCatalog/></PrivateSupplier>}/>
           <Route path={SUPPLIER_PRODUCT} element={<PrivateSupplier><ProductPage/></PrivateSupplier>}/>
-          <Route path={SUPPLIER_INFO} element={<PrivateSupplier><SupplierInfo/></PrivateSupplier>}/>
+          <Route path={SUPPLIER_INFO} element={<SupplierInfo/>}/>
           <Route path={CLIENT_CHAT} element={<PrivateRouteClient><ClientChat/></PrivateRouteClient>}/>
           <Route path={CLIENT_INFO} element={<PrivateRouteClient><ClientInfo/></PrivateRouteClient>}/>
           <Route path={PAY_ORDER} element={<PrivateRouteClient><PurchasePage/></PrivateRouteClient>}/>
