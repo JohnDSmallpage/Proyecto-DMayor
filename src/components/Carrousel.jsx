@@ -52,17 +52,17 @@ const Carrousel = ({photos,bool,editable,send}) => {
   };
 
     return (
-    <div className='w-full h-full  group flex-col flex items-center justify-center overflow-hidden'>
+    <div className='w-full h-full  group flex-col flex items-center justify-center '>
         <div 
             style={{backgroundImage: `url(${PhotoArray[currentIndex]})`}} 
             className='w-full h-full bg-center bg-cover duration-500'>
         
         {/* Flecha izquierda  */}
-        <div className='hidden group-hover:block absolute top-[40%] left-0 text-2.5 rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <div className='hidden group-hover:block absolute top-[20%] left-0 text-2.5 rounded-full p-2 bg-black/20 text-white cursor-pointer'>
           <BsChevronCompactLeft onClick={prevSlide} size={30} />
         </div>
         {/* Flecha derecha  */}
-        <div className='hidden group-hover:block absolute top-[40%]  right-0 text-2.5 rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <div className='hidden group-hover:block absolute top-[20%]  right-0 text-2.5 rounded-full p-2 bg-black/20 text-white cursor-pointer'>
             <BsChevronCompactRight onClick={nextSlide} size={30}/>   
         </div> 
 
