@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< Updated upstream
 import NavbarChat from './NavbarChat'
 import Search from './Search'
 import Chats from './Chats'
@@ -13,3 +14,11 @@ const Sidebar= () =>{
     )
 }
 export default Sidebar
+=======
+
+export default function Sidebar() {
+  return (
+    <div className='sidebar'>Sidebar</div>
+  )
+}
+>>>>>>> Stashed changes

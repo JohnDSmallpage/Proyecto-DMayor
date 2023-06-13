@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useContext, useEffect, useState } from 'react'
 import { useUser } from '../../firebase models/userContext';
 import { ChatContext } from '../../firebase models/ChatContext';
@@ -51,3 +52,12 @@ const Chats = () => {
 }
 
 export default Chats
+=======
+import React from 'react'
+
+export default function Chats() {
+  return (
+    <div>Chats</div>
+  )
+}
+>>>>>>> Stashed changes

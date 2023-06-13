@@ -4,6 +4,10 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router";
 import { CHATPAGE, SEARCH_PAGE } from "../routes/Url";
 import { productContext } from "../firebase models/ProductContext";
+<<<<<<< Updated upstream
+=======
+import { CHATPAGE } from "../routes/Url";
+>>>>>>> Stashed changes
 
 
 export function PaypalCheckout({price}) {

@@ -13,7 +13,11 @@ export const SUPPLIER_PRODUCT = "/supplierProduct/:id";
 export const SUPPLIER_PROFILE = "/supplierProfile";
 export const CHECKOUT = "/checkout";
 export const CLIENT_PROFILE = "/clientProfile"
+<<<<<<< Updated upstream
 export const CHATPAGE = "/chatpage"
+=======
+export const CHATPAGE = "/chat"
+>>>>>>> Stashed changes
 export const ADD_PRODUCT = "/addproduct"
 export const CATALOG = "/catalog"
 export const SUPPLIER_INFO = "/supplierInfo"

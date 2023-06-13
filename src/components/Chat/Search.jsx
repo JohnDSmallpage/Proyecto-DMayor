@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useContext } from 'react'
 import { useState } from 'react'
 import { collection, query, where, getDocs, getDoc, setDoc, doc, updateDoc, serverTimestamp } from "firebase/firestore";
@@ -95,3 +96,12 @@ const Search = () => {
 };
 
 export default Search
+=======
+import React from 'react'
+
+export default function Search() {
+  return (
+    <div>Search</div>
+  )
+}
+>>>>>>> Stashed changes

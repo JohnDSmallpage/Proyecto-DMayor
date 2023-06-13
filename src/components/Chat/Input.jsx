@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState } from 'react'
 import Img from "./../../images/karen.jpeg"
 //import Attach from "./img/attach.png"
@@ -97,3 +98,12 @@ const Input = () => {
 }
 
 export default Input
+=======
+import React from 'react'
+
+export default function Input() {
+  return (
+    <div>Input</div>
+  )
+}
+>>>>>>> Stashed changes

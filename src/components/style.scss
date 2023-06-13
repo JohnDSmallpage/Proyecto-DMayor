@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 @mixin mobile {
     @media screen and (max-width: 480px){
         @content;
@@ -17,11 +18,15 @@
 
 
 .chatpage{
+=======
+.chatPage{
+>>>>>>> Stashed changes
     background-color: #a7bcff;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+<<<<<<< Updated upstream
 
     .container{
        border: 1px solid white;
@@ -226,4 +231,21 @@
 
     }
     
+=======
+}
+
+.container{
+    border: 1px solid white;
+    border-radius:10px;
+    width: 65%;
+    height: 80%;
+    display: flex;
+
+    .sidebar{
+        flex:1;
+        border-right: 1px solid #3e3c61;
+        background-color: #3e3c61;
+    }
+    .chat{flex:2;}
+>>>>>>> Stashed changes
 }
