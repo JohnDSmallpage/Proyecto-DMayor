@@ -3,12 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import {BrowserRouter} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
-
-<<<<<<< Updated upstream
-import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT,CHATPAGE, SUPPLIER_PRODUCT} from './routes/Url';
-=======
 import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT, SUPPLIER_PRODUCT, CHATPAGE} from './routes/Url';
->>>>>>> Stashed changes
 import {LandingPage} from './views/LandingPage';
 import {Layout} from './views/Layout';
 import {Providers} from './views/Providers';
@@ -36,16 +31,12 @@ import { CATALOG } from './routes/Url';
 import { SupplierCatalog } from './views/SupplierCatalog';
 import { SUPPLIER_INFO } from './routes/Url';
 import { SupplierInfo } from './views/SupplierInfo';
-<<<<<<< Updated upstream
 import './components/style.scss'
-
 import { UserContextProvider } from './firebase models/userContext';
 import { ChatContextProvider } from './firebase models/ChatContext';
 import ChatContainer from './components/Chat/ChatContainer';
-=======
 import { ChatPage1 } from './components/ChatPage';
 
->>>>>>> Stashed changes
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <UserContextProvider>
@@ -68,11 +59,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={SUPPLIER_PROFILE} element={<PrivateSupplier><SupplierProfile/></PrivateSupplier>} />
           <Route path={CHECKOUT} element={<PrivateRouteClient> <CheckoutPage/> </PrivateRouteClient>} /> 
           <Route path={CLIENT_PROFILE} element={<PrivateRouteClient><ClientProfile/></PrivateRouteClient>}/>
-<<<<<<< Updated upstream
           <Route path={CHATPAGE} element={<PrivateRouteClient><ChatContainer></ChatContainer></PrivateRouteClient>}/>
-=======
-          <Route path={CHATPAGE} element={<PrivateRouteClient><ChatPage1/></PrivateRouteClient>}/>
->>>>>>> Stashed changes
           <Route path={ADD_PRODUCT} element={<PrivateSupplier><AddProduct/></PrivateSupplier>}/>
           <Route path={CATALOG} element={<PrivateSupplier><SupplierCatalog/></PrivateSupplier>}/>
           <Route path={SUPPLIER_PRODUCT} element={<PrivateSupplier><ProductPage/></PrivateSupplier>}/>
