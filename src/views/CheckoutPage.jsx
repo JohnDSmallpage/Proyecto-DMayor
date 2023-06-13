@@ -6,7 +6,7 @@ import { useState } from "react";
 import {PaypalCheckout} from "../components/PaypalCheckout";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { PAY_ORDER } from "../routes/Url";
+import { CART_PAGE } from "../routes/Url";
 
 export function CheckoutPage() {
   const selectProduct = useContext(productContext);
@@ -162,7 +162,7 @@ export function CheckoutPage() {
                     Método de pago:
                   </h2>
                   <div className="mt-5 flex justify-center h-min">
-                      <Link to={PAY_ORDER}>Completar</Link>
+                      <Link to={CART_PAGE}>Completar</Link>
                   </div>
                 </div>
               </label>
