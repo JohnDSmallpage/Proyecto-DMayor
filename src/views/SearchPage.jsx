@@ -4,6 +4,7 @@ import { Product } from "../components/Product";
 import { useContext, useState } from "react";
 import { searchContext } from "../firebase models/SearchContext";
 import { getProductsByCategory } from "../firebase models/user-service";
+import { useEffect } from "react";
 
 export function SearchPage() {
   
@@ -20,6 +21,18 @@ export function SearchPage() {
   productSearched.setProducts(data);
   };
 
+  const handleSelectChangeFromLandingPage = async (value) => {
+    setCategorySelected(value);
+    console.log(value);
+  const data = await getProductsByCategory(value);
+  console.log(data);
+  productSearched.setProducts(data);
+  };
+
+  useEffect (() => {
+    handleSelectChangeFromLandingPage(productSearched.categoryLanding);
+  }, []);
+
   return (
     <>
       <div className=" flex mt-4  justify-around container mx-auto bg-[#ff7a00] rounded-lg p-10">
@@ -34,6 +47,7 @@ export function SearchPage() {
               onChange={handleSelectChange}
               
               >
+              <option value="">Seleccione</option>
               <option value="Tecnología">Tecnología</option>
               <option value="Textiles">Textiles</option>
               <option value="Construcción">Construcción</option>

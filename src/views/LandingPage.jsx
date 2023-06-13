@@ -4,7 +4,7 @@ import { Product } from "../components/Product";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
 import Carrousel from "../components/Carrousel";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ADD_PRODUCT } from "../routes/Url";
 import { useEffect } from "react";
 import { getAllProducts } from "../firebase models/user-service";
@@ -16,7 +16,6 @@ import paypal from "../images/logo-Paypal.png";
 import phone from "../images/phone.png";
 import location from "../images/location.png";
 import email from "../images/email.png";
-
 import portada from "../images/portada.jpg";
 import camioncito from "../images/camioncito.jpg";
 import ejercicio from "../images/ejercicio.jpg";
@@ -25,28 +24,37 @@ import herramientas from "../images/herramientas.jpg";
 import maquillaje from "../images/maquillaje.jpg";
 import ropa from "../images/ropa.jpg";
 import home from "../images/home.jpg";
-
-
+import { useNavigate } from "react-router-dom";
+import { SEARCH_PAGE } from "../routes/Url";
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
   const slides = [
-"https://img.freepik.com/foto-gratis/concepto-compras-carrito-compras-minimo-sobre-fondo-naranja-representacion-3d_56104-1396.jpg?w=900&t=st=1686440473~exp=1686441073~hmac=f608b53fabe280824e25f953f423c0c66c7e0313587c1de8cb6dde11818f837d",
-    
-    
- "https://wallpapercave.com/wp/wp7530211.jpg",
-    
-    
- "https://wallpapercave.com/wp/wp6836093.jpg",
-    
-    
-       "https://img.freepik.com/fotos-premium/imagen-fondo-hay-escenario-exhibir-productos-proteccion-solar-tonos-azules-naranjas_544235-336.jpg?w=826",
-    
-       "https://img.freepik.com/fotos-premium/cinta-jugo-naranja-industria-alimentaria-productos-listos-envasado-automatico-concepto-produccion-alimentos-automatizada-ia-generativa_73944-32925.jpg?w=826",
-
+    {
+      url: "https://img.freepik.com/foto-gratis/concepto-compras-carrito-compras-minimo-sobre-fondo-naranja-representacion-3d_56104-1396.jpg?w=900&t=st=1686440473~exp=1686441073~hmac=f608b53fabe280824e25f953f423c0c66c7e0313587c1de8cb6dde11818f837d",
+    },
+    {
+      url: "https://wallpapercave.com/wp/wp7530211.jpg",
+    },
+    {
+      url: "https://wallpapercave.com/wp/wp6836093.jpg",
+    },
+    {
+      url: "https://img.freepik.com/fotos-premium/imagen-fondo-hay-escenario-exhibir-productos-proteccion-solar-tonos-azules-naranjas_544235-336.jpg?w=826",
+    },
+    {
+      url: "https://img.freepik.com/fotos-premium/cinta-jugo-naranja-industria-alimentaria-productos-listos-envasado-automatico-concepto-produccion-alimentos-automatizada-ia-generativa_73944-32925.jpg?w=826",
+    },
   ];
 
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState([]);
+
+  const handleCategorySearch = (value) => {
+    textSearched.setCategoryLanding(value);
+  };
+
 
   const getProducts = async () => {
     const data = await getAllProducts();
@@ -67,9 +75,10 @@ export function LandingPage() {
 
   return (
     <div id="main-container" className="flex flex-col justify-center">
-      
-      <div id="carrusel-container" className="flex justify-center items-center font-bold h-[500px] w-full ">
-        
+      <div
+        id="carrusel-container"
+        className="flex justify-center items-center font-bold h-[300px] "
+      >
         <Carrousel photos={slides} bool={true} />
         {/* <Carrousel photos={slides} bool={true} />  */}
       </div>
@@ -77,12 +86,10 @@ export function LandingPage() {
         id="message-container"
         className="flex flex-col justify-center items-center shadow-2xl shadow-white bg-gradient-to-b from-orange-400 to-orange-600  p-5 gap-[5px] mb-4"
       >
-        <h1 className="w-full text-3xl font-bold text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-2 ">
+        <h1 className="w-full text-3xl font-semibold font-ysabeau text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-2 ">
           Consigue lo que tu negocio necesita para crecer
         </h1>
       </div>
-
-      
 
       <div
         id="ofertas-container"
@@ -157,9 +164,11 @@ export function LandingPage() {
           <h2 className="text-[20px] text-center">
             Consiguelo todo en nuestros departamentos
           </h2>
+          <Link to={SEARCH_PAGE}>
           <button className="flex justify-center items-center bg-white text-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
             VER MÁS
           </button>
+          </Link>
         </div>
 
         <div
@@ -167,87 +176,91 @@ export function LandingPage() {
           className="flex  flex-row justify-between mx-5 mb-5"
         >
           <div className="flex flex-col gap-[5px]">
+            <Link to={SEARCH_PAGE}>
             <button
-              id="vehicles"
+              id="Agricultura"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
+              onClick={handleCategorySearch("Agricultura")}
+              
+            >
+              FOTO
+            </button>
+            <button className="flex justify-center items-center " onClick={handleCategorySearch("Agricultura")}>
+              Agricultura
+            </button>
+            </Link>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <button
+              id="Tecnología"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
+            >
+              FOTO
+            </button>
+            <button className="flex justify-center items-center ">Tecnología</button>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <button
+              id="Construcción"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
               FOTO
             </button>
             <button className="flex justify-center items-center ">
-              Carros
+              Construcción
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
-              id="home"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center ">Hogar</button>
-          </div>
-          <div className="flex flex-col gap-[5px]">
-            <button
-              id="phones"
+              id="Alimentos"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
               FOTO
             </button>
             <button className="flex justify-center items-center ">
-              Telefonos
+              Alimentos
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
-              id="computers"
+              id="Electrodomésticos"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
               FOTO
             </button>
-            <button className="flex justify-center items-center ">
-              Comida
-            </button>
+            <button className="flex justify-center items-center ">Electrodoméstico</button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
-              id="fashion"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center ">Moda</button>
-          </div>
-          <div className="flex flex-col gap-[5px]">
-            <button
-              id="beauty"
+              id="Ganadería"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
             >
               FOTO
             </button>
             <button className="flex justify-center items-center hidden sm:block">
-              Belleza
+              Ganadería
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
-              id="beauty"
+              id="Químicos"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
             >
               FOTO
             </button>
             <button className="flex justify-center items-center  hidden sm:block">
-              Belleza
+              Químicos
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
-              id="beauty"
+              id="Salud"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
             >
               FOTO
             </button>
             <button className="flex justify-center items-center hidden sm:block">
-              Belleza
+              Salud
             </button>
           </div>
         </div>

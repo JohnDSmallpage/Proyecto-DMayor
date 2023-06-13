@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
+  SEARCH_PAGE,
   CATEGORIAS,
   LANDING_PAGE,
   PROVEEDORES,
@@ -118,7 +119,7 @@ export function Navbar() {
                   </Link>
                   <Link
                     className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
-                    to={CATEGORIAS}
+                    to={SEARCH_PAGE}
                     onClick={() => setOpen(false)}
                   >
                     <img
@@ -248,7 +249,7 @@ export function Navbar() {
           >
             <Link
               className="flex flex-row items-center bg-white  rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
-              to={CATEGORIAS}
+              to={SEARCH_PAGE}
             >
               <img
                 className="pl-[10px] pr-[2.5px] py-[10px]"
