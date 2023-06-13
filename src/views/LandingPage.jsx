@@ -78,7 +78,7 @@ export function LandingPage() {
         id="message-container"
         className="flex flex-col justify-center items-center shadow-2xl shadow-white bg-gradient-to-b from-orange-400 to-orange-600  p-5 gap-[5px] mb-4"
       >
-        <h1 className="w-full text-3xl font-bold text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-2 ">
+        <h1 className="w-full text-3xl font-semibold font-ysabeau text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-2 ">
           Consigue lo que tu negocio necesita para crecer
         </h1>
       </div>

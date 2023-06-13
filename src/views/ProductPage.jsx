@@ -4,7 +4,7 @@ import { getProductById } from "../firebase models/user-service";
 import { useState } from "react";
 import { set } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { CATALOG, CHECKOUT } from "../routes/Url";
+import { CATALOG, CART_PAGE } from "../routes/Url";
 import { useContext } from "react";
 import { productContext } from "../firebase models/ProductContext";
 import { useUser } from "../firebase models/userContext";
@@ -45,7 +45,7 @@ export function ProductPage() {
     selectProduct.setSelectedProduct(product);
     selectProduct.setQuantity(cantidad);
     
-    navigate(CHECKOUT);
+    navigate(CART_PAGE);
   };
 
   const handleDeleteProduct = () => {

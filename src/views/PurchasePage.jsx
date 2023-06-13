@@ -9,7 +9,7 @@ export function PurchasePage() {
   return (
     <div id="main-container" className="flex justify-center items-center">
       <div id="internal-container" className="my-5 mx-5 flex flex-col justify-center gap-[10px]">
-        <h1 className="text-xl font-semibold">Confirmacion del pedido</h1>
+        <h1 className="text-xl font-semibold">Confirmación de compra</h1>
         <div
           id="paypal-buttons"
           className="md:text-xl flex flex-row px-5 py-5 bg-[#F3F5F6] rounded-[17px] border-2"
