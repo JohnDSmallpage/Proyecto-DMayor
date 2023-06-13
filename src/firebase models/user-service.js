@@ -27,7 +27,7 @@ export async function getProductsByName(textSearched){
     textSearched = textSearched.toLowerCase();
 
     console.log(textSearched);
-    const usersQuery = query(collection(db,"products"), where("name","==", textSearched));
+    const usersQuery = query(collection(db,"products"), where("name","==", textSearched), where("hidden","==",false));
     
     const results = await getDocs(usersQuery);
     
@@ -48,7 +48,7 @@ export async function getProductsByName(textSearched){
 export async function getProductsByCategory(categorySearched){
     categorySearched = categorySearched.toLowerCase();
     console.log(categorySearched);
-    const usersQuery = query(collection(db,"products"), where("category","==", categorySearched));
+    const usersQuery = query(collection(db,"products"), where("category","==", categorySearched), where("hidden","==",false));
     
     const results = await getDocs(usersQuery);
     
@@ -168,6 +168,17 @@ export const addProductToCatalog = async (id, user) => {
     console.log("Producto agregado al catalogo");
     return result;
   }
+
+  export const reduceAvailableQuantity = async (selectedProduct, quantity) => {
+    const reference = doc(db, "products", selectedProduct.id);
+    selectedProduct.availableQuantity = parseInt(selectedProduct.availableQuantity) - quantity ;
+    selectedProduct.availableQuantity = selectedProduct.availableQuantity.toString();
+    
+    const result = await updateDoc(reference, selectedProduct);
+    console.log("Producto agregado al catalogo");
+    return result;
+  }
+
   export const UpdateProfile = async (user) => {
     const reference = doc(db, "suppliers", user.uid);
     const result = await updateDoc(reference, user);
@@ -176,7 +187,7 @@ export const addProductToCatalog = async (id, user) => {
   }
 
   export const getProductsBySupplier = async (idProducts) => {
-    const userQuery = query(collection(db,"products"), where("id","in",idProducts));
+    const userQuery = query(collection(db,"products"), where("id","in",idProducts), where("hidden","==",false));
     const results = await getDocs(userQuery);
     
     if(results.size>0){
@@ -189,12 +200,29 @@ export const addProductToCatalog = async (id, user) => {
         return null;
     }
 
+}
+
+export const getHiddenProductsBySupplier = async (idProducts) => {
+    const userQuery = query(collection(db,"products"), where("id","in",idProducts), where("hidden","==",true));
+    const results = await getDocs(userQuery);
     
+    if(results.size>0){
+        const products = results.docs.map((item)=>({
+            ...item.data(),
+            id: item.id,
+        }));
+        return products;
+    }else{
+        return null;
+    }
 
 }
 
+
+
+
 export const getAllProducts = async () => {
-    const userQuery = collection(db,"products");
+    const userQuery = query(collection(db,"products"), where("hidden","==",false));
     const results = await getDocs(userQuery);
     
     if(results.size>0){
@@ -218,6 +246,30 @@ export const deleteProduct = async (productId, user) => {
     await updateDoc(reference, user);
     console.log("Producto eliminado del catalogo");
 
+}
+
+export const hideProduct = async (productId, user) => {
+    
+    const reference = doc(db, "products", productId);
+
+    await updateDoc(reference, {
+    hidden: true
+    });
+
+    
+    
+}
+
+export const showProduct = async (productId, user) => {
+    
+    const reference = doc(db, "products", productId);
+
+    await updateDoc(reference, {
+    hidden: false
+    });
+
+    
+    
 }
 
 

@@ -4,7 +4,7 @@ import { Product } from "../components/Product";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
 import Carrousel from "../components/Carrousel";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ADD_PRODUCT } from "../routes/Url";
 import { useEffect } from "react";
 import { getAllProducts } from "../firebase models/user-service";
@@ -25,6 +25,8 @@ import herramientas from "../images/herramientas.jpg";
 import maquillaje from "../images/maquillaje.jpg";
 import ropa from "../images/ropa.jpg";
 import home from "../images/home.jpg";
+import { useNavigate } from "react-router-dom";
+import { SEARCH_PAGE } from "../routes/Url";
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
@@ -46,7 +48,14 @@ export function LandingPage() {
     },
   ];
 
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState([]);
+
+  const handleCategorySearch = (value) => {
+    textSearched.setCategoryLanding(value);
+  };
+
 
   const getProducts = async () => {
     const data = await getAllProducts();
@@ -156,9 +165,11 @@ export function LandingPage() {
           <h2 className="text-[20px] text-center">
             Consiguelo todo en nuestros departamentos
           </h2>
+          <Link to={SEARCH_PAGE}>
           <button className="flex justify-center items-center bg-white text-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
             VER MÁS
           </button>
+          </Link>
         </div>
 
         <div
@@ -166,87 +177,91 @@ export function LandingPage() {
           className="flex  flex-row justify-between mx-5 mb-5"
         >
           <div className="flex flex-col gap-[5px]">
+            <Link to={SEARCH_PAGE}>
             <button
-              id="vehicles"
+              id="Agricultura"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
+              onClick={handleCategorySearch("Agricultura")}
+              
+            >
+              FOTO
+            </button>
+            <button className="flex justify-center items-center " onClick={handleCategorySearch("Agricultura")}>
+              Agricultura
+            </button>
+            </Link>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <button
+              id="Tecnología"
+              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
+            >
+              FOTO
+            </button>
+            <button className="flex justify-center items-center ">Tecnología</button>
+          </div>
+          <div className="flex flex-col gap-[5px]">
+            <button
+              id="Construcción"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
               FOTO
             </button>
             <button className="flex justify-center items-center ">
-              Carros
+              Construcción
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
-              id="home"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center ">Hogar</button>
-          </div>
-          <div className="flex flex-col gap-[5px]">
-            <button
-              id="phones"
+              id="Alimentos"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
               FOTO
             </button>
             <button className="flex justify-center items-center ">
-              Telefonos
+              Alimentos
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
-              id="computers"
+              id="Electrodomésticos"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
             >
               FOTO
             </button>
-            <button className="flex justify-center items-center ">
-              Comida
-            </button>
+            <button className="flex justify-center items-center ">Electrodoméstico</button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
-              id="fashion"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center ">Moda</button>
-          </div>
-          <div className="flex flex-col gap-[5px]">
-            <button
-              id="beauty"
+              id="Ganadería"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
             >
               FOTO
             </button>
             <button className="flex justify-center items-center hidden sm:block">
-              Belleza
+              Ganadería
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
-              id="beauty"
+              id="Químicos"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
             >
               FOTO
             </button>
             <button className="flex justify-center items-center  hidden sm:block">
-              Belleza
+              Químicos
             </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
-              id="beauty"
+              id="Salud"
               className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
             >
               FOTO
             </button>
             <button className="flex justify-center items-center hidden sm:block">
-              Belleza
+              Salud
             </button>
           </div>
         </div>
