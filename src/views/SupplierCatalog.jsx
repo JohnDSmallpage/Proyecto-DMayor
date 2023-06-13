@@ -9,9 +9,11 @@ import { useState } from "react";
 import { getProductsBySupplier } from "../firebase models/user-service";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
+import { getHiddenProductsBySupplier } from "../firebase models/user-service";
 
 export function SupplierCatalog() {
   const [products, setProducts] = useState([]);
+  const [hiddenProducts, setHiddenProducts] = useState([]);	
   const { user } = useUser();
 
   const productSearched = useContext(searchContext);
@@ -22,8 +24,15 @@ export function SupplierCatalog() {
     setProducts(data);
   };
 
+  const getSupplierHiddenProducts = async () => {
+    const idProducts = user.catalog;
+    const data = await getHiddenProductsBySupplier(idProducts);
+    setHiddenProducts(data);
+  };
+
   useEffect(() => {
     getSupplierProducts();
+    getSupplierHiddenProducts();
     productSearched.setSupplierMode(true);
   }, [products]);
 
@@ -53,6 +62,24 @@ export function SupplierCatalog() {
           ))
         )}
       </div>
+
+      <h1 className="text-[20px] font-bold text-gray-800 text-center mt-3">
+        Productos ocultos
+      </h1>
+
+      <div className="flex flex-wrap">
+        {hiddenProducts == null ? (
+          <div>No hay productos ocultos</div>
+        ) : (
+          hiddenProducts?.map((product, idx) => (
+            <>
+              <Product info={product} key={idx} />
+            </>
+          ))
+        )}
+      </div>
+
+
     </>
   );
 }
