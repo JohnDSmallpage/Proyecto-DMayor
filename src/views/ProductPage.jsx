@@ -33,7 +33,7 @@ export function ProductPage() {
 
   const handleInputChange = (e) => {
     const nuevoValor = e.target.value;
-    const regex = /^[0-9]+$/;
+    const regex = /^[1-9][0-9]*$/;
     if (isNaN(nuevoValor) || nuevoValor <= 0 || !regex.test(nuevoValor)) {
       setCantidad("");
     } else {
@@ -257,8 +257,13 @@ export function ProductPage() {
                 </div>
 
                 <span className="flex flex-col mt-4 text-left whitespace-pre-line title-font font-medium text-xl text-gray-900 leading-normal">
-                  Cantidad disponible: {product.availableQuantity}{" "}
-                  {" " + product.unity}
+
+                  Cantidad disponible: 
+                  {product.availableQuantity == "0" ? (
+                   <p>Out of stock</p>  
+                  ) : (
+                    <p>{product.availableQuantity}{" " + product.unity}</p>)
+                  }
                   {product.discounts == [] ? (
                     <div>
                       <p>Loading...</p>
@@ -419,7 +424,19 @@ export function ProductPage() {
 
                 <div className="flex flex-col mt-2">
                   <div className=" mt-1 title-font font-medium text-xl text-gray-900">
-                    Cantidad disponible:{ " " + product.availableQuantity}{" " + product.unity} 
+                  Cantidad disponible: 
+                  {product.availableQuantity == "0" ? (
+                   <p>Out of stock</p>  
+                  ) : (
+                    <p>{product.availableQuantity}{" " + product.unity}</p>)
+                  }
+                  {product.discounts == [] ? (
+                    <div>
+                      <p>Loading...</p>
+                    </div>
+                  ) : (
+                    <p>{descuentos}</p>
+                  )}
                   </div>
                   <div className=" mt-1 title-font font-medium text-xl text-gray-900">
                     Cantidad:{" "}
