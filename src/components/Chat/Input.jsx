@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Img from "./../../images/karen.jpeg"
-//import Attach from "./img/attach.png"
 import { useUser } from '../../firebase models/userContext'
 import { useContext } from 'react'
 import { ChatContext } from '../../firebase models/ChatContext'
+import { UserContext } from '../../firebase models/userContext'
 import { arrayUnion, doc, Timestamp, updateDoc } from '@firebase/firestore'
 import { v4 as uuid } from 'uuid'
 import { ref, uploadBytesResumable } from '@firebase/storage'
@@ -12,17 +12,17 @@ import { serverTimestamp } from '@firebase/firestore'
 
 const Input = () => {
 
-  const [text, setText] = useState('')
-  const [img, setImg] = useState(null)
+  const [text, setText] = useState('');
+  const [img, setImg] = useState(null);
 
-  const {user} = useUser();
+  const {user} = useUser(UserContext);
   const {data} = useContext(ChatContext)
 
   const handleSend = async () => {
 
     if(img){
 
-      const storageRef = ref(stoarge, uuid);
+      const storageRef = ref(storage, uuid);
 
       const uploadTask = uploadBytesResumable(storageRef, img)
 
@@ -85,11 +85,6 @@ const Input = () => {
         value={text}
       />
       <div className='send'>
-        {/*<img src={Attach} alt=""/>*/}
-        <input type="file" style={{display: "none"}} id="file" onChange={e => setImg(e.target.files[0])}/>
-        <label htmlFor='file'>
-          {<img src={Img} alt=""/>}
-        </label>
         <button onClick={handleSend}>Enviar</button>
       </div>
     </div>

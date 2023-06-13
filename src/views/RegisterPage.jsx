@@ -35,7 +35,8 @@ export function RegisterPage() {
     );
     navigate(LANDING_PAGE)
   };
-
+  
+ 
 
   return (
     <div className="md:max-w-lg max-w-sm mx-auto bg-white p-8 rounded-xl shadow shadow-slate-300 mt-8">
