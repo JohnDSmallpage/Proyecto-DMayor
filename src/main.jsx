@@ -26,7 +26,6 @@ import { ClientChat } from './views/ClientChat';
 import { ClientInfo } from './views/ClientInfo';
 import { PrivateRouteClient } from './components/PrivateRouteClient';
 import { CheckoutPage } from './views/CheckoutPage'; 
-import { Chat } from './components/Chat';
 import { AddProduct } from './views/AddProduct';
 import { ADD_PRODUCT }   from './routes/Url';
 import { CATALOG } from './routes/Url';
@@ -36,6 +35,8 @@ import { SupplierInfo } from './views/SupplierInfo';
 import  { PAY_ORDER } from './routes/Url';
 import { PurchasePage } from './views/PurchasePage';
 import { CartPage } from './views/CartPage';
+import { Chat } from './views/Chat';
+import { PrivateUserRoute } from './components/PrivateUserRoute';
 
 
 
@@ -58,7 +59,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={SUPPLIER_PROFILE} element={<PrivateSupplier><SupplierProfile/></PrivateSupplier>} />
           <Route path={CHECKOUT} element={<PrivateRouteClient> <CheckoutPage/> </PrivateRouteClient>} />
           <Route path={CLIENT_PROFILE} element={<PrivateRouteClient><ClientProfile/></PrivateRouteClient>}/>
-          <Route path={CHAT} element={<PrivateRouteClient><Chat/></PrivateRouteClient>}/>
+          <Route path={CHAT} element={<PrivateUserRoute><Chat/></PrivateUserRoute>}/>
           <Route path={ADD_PRODUCT} element={<PrivateSupplier><AddProduct/></PrivateSupplier>}/>
           <Route path={CATALOG} element={<PrivateSupplier><SupplierCatalog/></PrivateSupplier>}/>
           <Route path={SUPPLIER_PRODUCT} element={<PrivateSupplier><ProductPage/></PrivateSupplier>}/>

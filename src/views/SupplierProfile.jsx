@@ -4,7 +4,7 @@ import Verified from "../images/shield-check-fill.png";
 import Catalogo from "../images/file-list-3-line.png";
 import { useUser } from "../firebase models/userContext";
 import { Link } from "react-router-dom";
-import { CATALOG } from "../routes/Url";
+import { CATALOG, CHAT } from "../routes/Url";
 import { productContext } from "../firebase models/ProductContext";
 import { SUPPLIER_INFO } from "../routes/Url";
 
@@ -105,7 +105,8 @@ export function SupplierProfile() {
               </button>
             </Link>
 
-            <button
+            <Link
+            to={CHAT}
               id="option-3"
               className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
             >
@@ -114,15 +115,15 @@ export function SupplierProfile() {
                 id="option-3-name"
                 className="flex justify-center items-center w-[125px] h-[19px] text-[15px] font-semibold"
               >
-                Opcion 3
+                Chat
               </h2>
               <h4
                 id="option-3-description"
                 className="flex justify-center items-center w-[151px] h-[31px] text-[10px]"
               >
-                Descripcion de opcion 3
+                Todos tus chats con clientes
               </h4>
-            </button>
+            </Link>
             <button
               id="option-4"
               className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
