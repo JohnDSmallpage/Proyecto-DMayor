@@ -11,6 +11,11 @@ import { useUser } from "../firebase models/userContext";
 import { searchContext } from "../firebase models/SearchContext";
 import { hideProduct } from "../firebase models/user-service";
 import { showProduct } from "../firebase models/user-service";
+import {Rating} from "../components/Rating"
+import { db } from "../firebase models/Config"; // Importa la instancia de Firestore que has creado
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+
+
 
 export function ProductPage() {
   const { id } = useParams();
@@ -102,6 +107,35 @@ export function ProductPage() {
     setDescuentos(descuento);
     // console.log(descuento);
   }, [product]);
+  
+
+  // ------ RATING --------
+  const [ratings, setRatings] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
+
+  useEffect(() => {
+    const q = query(collection(db, "ratings"), where("id", "==", id));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map((doc) => doc.data());
+      setRatings(data);
+
+      // Calcular el promedio de las valoraciones
+      if (data.length > 0) {
+        const totalRating = data.reduce(
+          (accumulator, currentValue) => accumulator + currentValue.rating,
+          0
+        );
+        const average = totalRating / data.length;
+        setAverageRating(average);
+      } else {
+        setAverageRating(0);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [id]);
+
+
 
   return (
     <>
@@ -424,7 +458,7 @@ export function ProductPage() {
                     </svg>
                   </button>
                 </div>
-
+               
                 <div className="flex flex-col mt-2">
                   <div className=" mt-1 title-font font-medium text-xl text-gray-900">
                   Cantidad disponible: 
@@ -468,8 +502,27 @@ export function ProductPage() {
               </div>
             </div>
           </div>
-        </section>
+
+        </section>   
       )}
+
+    <div>
+      <Rating/>
+      <h2>Producto {product.name}</h2>
+      <p>Valoración promedio: {averageRating}</p>
+
+      <h3>Valoraciones</h3>
+      <ul>
+        {ratings.map((rating, index) => (
+          <li key={index}>
+            <p>Valoración: {rating.rating}</p>
+            <p>Descripción: {rating.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
     </>
   );
 }
+

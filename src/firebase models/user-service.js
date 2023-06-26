@@ -138,6 +138,7 @@ export async function getProductById(id){
         return null;
     }    
 }
+
 export async function getApplications(){
     const userQuery = query(collection(db,"suppliers"), where("accepted","==",false));
     const results = await getDocs(userQuery);
@@ -291,9 +292,7 @@ export const showProduct = async (productId, user) => {
 
     await updateDoc(reference, {
     hidden: false
-    });
-
-    
+    }); 
     
 }
 

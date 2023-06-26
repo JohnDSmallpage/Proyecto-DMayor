@@ -27,6 +27,8 @@ import home from "../images/home.jpg";
 import { useNavigate } from "react-router-dom";
 import { SEARCH_PAGE } from "../routes/Url";
 
+
+
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
   const slides = [
@@ -271,10 +273,11 @@ export function LandingPage() {
               <li>Politicas de Privacidad</li>
               <li>Politicas de Retorno</li>
               <li>Terminos y Servicios</li>
-              <li>Contacto</li>
+              <li>Contacto</li>  
             </ol>
           </div>
           <div className="h-full">
+          
             <p className="text-xl font-bold">Contactanos</p>
             <ol className="flex flex-col justify-around gap-[10px]">
               <li className="flex items-center">
@@ -297,7 +300,9 @@ export function LandingPage() {
             <img className="w-[70px]" src={paypal} alt="" />
           </div>
         </div>
+        
       </footer>
+      
     </div>
   );
 }
