@@ -1,21 +1,91 @@
-import { doc, setDoc, collection,query, getDocs, where, updateDoc, deleteDoc } from "firebase/firestore";
+import { doc, setDoc, collection,query, getDocs, where, updateDoc, deleteDoc, getDoc, serverTimestamp, arrayUnion, Timestamp } from "firebase/firestore";
 import { db } from "./Config";
 import { store } from "./Config";
 import { v4 } from "uuid";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "@firebase/storage";
 import { async } from "@firebase/util";
+import { v4 as uuid} from "uuid";
 
+export async function uploadImg(img,user,data,text){
+            const storageRef = ref(store, `images/${v4()}`)
+            // const uploadTask = uploadBytesResumable(storageRef,img)
+            const uploadTask = await uploadBytes(storageRef, img);
+            const url =  await getDownloadURL(storageRef);
+            await updateDoc(doc(db,"chats",data.chatId),{
+            messages:arrayUnion({
+                id:uuid(),
+                text,
+                senderId:user.uid,
+                date: Timestamp.now(),
+                img: url,
+            })
+            })
+            upload(user,data,text)
+}
+export async function uploadMessage(data,user,text){
+    await updateDoc(doc(db,"chats",data.chatId),{
+        messages:arrayUnion({
+            id: uuid(),
+            text,
+            senderId:user.uid,
+            date:Timestamp.now(),
+        })
+    })
+    upload(user,data,text);
+}
+async function upload(user,data,text){
+    await updateDoc(doc(db,"userChat",user.uid),{
+        [data.chatId+".lastMessage"]:{
+            text
+        },
+        [data.chatId+".date"]: serverTimestamp()
+    })
+    await updateDoc(doc(db,"userChat",data.user.uid),{
+        [data.chatId+".lastMessage"]:{
+            text
+        },
+        [data.chatId+".date"]: serverTimestamp()
+    })
+}
 
-
-
+export async function searchChat(combinedID){
+    const res = await getDoc(doc(db,"chats",combinedID));
+    return res;
+}
+export async function setChats(combinedID,user,product){
+    await setDoc(doc(db,"chats",combinedID),{messages:[]});
+    //crea user chats
+    console.log(user)
+    console.log(product)
+    await updateDoc(doc(db,"userChat",user.uid),{
+        [combinedID+".userInfo"]:{
+            uid:product.supplierId,
+            name:product.supplierName,
+            // photoURL:context.profilePic
+        },
+        [combinedID+".date"]: serverTimestamp()
+    })
+    await updateDoc(doc(db,"userChat",product.supplierId),{
+        [combinedID+".userInfo"]:{
+            uid:user?.uid,
+            name:user?.name,
+            // photoURL:user.profilePic
+        },
+        [combinedID+".date"]: serverTimestamp()
+    })
+}
 
 
 
 // Crea el perfil de usuario en el firestore
 export async function createUserProfile(userId,data){
+    setDoc(doc(db,'userChat',userId),{});
     return setDoc(doc(db,'users',userId),data);
+
 }
+
 export async function createSupplierProfile(userId,data){
+    setDoc(doc(db,'userChat',userId),{});
     return setDoc(doc(db,'suppliers',userId),data);
 }
 

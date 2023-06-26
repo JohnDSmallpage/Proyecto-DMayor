@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getProductById } from "../firebase models/user-service";
+import { getProductById, searchChat, setChats } from "../firebase models/user-service";
 import { useState } from "react";
 import { set } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { CATALOG, CART_PAGE } from "../routes/Url";
+import { CATALOG, CART_PAGE, CHAT } from "../routes/Url";
 import { useContext } from "react";
 import { productContext } from "../firebase models/ProductContext";
 import { useUser } from "../firebase models/userContext";
@@ -14,7 +14,9 @@ import { showProduct } from "../firebase models/user-service";
 import {Rating} from "../components/Rating"
 import { db } from "../firebase models/Config"; // Importa la instancia de Firestore que has creado
 import { collection, query, where, onSnapshot } from "firebase/firestore";
-
+import { Chat } from "./Chat";
+import { db } from "../firebase models/Config";
+import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
 
 export function ProductPage() {
@@ -24,11 +26,25 @@ export function ProductPage() {
   const selectProduct = useContext(productContext);
   const productSearched = useContext(searchContext);
 
-  const user = useUser();
+  const {user} = useUser();
 
   const [product, setProduct] = useState([]);
   const [descuentos, setDescuentos] = useState("");
   const [cantidad, setCantidad] = useState(1);
+
+    const setChat = async ()=>{
+      const combinedID = user?.uid > product.supplierId ? 
+      user?.uid + product.supplierId : 
+      product.supplierId + user?.uid;
+      const res = await searchChat(combinedID);
+      // try{      
+          if(!res.exists()){
+              //crea el chat
+              await setChats(combinedID,user,product);
+          }
+          navigate(CHAT);
+  }
+
 
   const getProduct = async (id) => {
     const data = await getProductById(id);
@@ -139,8 +155,8 @@ export function ProductPage() {
 
   return (
     <>
-      {user.user?.accepted &&
-      user.user != null &&
+      {user?.user?.accepted &&
+      user?.user != null &&
       productSearched.supplierMode == true ? (
         <section className="text-gray-600 body-font overflow-hidden">
           <div className="container px-5 py-24 mx-auto">
@@ -395,6 +411,9 @@ export function ProductPage() {
                 <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5 gap-2">
                   <p>Proveedor:  </p>
                 <Link to={`/supplierInfo/${product.supplierId}`} className="text-orange-500">{product.supplierName}</Link>
+                {user && user?.Company==undefined &&
+                <button onClick={setChat} className="text-orange-500">chatear</button>
+                }
                   {/* <div className="flex">
         <span className="mr-3">Color</span>
         <button className="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>
