@@ -9,21 +9,20 @@ import { ADD_PRODUCT } from "../routes/Url";
 import { useEffect } from "react";
 import { getAllProducts } from "../firebase models/user-service";
 import { useState } from "react";
-import productsimg from "../images/products.jpg";
+import productsimg from "../images/products.png";
 import visa from "../images/visa.png";
 import masterCard from "../images/mastercard.png";
 import paypal from "../images/logo-Paypal.png";
 import phone from "../images/phone.png";
 import location from "../images/location.png";
 import email from "../images/email.png";
-import portada from "../images/portada.jpg";
-import camioncito from "../images/camioncito.jpg";
-import ejercicio from "../images/ejercicio.jpg";
-import electronicos from "../images/electronicos.jpg";
-import herramientas from "../images/herramientas.jpg";
-import maquillaje from "../images/maquillaje.jpg";
-import ropa from "../images/ropa.jpg";
-import home from "../images/home.jpg";
+import portada from "../images/portada.png";
+import construccion from "../images/construccion.png";
+import electronicos from "../images/electronicos.png";
+import herramientas from "../images/herramientas.png";
+import ropa from "../images/ropa.png";
+import alimentos from "../images/alimentos.png";
+import home from "../images/home.png";
 import { useNavigate } from "react-router-dom";
 import { SEARCH_PAGE } from "../routes/Url";
 
@@ -92,13 +91,13 @@ export function LandingPage() {
       >
         <div id="izq-cont" className="flex flex-col w-1/4  rounded-sm gap-5">
           <Link className="h-1/5 rounded ">
-            <img className="h-full w-full rounded" src={ejercicio} />
+            <img className="h-full w-full rounded" src={construccion} />
           </Link>
           <Link className="h-3/5 rounded ">
-            <img className="h-full w-full rounded" src={ropa} />
+            <img className="h-full w-full rounded" src={alimentos} />
           </Link>
           <Link className="h-1/5 rounded ">
-            <img className="h-full w-full rounded" src={maquillaje} />
+            <img className="h-full w-full rounded" src={ropa} />
           </Link>
         </div>
 
