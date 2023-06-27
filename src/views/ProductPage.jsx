@@ -453,13 +453,7 @@ export function ProductPage() {
                   ) : (
                     <p>{product.availableQuantity}{" " + product.unity}</p>)
                   }
-                  {product.discounts == [] ? (
-                    <div>
-                      <p>Loading...</p>
-                    </div>
-                  ) : (
-                    <p>{descuentos}</p>
-                  )}
+                  
                   </div>
                   <div className=" mt-1 title-font font-medium text-xl text-gray-900">
                     Cantidad:{" "}
