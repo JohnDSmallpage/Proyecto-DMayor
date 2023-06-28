@@ -1,0 +1,23 @@
+.favoriteBtn {
+    border: none;
+    outline: none;
+    padding: 12px 16px;
+    margin-top: 16px;
+    background:orange;
+    border: 1px solid orange;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.favoriteBtn:hover {
+    background: #181b20;
+}
+
+.favoriteBtn.isFavorite {
+    background: #181b20;
+}
+
+.favoriteBtn.favoriteBtn.isFavorite:hover {
+    background: transparent;
+}

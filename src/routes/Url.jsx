@@ -23,4 +23,5 @@ export const CLIENT_INFO = "/clientInfo"
 export const PAY_ORDER = "/payOrder"
 
 export const CART_PAGE = "/CartPage"
+export const FAV_PAGE = "/favorites"
 
