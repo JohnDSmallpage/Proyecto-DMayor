@@ -16,11 +16,6 @@ import { db } from "../firebase models/Config"; // Importa la instancia de Fires
 import { collection, query, where, onSnapshot, addDoc } from "firebase/firestore";
 import { FaStar } from 'react-icons/fa';
 import '../components/Rating.module.css';
-
-
-
-
-import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { Chat } from "./Chat";
 import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
