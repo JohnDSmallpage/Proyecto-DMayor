@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+/*import { useEffect, useState } from 'react';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 import {useUser} from "../firebase models/userContext";
 import db from "../firebase models/Config"
@@ -31,4 +31,4 @@ export function HistorialCompras() {
       </ul>
     </div>
   );
-}
+}*/
