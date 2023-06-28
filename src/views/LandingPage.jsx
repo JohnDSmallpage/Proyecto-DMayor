@@ -23,17 +23,16 @@ import herramientas from "../images/herramientas.png";
 import ropa from "../images/ropa.png";
 import alimentos from "../images/alimentos.png";
 import home from "../images/home.png";
-import banner1 from "../images/banner1.jpg";
-import banner2 from "../images/banner2.jpg";
-import banner3 from "../images/banner3.jpg";
-import banner4 from "../images/banner4.jpg";
-import banner5 from "../images/banner5.jpg";
+import banner1 from "../images/banner1.png";
+import banner2 from "../images/banner2.png";
+import banner3 from "../images/banner3.png";
+import banner4 from "../images/banner4.png";
 import { useNavigate } from "react-router-dom";
 import { SEARCH_PAGE } from "../routes/Url";
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
-  const slides = [banner1,banner2,banner3,banner4,banner5];
+  const slides = [banner1,banner2,banner3,banner4];
 
   const navigate = useNavigate();
 
