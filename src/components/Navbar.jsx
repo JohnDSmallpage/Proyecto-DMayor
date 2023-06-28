@@ -12,6 +12,7 @@ import {
   ADMIN,
   SUPPLIER_PROFILE,
   CLIENT_PROFILE,
+  CHAT,
 } from "../routes/Url";
 import DMAYOR_LOGO from "../images/DMAYOR_logo.png";
 import Departamentos from "../images/database-line.png";

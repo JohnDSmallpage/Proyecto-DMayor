@@ -18,7 +18,7 @@ export const ADD_PRODUCT = "/addproduct"
 export const CATALOG = "/catalog"
 export const SUPPLIER_INFO = "/supplierInfo/:id"
 export const CLIENT_CHAT = "/clientChat"
-export const CLIENT_INFO = "/clientInfo"
+export const CLIENT_INFO = "/clientInfo" 
 
 export const PAY_ORDER = "/payOrder"
 
