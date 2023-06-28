@@ -15,7 +15,6 @@ import {Rating} from "../components/Rating"
 import { db } from "../firebase models/Config"; // Importa la instancia de Firestore que has creado
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { Chat } from "./Chat";
-import { db } from "../firebase models/Config";
 import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
 
