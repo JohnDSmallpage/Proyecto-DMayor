@@ -23,23 +23,17 @@ import herramientas from "../images/herramientas.png";
 import ropa from "../images/ropa.png";
 import alimentos from "../images/alimentos.png";
 import home from "../images/home.png";
+import banner1 from "../images/banner1.jpg";
+import banner2 from "../images/banner2.jpg";
+import banner3 from "../images/banner3.jpg";
+import banner4 from "../images/banner4.jpg";
+import banner5 from "../images/banner5.jpg";
 import { useNavigate } from "react-router-dom";
 import { SEARCH_PAGE } from "../routes/Url";
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
-  const slides = [
-    "https://img.freepik.com/foto-gratis/concepto-compras-carrito-compras-minimo-sobre-fondo-naranja-representacion-3d_56104-1396.jpg?w=900&t=st=1686440473~exp=1686441073~hmac=f608b53fabe280824e25f953f423c0c66c7e0313587c1de8cb6dde11818f837d",
-    
-    
-     "https://wallpapercave.com/wp/wp7530211.jpg",
-    
-      "https://wallpapercave.com/wp/wp6836093.jpg",
-
-    "https://img.freepik.com/fotos-premium/imagen-fondo-hay-escenario-exhibir-productos-proteccion-solar-tonos-azules-naranjas_544235-336.jpg?w=826",
-    "https://img.freepik.com/fotos-premium/cinta-jugo-naranja-industria-alimentaria-productos-listos-envasado-automatico-concepto-produccion-alimentos-automatizada-ia-generativa_73944-32925.jpg?w=826",
-    
-  ];
+  const slides = [banner1,banner2,banner3,banner4,banner5];
 
   const navigate = useNavigate();
 
@@ -48,7 +42,6 @@ export function LandingPage() {
   const handleCategorySearch = (value) => {
     textSearched.setCategoryLanding(value);
   };
-
 
   const getProducts = async () => {
     const data = await getAllProducts();
@@ -159,9 +152,9 @@ export function LandingPage() {
             Consiguelo todo en nuestros departamentos
           </h2>
           <Link to={SEARCH_PAGE}>
-          <button className="flex justify-center items-center bg-white text-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
-            VER MÁS
-          </button>
+            <button className="flex justify-center items-center bg-white text-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
+              VER MÁS
+            </button>
           </Link>
         </div>
 
@@ -171,17 +164,19 @@ export function LandingPage() {
         >
           <div className="flex flex-col gap-[5px]">
             <Link to={SEARCH_PAGE}>
-            <button
-              id="Agricultura"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
-              onClick={handleCategorySearch("Agricultura")}
-              
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center " onClick={handleCategorySearch("Agricultura")}>
-              Agricultura
-            </button>
+              <button
+                id="Agricultura"
+                className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
+                onClick={handleCategorySearch("Agricultura")}
+              >
+                FOTO
+              </button>
+              <button
+                className="flex justify-center items-center "
+                onClick={handleCategorySearch("Agricultura")}
+              >
+                Agricultura
+              </button>
             </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
@@ -191,7 +186,9 @@ export function LandingPage() {
             >
               FOTO
             </button>
-            <button className="flex justify-center items-center ">Tecnología</button>
+            <button className="flex justify-center items-center ">
+              Tecnología
+            </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
@@ -222,7 +219,9 @@ export function LandingPage() {
             >
               FOTO
             </button>
-            <button className="flex justify-center items-center ">Electrodoméstico</button>
+            <button className="flex justify-center items-center ">
+              Electrodoméstico
+            </button>
           </div>
           <div className="flex flex-col gap-[5px]">
             <button
