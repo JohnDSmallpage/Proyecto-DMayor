@@ -13,7 +13,12 @@ import { hideProduct } from "../firebase models/user-service";
 import { showProduct } from "../firebase models/user-service";
 import {Rating} from "../components/Rating"
 import { db } from "../firebase models/Config"; // Importa la instancia de Firestore que has creado
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { collection, query, where, onSnapshot, addDoc } from "firebase/firestore";
+import { FaStar } from 'react-icons/fa';
+import '../components/Rating.module.css';
+
+
+
 
 
 
@@ -108,6 +113,24 @@ export function ProductPage() {
     // console.log(descuento);
   }, [product]);
   
+  //SUBIR EL RATING
+ 
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
+
+  const handleRating = async () => {
+    try {
+      await addDoc(collection(db, 'ratings'), {
+        productId: id,
+        userId: user.uid,
+        rating: rating,
+      });
+      console.log('Valoración guardada correctamente en Firebase.');
+    } catch (error) {
+      console.error('Error al guardar la valoración en Firebase:', error);
+    }
+  };
+
 
   // ------ RATING --------
   const [ratings, setRatings] = useState([]);
@@ -507,7 +530,37 @@ export function ProductPage() {
       )}
 
     <div>
-      <Rating/>
+    <div className="rating">
+      Rating
+      {[...Array(5)].map((star, index) => {
+        const currentRating = index + 1;
+        return (
+          <label key={index}>
+            <input
+              type="radio"
+              name="rating"
+              value={currentRating}
+              onClick={() => setRating(currentRating)}
+            />
+
+            <FaStar
+              className="star"
+              size={30}
+              color={currentRating <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
+              onMouseEnter={() => setHover(currentRating)}
+              onMouseLeave={() => setHover(null)}
+            ></FaStar>
+          </label>
+        );
+      })}
+      <button onClick={handleRating}>Guardar Valoración</button>
+      <p>Your rating is {rating}</p>
+    </div>
+
+
+
+
+
       <h2>Producto {product.name}</h2>
       <p>Valoración promedio: {averageRating}</p>
 
