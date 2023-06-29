@@ -74,7 +74,6 @@ export function LandingPage() {
         className="flex justify-center items-center font-bold h-[300px] "
       >
         <Carrousel photos={slides} bool={true} />
-        {/* <Carrousel photos={slides} bool={true} />  */}
       </div>
       <div
         id="message-container"
