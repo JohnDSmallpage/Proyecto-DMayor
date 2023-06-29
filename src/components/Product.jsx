@@ -1,9 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../firebase models/userContext";
+import { useFavoritesContext } from "../firebase models/FavoritesContext";
 
-export function Product({ info }) {
+
+export function Product({ info}) {
   const { user } = useUser();
+
+  
+
+  const { favoriteList, handleFavoriteButton} = useFavoritesContext();
+  const isFavorite = favoriteList?.listOfIds?.includes(info.id);
+
   return (
     <>
     {user?.accepted ?
@@ -62,10 +70,20 @@ export function Product({ info }) {
             </h2>
             <p className="mt-1 text-[#FF7A00] text-xl font-bold">{"$" + info.price}</p>
           </div>
+
+          
         </div>
       </Link>
       
       }
+        
+        <button 
+          className={` flex justify-center items-center  text-white bg-[#FF7A00] rounded-[3px] w-[300px] h-[20px] text-[22px] ${isFavorite ? 'bg-gray-900' : ''}`}
+          type="button"
+          onClick={() => handleFavoriteButton({ productId: info.id, isFavorite })}
+          >
+          {isFavorite ? "-" : "+"}
+        </button>
     </>
   );
 }

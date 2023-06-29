@@ -13,6 +13,7 @@ import {
   SUPPLIER_PROFILE,
   CLIENT_PROFILE,
   CHAT,
+  FAV_PAGE,
 } from "../routes/Url";
 import DMAYOR_LOGO from "../images/DMAYOR_logo.png";
 import Departamentos from "../images/database-line.png";
@@ -34,6 +35,7 @@ import CerrarSesion from "../images/logout-box-line.png";
 import Faq from "../images/question-answer-line.png";
 import Categorias from "../images/store-line.png";
 import { Searchbar } from "../components/Searchbar";
+import Fav from "../images/estrellavacia1.png";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -154,6 +156,18 @@ export function Navbar() {
                     />
                     FAQ
                   </Link>
+                  <Link
+                    className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
+                    to={FAV_PAGE}
+                    onClick={() => setOpen(false)}
+                  >
+                    <img
+                      className="ml-[15px] w-[24px] h-[24px]"
+                      src={Fav}
+                      alt=""
+                    />
+                    Favoritos
+                  </Link>
                   {!user ? (
                     <div className="flex flex-col  text-white text-xl  cursor-pointer ">
                       <Link
@@ -266,6 +280,7 @@ export function Navbar() {
               <img className="pl-[10px] pr-[2.5px] py-[10px]" src={Faq2}></img>
               <p className="pr-[10px] pl-[2.5px]">FAQ</p>
             </Link>
+            
           </nav>
 
           <div id="buscador" className="">
@@ -342,6 +357,16 @@ export function Navbar() {
             </div>
           )}
           
+        
+          <div id="favoritos" className="">
+          <Link
+              className="flex flex-row items-center bg-white   rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
+              to={FAV_PAGE}
+            >
+              <img className="pl-[10px] pr-[2.5px] py-[10px]" src={Fav}></img>
+              <p className="pr-[10px] pl-[2.5px]">Favoritos</p>
+            </Link>
+          </div>
         </div>
       </div>
     </header>
