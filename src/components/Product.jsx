@@ -77,13 +77,13 @@ export function Product({ info}) {
       
       }
         
-        <button 
+        {/*<button 
           className={` flex justify-center items-center  text-white bg-[#FF7A00] rounded-[3px] w-[300px] h-[20px] text-[22px] ${isFavorite ? 'bg-gray-900' : ''}`}
           type="button"
           onClick={() => handleFavoriteButton({ productId: info.id, isFavorite })}
           >
           {isFavorite ? "-" : "+"}
-        </button>
+    </button>*/}
     </>
   );
 }

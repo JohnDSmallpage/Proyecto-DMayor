@@ -156,7 +156,7 @@ export function Navbar() {
                     />
                     FAQ
                   </Link>
-                  <Link
+                 {/* <Link
                     className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                     to={FAV_PAGE}
                     onClick={() => setOpen(false)}
@@ -167,14 +167,14 @@ export function Navbar() {
                       alt=""
                     />
                     Favoritos
-                  </Link>
+                  </Link> */}
                   {!user ? (
                     <div className="flex flex-col  text-white text-xl  cursor-pointer ">
                       <Link
                         className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                         to={LOGIN}
                         onClick={() => setOpen(false)}
-                      >
+                  >
                         <img
                           className="ml-[15px] w-[24px] h-[24px]"
                           src={IniciarSesion}
@@ -358,7 +358,7 @@ export function Navbar() {
           )}
           
         
-          <div id="favoritos" className="">
+          {/*<div id="favoritos" className="">
           <Link
               className="flex flex-row items-center bg-white   rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
               to={FAV_PAGE}
@@ -366,7 +366,7 @@ export function Navbar() {
               <img className="pl-[10px] pr-[2.5px] py-[10px]" src={Fav}></img>
               <p className="pr-[10px] pl-[2.5px]">Favoritos</p>
             </Link>
-          </div>
+              </div>*/}
         </div>
       </div>
     </header>

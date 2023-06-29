@@ -81,8 +81,9 @@ const addNewFavorite = async ({productId, listOfIds = [], favoriteListId}) => {
         try {
             const favoritesData = await getFavoritesByUserId(favoritesData.listOfIds);
 // lógica para buscar los productos relacionados con los favoritos
+console.log(favoritesData);
             return {favoritesData};
-            //console.log(favoritesData);
+            
         } catch (error) {
             console.error("FAILED GET FAVORITES");
             
