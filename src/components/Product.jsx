@@ -40,7 +40,7 @@ export function Product({ info }) {
       <Link to={`/product/${info.id}`}>
         <div
           id="main-container"
-          className="flex flex-col bg-[#F3F5F6] rounded p-4 w-[200px] h-[250px]"
+          className="flex flex-col bg-[#F3F5F6] rounded p-4 w-[240px] h-[290px]"
         >
           <div
             id="img-container"
@@ -57,7 +57,7 @@ export function Product({ info }) {
           </div>
 
           <div id="info-container" className="flex flex-col justify-between">
-            <h2 className="mt-1 text-gray-900 ">
+            <h2 className="mt-1 text-xl text-gray-900 ">
               {info.name.charAt(0).toUpperCase() + info.name.slice(1)}
             </h2>
             <p className="mt-1 text-[#FF7A00] text-xl font-bold">{"$" + info.price}</p>

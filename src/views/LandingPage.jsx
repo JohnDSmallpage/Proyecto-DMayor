@@ -27,12 +27,20 @@ import banner1 from "../images/banner1.png";
 import banner2 from "../images/banner2.png";
 import banner3 from "../images/banner3.png";
 import banner4 from "../images/banner4.png";
+import agriculturaIcon from "../images/agriculturaIcon.png";
+import tecnologiaIcon from "../images/tecnologiaIcon.png";
+import construccionIcon from "../images/construccionIcon.png";
+import alimentosIcon from "../images/alimentosIcon.png";
+import ganaderiaIcon from "../images/ganaderiaIcon.png";
+import quimicosIcon from "../images/quimicosIcon.png";
+import saludIcon from "../images/saludIcon.png";
+
 import { useNavigate } from "react-router-dom";
 import { SEARCH_PAGE } from "../routes/Url";
 
 export function LandingPage() {
   // Productos de prueba, en realidad debe hacerse llamado desde la Firestore
-  const slides = [banner1,banner2,banner3,banner4];
+  const slides = [banner1, banner2, banner3, banner4];
 
   const navigate = useNavigate();
 
@@ -82,13 +90,13 @@ export function LandingPage() {
         className="flex flex-row justify-between w-full h-[500px] px-5 gap-5 "
       >
         <div id="izq-cont" className="flex flex-col w-1/4  rounded-sm gap-5">
-          <Link className="h-1/5 rounded ">
+          <Link to={SEARCH_PAGE} className="h-1/5 rounded ">
             <img className="h-full w-full rounded" src={construccion} />
           </Link>
-          <Link className="h-3/5 rounded ">
+          <Link to={SEARCH_PAGE} className="h-3/5 rounded ">
             <img className="h-full w-full rounded" src={alimentos} />
           </Link>
-          <Link className="h-1/5 rounded ">
+          <Link to={SEARCH_PAGE} className="h-1/5 rounded ">
             <img className="h-full w-full rounded" src={ropa} />
           </Link>
         </div>
@@ -97,24 +105,24 @@ export function LandingPage() {
           id="mid-cont"
           className="flex flex-col w-2/4 h-full rounded-sm gap-5"
         >
-          <Link className="h-[300px] rounded">
+          <Link to={SEARCH_PAGE} className="h-[300px] rounded">
             <img className="h-full w-full rounded " src={portada} />
           </Link>
           <div className="flex flex-row gap-5">
-            <Link className="h-[180px] w-1/2 rounded">
+            <Link to={SEARCH_PAGE} className="h-[180px] w-1/2 rounded">
               <img className="h-full w-full rounded " src={electronicos} />
             </Link>
-            <Link className="h-[180px] w-1/2 rounded">
+            <Link to={SEARCH_PAGE} className="h-[180px] w-1/2 rounded">
               <img className="h-full w-full rounded " src={herramientas} />
             </Link>
           </div>
         </div>
 
         <div id="der-cont" className="flex flex-col w-1/4 h-full gap-5">
-          <Link className="h-2/5 rounded">
+          <Link to={SEARCH_PAGE} className="h-2/5 rounded">
             <img className="h-full w-full rounded " src={home} />
           </Link>
-          <Link className="h-3/5 rounded">
+          <Link to={SEARCH_PAGE} className="h-3/5 rounded">
             <img className="h-full w-full rounded " src={productsimg} />
           </Link>
         </div>
@@ -125,9 +133,6 @@ export function LandingPage() {
           <h1 className="font-semibold text-lg">
             Productos destacados en D'Mayor
           </h1>
-          <button className="flex justify-center items-center font-bold text-white bg-[#FF7A00] rounded-[5px] w-[107px] h-[30px] text-[12px]">
-            VER MÁS
-          </button>
         </div>
         <section className="flex flex-row w-1/2 gap-[10px] ">
           {products == null ? (
@@ -159,19 +164,21 @@ export function LandingPage() {
 
         <div
           id="category-buttons"
-          className="flex  flex-row justify-between mx-5 mb-5"
+          className="flex  flex-row justify-around mx-5 mb-5"
         >
           <div className="flex flex-col gap-[5px]">
             <Link to={SEARCH_PAGE}>
               <button
                 id="Agricultura"
-                className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
+                className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
                 onClick={handleCategorySearch("Agricultura")}
               >
-                FOTO
+                <img className="" src={agriculturaIcon} />
               </button>
+            </Link>
+            <Link to={SEARCH_PAGE}>
               <button
-                className="flex justify-center items-center "
+                className="flex justify-center items-center w-full"
                 onClick={handleCategorySearch("Agricultura")}
               >
                 Agricultura
@@ -179,81 +186,98 @@ export function LandingPage() {
             </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <button
-              id="Tecnología"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center ">
-              Tecnología
-            </button>
+            <Link to={SEARCH_PAGE}>
+              <button
+                id="Tecnología"
+                className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
+              >
+                <img className="" src={tecnologiaIcon} />
+              </button>
+            </Link>
+            <Link to={SEARCH_PAGE}>
+              <button className="flex justify-center items-center w-full">
+                Tecnología
+              </button>
+            </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <button
-              id="Construcción"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center ">
-              Construcción
-            </button>
+            <Link to={SEARCH_PAGE}>
+              <button
+                id="Construcción"
+                className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
+                onClick={handleCategorySearch("Construcción")}
+              >
+                <img className="" src={construccionIcon} />
+              </button>
+            </Link>
+            <Link to={SEARCH_PAGE}>
+              <button
+                className="flex justify-center items-center w-full"
+                onClick={handleCategorySearch("Construcción")}
+              >
+                Construcción
+              </button>
+            </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <button
-              id="Alimentos"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center ">
-              Alimentos
-            </button>
+            <Link to={SEARCH_PAGE}>
+              <button
+                id="Alimentos"
+                className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
+              >
+                <img className="" src={alimentosIcon} />
+              </button>
+            </Link>
+            <Link to={SEARCH_PAGE}>
+              <button className="flex justify-center items-center w-full">
+                Alimentos
+              </button>
+            </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <button
-              id="Electrodomésticos"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px]"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center ">
-              Electrodoméstico
-            </button>
+            <Link to={SEARCH_PAGE}>
+              <button
+                id="Ganadería"
+                className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
+              >
+                <img className="" src={ganaderiaIcon} />
+              </button>
+            </Link>
+            <Link to={SEARCH_PAGE}>
+              <button className="flex justify-center items-center w-full">
+                Ganadería
+              </button>
+            </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <button
-              id="Ganadería"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center hidden sm:block">
-              Ganadería
-            </button>
+            <Link to={SEARCH_PAGE}>
+              <button
+                id="Químicos"
+                className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
+              >
+                <img className="" src={quimicosIcon} />
+              </button>
+            </Link>
+            <Link to={SEARCH_PAGE}>
+              <button className="flex justify-center items-center w-full">
+                Químicos
+              </button>
+            </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <button
-              id="Químicos"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center  hidden sm:block">
-              Químicos
-            </button>
-          </div>
-          <div className="flex flex-col gap-[5px]">
-            <button
-              id="Salud"
-              className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] hidden sm:block"
-            >
-              FOTO
-            </button>
-            <button className="flex justify-center items-center hidden sm:block">
-              Salud
-            </button>
+            <Link to={SEARCH_PAGE}>
+              <button
+                id="Salud"
+                className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
+              >
+                <img className="" src={saludIcon} />
+              </button>
+            </Link>
+            <Link to={SEARCH_PAGE}>
+              <button className="flex justify-center items-center w-full">
+                Salud
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -261,16 +285,7 @@ export function LandingPage() {
         <h2 className="text-xl font-bold text-gray-800 text-center mt-3">
           Mantente en contacto
         </h2>
-        <div className="flex flex-row justify-around">
-          <div className="flex flex-col justify-around h-full">
-            <p className="text-xl font-bold">Accesos rapidos</p>
-            <ol className="flex flex-col justify-around gap-[10px]">
-              <li>Politicas de Privacidad</li>
-              <li>Politicas de Retorno</li>
-              <li>Terminos y Servicios</li>
-              <li>Contacto</li>
-            </ol>
-          </div>
+        <div className="flex flex-row justify-evenly">
           <div className="h-full">
             <p className="text-xl font-bold">Contactanos</p>
             <ol className="flex flex-col justify-around gap-[10px]">
