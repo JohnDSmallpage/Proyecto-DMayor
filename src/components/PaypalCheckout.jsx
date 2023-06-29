@@ -5,7 +5,9 @@ import { useNavigate } from "react-router";
 import { SEARCH_PAGE } from "../routes/Url";
 import { productContext } from "../firebase models/ProductContext";
 import { CHAT } from "../routes/Url";
-import { reduceAvailableQuantity } from "../firebase models/user-service";
+import { addOrderToUserHistory, reduceAvailableQuantity } from "../firebase models/user-service";
+import { addNewHistory } from "../firebase models/user-service";
+import { useUser } from "../firebase models/userContext";
 
 
 export function PaypalCheckout({price}) {
@@ -14,6 +16,7 @@ export function PaypalCheckout({price}) {
     const [ErrorMessage, setErrorMessage] = useState("");
     const [orderID, setOrderID] = useState(false);
     const navigate = useNavigate();
+    const { user, isLoading } = useUser();
 
     // creates a paypal order
     const createOrder = (data, actions) => {
@@ -54,6 +57,19 @@ export function PaypalCheckout({price}) {
             console.log(selectProduct.finalPrice);
             console.log('Order successful . Your order id is--', orderID);
             reduceAvailableQuantity(selectProduct.selectedProduct, selectProduct.quantity)
+            const newData = {
+                "id": orderID,
+                "price": selectProduct.finalPrice,
+                "productName": selectProduct.selectedProduct.name,
+                "category": selectProduct.selectedProduct.category,
+                "quantity": selectProduct.quantity,
+                "supplier": selectProduct.selectedProduct.supplierName,
+                "date" : new Date().toLocaleString(),
+                "photo": selectProduct.selectedProduct.photos
+            }
+            console.log(newData);
+            addNewHistory(orderID, newData);
+            addOrderToUserHistory(orderID, user);
             navigate(CHAT);
         }
         
