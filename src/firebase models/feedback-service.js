@@ -6,7 +6,6 @@ import {
     getDocs, 
     where, 
     updateDoc, 
-    deleteDoc,
     addDoc 
 } from "firebase/firestore";
 
@@ -15,11 +14,8 @@ export async function createFeedbackList(data){
     return addDoc(collection(db, "feedback", data));
 }
 
-export async function fetchFeedbackByUserId(userId){
-    const feedbackQuery = query(
-        collection(db, "feedback"),
-        where("userId", "==", userId)
-    );
+export async function fetchFeedbackByProductId(productId){
+    const feedbackQuery = query(collection(db, "feedback"), where("productId", "==", productId));
 
     const results = await getDocs(feedbackQuery);
 

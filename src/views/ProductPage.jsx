@@ -49,7 +49,7 @@ export function ProductPage() {
 
   const getProduct = async (id) => {
     const data = await getProductById(id);
-    // console.log(data);
+     //console.log(data);
     setProduct(data);
   };
 
