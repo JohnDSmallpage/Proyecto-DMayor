@@ -2,9 +2,11 @@ import Inicio from "../images/home-2-line.png";
 import Perfil from "../images/user-3-line.png";
 import Client from "../images/shopping-basket-fill.png";
 import Chat from "../images/message-2-line.png";
+import Catalogo from "../images/file-list-3-line.png";
+
 import { useUser } from "../firebase models/userContext";
 import { Link } from "react-router-dom";
-import { CHAT, CLIENT_CHAT } from "../routes/Url";
+import { CHAT, CLIENT_CHAT, HISTORY } from "../routes/Url";
 import { CLIENT_INFO } from "../routes/Url";
 
 export function ClientProfile() {
@@ -46,7 +48,7 @@ export function ClientProfile() {
           id="bottom-container"
           className="flex flex-row justify-between w-full gap-[15px]"
         >
-          <Link className="w-1/2" to={CHAT}>
+          <Link className="w-1/3" to={CHAT}>
             <button
               id="option-1"
               className="flex flex-col justify-center items-center w-full h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
@@ -68,7 +70,7 @@ export function ClientProfile() {
             </button>
           </Link>
 
-          <Link className="w-1/2" to={CLIENT_INFO}>
+          <Link className="w-1/3" to={CLIENT_INFO}>
             <button
               id="option-2"
               className="flex flex-col justify-center items-center w-full h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
@@ -88,8 +90,26 @@ export function ClientProfile() {
               </h4>
             </button>
           </Link>
-
-          
+          <Link className="w-1/3" to={HISTORY}>
+            <button
+              id="option-3"
+              className="flex flex-col justify-center items-center w-full h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+            >
+              <img className="w-[30px] h-[30px]" src={Catalogo} alt="" />
+              <h2
+                id="history"
+                className="flex justify-center items-center text-xl font-semibold"
+              >
+                Historial
+              </h2>
+              <h4
+                id="historial-description"
+                className="flex justify-center items-center text-sm"
+              >
+                Ve el historial de tus compras
+              </h4>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
