@@ -2,25 +2,19 @@ import Inicio from "../images/home-2-line.png";
 import Perfil from "../images/user-3-line.png";
 import Verified from "../images/shield-check-fill.png";
 import Catalogo from "../images/file-list-3-line.png";
+import Chat from "../images/message-2-line.png";
 import { useUser } from "../firebase models/userContext";
 import { Link } from "react-router-dom";
 import { CATALOG, CHAT } from "../routes/Url";
 import { productContext } from "../firebase models/ProductContext";
 import { SUPPLIER_INFO } from "../routes/Url";
 
-
-
-
-
-  
-
 export function SupplierProfile() {
   const { user, isLoading } = useUser();
 
   return (
-   
     <div id="main-container" className="flex justify-center items-center">
-      {!user.accepted? (
+      {!user.accepted ? (
         <div className="flex flex-col justify-center items-center h-screen ">
           <p className="text-[30px] font-bold text-[#ff7a00]">
             Su solicitud esta siendo Revisada
@@ -47,7 +41,7 @@ export function SupplierProfile() {
             </div>
             <div
               id="name-user"
-              className="flex flex-col w-[191px] h-[82px] mt-[18px]"
+              className="flex flex-col w-full h-[82px] mt-[18px]"
             >
               <h1 id="name" className="text-[28px] font-semibold">
                 {user.Company}
@@ -61,131 +55,75 @@ export function SupplierProfile() {
             </div>
           </div>
 
-          <div id="bottom-container" className="flex flex-wrap justify-between w-full gap-[15px]">
-            <Link to={CATALOG}>
+          <div
+            id="bottom-container"
+            className="flex flex-row justify-between w-full gap-[15px]"
+          >
+            <Link className="w-1/3" to={CHAT}>
               <button
                 id="option-1"
-                className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+                className="flex flex-col justify-center items-center w-full h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+              >
+                <img className="w-[30px] h-[30px]" src={Chat} alt="" />
+                <h2
+                  id="chats"
+                  className="flex justify-center items-center  text-xl font-semibold"
+                >
+                  Chats
+                </h2>
+                <h4
+                  id="chats-description"
+                  className="flex justify-center items-center  text-sm"
+                >
+                  Acá podrás encontrar tus chats con los proveedores
+                </h4>
+              </button>
+            </Link>
+            <Link className="w-1/3" to={CATALOG}>
+              <button
+                id="option-2"
+                className="flex flex-col justify-center items-center w-full h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
               >
                 <img className="w-[30px] h-[30px]" src={Catalogo} alt="" />
                 <h2
                   id="catalogo"
-                  className="flex justify-center items-center w-[125px] h-[19px] text-[15px] font-semibold"
+                  className="flex justify-center items-center  text-xl font-semibold"
                 >
                   Catalogo
                 </h2>
 
                 <h4
                   id="catalogo-description"
-                  className="flex justify-center items-center w-[151px] h-[31px] text-[10px]"
+                  className="flex justify-center items-center  text-sm"
                 >
-                  Aca podras ver tu catalogo y listar o eliminar productos
+                  Lista y elimina productos de tu catálogo
                 </h4>
               </button>
             </Link>
 
-            <Link to={`/supplierInfo/${user.id}`}>
+            <Link className="w-1/3" to={`/supplierInfo/${user.id}`}>
               <button
-                id="option-2"
-                className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+                id="option-3"
+                className="flex flex-col justify-center items-center w-full h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
               >
                 <img className="w-[30px] h-[30px]" src={Perfil} alt="" />
                 <h2
                   id="datos"
-                  className="flex justify-center items-center w-[125px] h-[19px] text-[15px] font-semibold"
+                  className="flex justify-center items-center  text-xl font-semibold"
                 >
                   Datos
                 </h2>
                 <h4
                   id="datos-description"
-                  className="flex justify-center items-center w-[151px] h-[31px] text-[10px]"
+                  className="flex justify-center items-center  text-sm"
                 >
-                  Ver y editar datos de la cuenta del usuario
+                  Ver datos de la cuenta del usuario
                 </h4>
               </button>
             </Link>
-
-            <Link
-            to={CHAT}
-              id="option-3"
-              className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
-            >
-              <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
-              <h2
-                id="option-3-name"
-                className="flex justify-center items-center w-[125px] h-[19px] text-[15px] font-semibold"
-              >
-                Chat
-              </h2>
-              <h4
-                id="option-3-description"
-                className="flex justify-center items-center w-[151px] h-[31px] text-[10px]"
-              >
-                Todos tus chats con clientes
-              </h4>
-            </Link>
-            <button
-              id="option-4"
-              className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
-            >
-              <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
-              <h2
-                id="option-4-name"
-                className="flex justify-center items-center w-[125px] h-[19px] text-[15px] font-semibold"
-              >
-                Opcion 4
-              </h2>
-              <h4
-                id="option-4-description"
-                className="flex justify-center items-center w-[151px] h-[31px] text-[10px]"
-              >
-                Descripcion de opcion 4
-              </h4>
-            </button>
-
-            <button
-              id="option-5"
-              className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
-            >
-              <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
-              <h2
-                id="option-5-name"
-                className="flex justify-center items-center w-[125px] h-[19px] text-[15px] font-semibold"
-              >
-                Opcion 5
-              </h2>
-              <h4
-                id="option-5-description"
-                className="flex justify-center items-center w-[151px] h-[31px] text-[10px]"
-              >
-                Descripcion de opcion 5
-              </h4>
-            </button>
-
-            <button
-              id="option-6"
-              className="flex flex-col justify-center items-center w-[175px] h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
-            >
-              <img className="w-[30px] h-[30px]" src={Inicio} alt="" />
-              <h2
-                id="option-3-name"
-                className="flex justify-center items-center w-[125px] h-[19px] text-[15px] font-semibold"
-              >
-                Opcion 6
-              </h2>
-              <h4
-                id="option-3-description"
-                className="flex justify-center items-center w-[151px] h-[31px] text-[10px]"
-              >
-                Descripcion de opcion 6
-              </h4>
-            </button>
           </div>
         </div>
-      )
-      }
+      )}
     </div>
-      
   );
 }
-
