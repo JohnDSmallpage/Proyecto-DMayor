@@ -2,6 +2,7 @@ import { getFavoritesByUserId, updateFavoriteList } from "./favorites-service";
 import { createFavoriteList } from "./favorites-service";
 
 
+
 export function useFavorites() {
 const addNewFavorite = async ({productId, listOfIds = [], favoriteListId}) => {
         const newList = [...listOfIds, productId];
@@ -78,11 +79,13 @@ const addNewFavorite = async ({productId, listOfIds = [], favoriteListId}) => {
 
     const getFavorites = async (userId = "") => {
         try {
-            const favoritesData = await getFavoritesByUserId(userId);
-//to do: buscar productos
-            console.log(favoritesData);
+            const favoritesData = await getFavoritesByUserId(favoritesData.listOfIds);
+// lógica para buscar los productos relacionados con los favoritos
+            return {favoritesData};
+            //console.log(favoritesData);
         } catch (error) {
             console.error("FAILED GET FAVORITES");
+            
         }
     };
 

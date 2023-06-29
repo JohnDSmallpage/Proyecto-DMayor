@@ -42,7 +42,7 @@ const handleFavoriteButton = async ({productId, isFavorite}) => {
 
 const handleGetFavorites = async () => {
     try {
-        setIsLoading(true);
+        setIsLoading(false);
         const data = await getFavorites(user.id);
         console.log({data})
         
@@ -53,9 +53,13 @@ const handleGetFavorites = async () => {
 
 useEffect(() => {
     if (!isLoading && user?.id) {
-        handleGetFavorites();
-    }
-}, [user])
+        try {
+          handleGetFavorites();
+        } catch (error) {
+          console.error("FAILED TO LOAD FAVORITES", error);
+        }
+      }
+    }, [user]);
 
 return( 
     <FavoritesContext.Provider 
