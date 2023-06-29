@@ -42,11 +42,18 @@ const Carrousel = ({ photos, bool, editable, send }) => {
     const isLastSlide = currentIndex === PhotoArray.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
+    // clearInterval(timerInterval);
+    
   };
+
 
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
   };
+
+//  const timerInterval = setInterval(
+//    nextSlide, 3000);
+
 
   return (
     <div className="max-w-full h-full w-full  group">
@@ -54,11 +61,11 @@ const Carrousel = ({ photos, bool, editable, send }) => {
         style={{ backgroundImage: `url(${PhotoArray[currentIndex]})` }}
         className="w-full h-full bg-center bg-cover duration-500 flex items-center justify-between px-2"
       >
-        {/* Flecha izquierda  */}
+        {/* Left arrow  */}
         <div className="hidden group-hover:block   text-2.5 rounded-full p-2 bg-black/20 text-white cursor-pointer">
           <BsChevronCompactLeft onClick={prevSlide} size={20} />
         </div>
-        {/* Flecha derecha  */}
+        {/* Right Arrow  */}
         <div className="hidden group-hover:block   text-2.5 rounded-full p-2 bg-black/20 text-white cursor-pointer">
           <BsChevronCompactRight onClick={nextSlide} size={20} />
         </div>
