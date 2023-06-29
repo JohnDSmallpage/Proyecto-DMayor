@@ -1,10 +1,10 @@
 .favoriteBtn {
     border: none;
     outline: none;
-    padding: 2px 6px;
-    margin-top: 150px;
-    background:orange;
-    border: 1px solid orange;
+    padding: 8px 6px;
+    margin-top: 180px;
+    background: #FF7A00;
+    border: 1px solid #FF7A00;
     color: #fff;
     border-radius: 6px;
     cursor: pointer;
@@ -16,9 +16,9 @@
 }
 
 .favoriteBtn.isFavorite {
-    background: #181b20;
+    background: gray;
 }
 
 .favoriteBtn.isFavorite:hover {
-    background: transparent;
+    background: #181b20;
 }

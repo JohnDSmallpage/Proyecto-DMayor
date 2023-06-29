@@ -1,5 +1,5 @@
 .container1 {
-    background: #272b33;
+    background: white;
     min-height: 100vh;
     padding: 30px;
 }
@@ -7,7 +7,7 @@
 .title {
     font-size: 2em;
     text-align: center;
-    color: white;
+    color: #FF7A00;
 }
 
 .products {

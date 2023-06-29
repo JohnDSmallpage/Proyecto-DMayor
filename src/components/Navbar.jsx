@@ -355,22 +355,7 @@ export function Navbar() {
               )}
             </div>
           )}
-          <div id="camioncito-compras" className="">
-            <Link
-              to={Inicio}
-              className="flex flex-row items-center bg-white  rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"
-            >
-              <img
-                className="pl-[10px] pr-[2.5px] py-[10px]"
-                src={Camioncito}
-              />
-              <div id="cantidad-productos" className="pr-[10px] pl-[2.5px]">
-                <p className="flex items-center justify-center bg-black rounded-full text-white text-sm w-[25px] h-[25px]">
-                  0
-                </p>
-              </div>
-            </Link>
-          </div>
+        
           <div id="favoritos" className="">
           <Link
               className="flex flex-row items-center bg-white   rounded-full hover:bg-[#F3F5F6] py-[5px] px-[5px] rounded-full"

@@ -17,7 +17,7 @@ export function FavoritesPage() {
     
     <>
     <div className='container1'>
-      <h1 className='title'>Favorites Products</h1>
+      <h1 className='title'>Productos Favoritos</h1>
       <div className='products'>
         {isLoading && <p className="loading">Loading...</p>}
 

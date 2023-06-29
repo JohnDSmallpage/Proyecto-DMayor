@@ -77,7 +77,7 @@ export function Product({ info}) {
       
       }
         
-        <button
+        <button 
           className={`${styles.favoriteBtn} ${
              isFavorite ? styles.isFavorite : ""
               }`}
