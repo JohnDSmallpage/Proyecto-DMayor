@@ -4,7 +4,7 @@ import './index.css'
 import {BrowserRouter} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 
-import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT, CHAT, SUPPLIER_PRODUCT, CART_PAGE} from './routes/Url';
+import {LANDING_PAGE, CATEGORIAS, PROVEEDORES, FAQ, DEFAULT, SEARCH_PAGE, REGISTER, LOGIN, APPLICATION, ADMIN, PRODUCT_PAGE,SUPPLIER_PROFILE, CLIENT_PROFILE, CHECKOUT, CHAT, SUPPLIER_PRODUCT, CART_PAGE, HISTORY} from './routes/Url';
 import {LandingPage} from './views/LandingPage';
 import {Layout} from './views/Layout';
 import {Providers} from './views/Providers';
@@ -37,6 +37,7 @@ import { PurchasePage } from './views/PurchasePage';
 import { CartPage } from './views/CartPage';
 import { Chat } from './views/Chat';
 import { PrivateUserRoute } from './components/PrivateUserRoute';
+import { HistoryPage } from './views/HistoryPage';
 
 
 
@@ -68,6 +69,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={CLIENT_INFO} element={<PrivateRouteClient><ClientInfo/></PrivateRouteClient>}/>
           <Route path={PAY_ORDER} element={<PrivateRouteClient><PurchasePage/></PrivateRouteClient>}/>
           <Route path={CART_PAGE} element={<PrivateRouteClient> <CartPage/> </PrivateRouteClient>}/>
+          <Route path={HISTORY} element={<PrivateRouteClient> <HistoryPage/> </PrivateRouteClient>}/>
 
 
 

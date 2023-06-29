@@ -15,6 +15,7 @@ export function RegisterPage() {
     formState: { errors },
   } = useForm({
     defaultValues: {
+      history: [],
     },
   });
   const password = useRef({});
