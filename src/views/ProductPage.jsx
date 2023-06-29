@@ -11,8 +11,6 @@ import { useUser } from "../firebase models/userContext";
 import { searchContext } from "../firebase models/SearchContext";
 import { hideProduct } from "../firebase models/user-service";
 import { showProduct } from "../firebase models/user-service";
-import { useFavoritesContext } from "../firebase models/FavoritesContext";
-import styles from "./index.module.css"
 
 export function ProductPage() {
   const { id } = useParams();
@@ -26,9 +24,6 @@ export function ProductPage() {
   const [product, setProduct] = useState([]);
   const [descuentos, setDescuentos] = useState("");
   const [cantidad, setCantidad] = useState(1);
-
-  const { favoriteList, handleFavoriteButton} = useFavoritesContext();
-  const isFavorite = favoriteList?.listOfIds?.includes(product.id)
 
   const getProduct = async (id) => {
     const data = await getProductById(id);
@@ -246,17 +241,7 @@ export function ProductPage() {
                     "Mostrar producto" : "Ocultar producto"}
                     
                   </button>
-                  <button
-                    className={`${styles.favoriteBtn} ${
-                      isFavorite ? styles.isFavorite : ""
-                    }`}
-                    type="button"
-                    onClick={() =>
-                    handleFavoriteButton({productId: product.id, isFavorite})
-                    }
-                  >
-                    {isFavorite ? "Eliminar favorito" : "Agregar a favoritos"}
-                  </button>
+                 
 
                   {/*<button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                     <svg
@@ -426,17 +411,7 @@ export function ProductPage() {
                   >
                     Comprar
                   </button>
-                  <button
-                    className={`${styles.favoriteBtn} ${
-                      isFavorite ? styles.isFavorite : ""
-                    }`}
-                    type="button"
-                    onClick={() =>
-                    handleFavoriteButton({productId: product.id, isFavorite})
-                    }
-                  >
-                    {isFavorite ? "Eliminar favorito" : "Agregar a favoritos"}
-                  </button>
+                 
                   
                   {/*<button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                     <svg

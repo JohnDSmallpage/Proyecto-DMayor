@@ -22,12 +22,12 @@ export async function getFavoritesByUserId(userId){
     const results = await getDocs(favoriteQuery);
 
     if(results.size > 0) {
-        const favoriteList = results.docs.map((item) => ({
+        const favoritesList = results.docs.map((item) => ({
             ...item.data(),
             id: item.id,
         }));
 
-        return favoriteList[0];
+        return favoritesList[0];
     } else {
         return null;
     }
@@ -39,11 +39,11 @@ export async function updateFavoriteList(favoriteListId, data) {
     return updateDoc(listRef, data);
 }
 
-export const addProductToFavoriteList = async (id, user) => {
+/*export const addProductToFavoriteList = async (id, user) => {
     const reference = doc(db, "favorites", user.uid);
     
     user.favoriteList.push(id);
     const result = await updateDoc(reference, user);
     console.log("Producto agregado a la lista de favoritos");
     return result;
-  }
+  }*/

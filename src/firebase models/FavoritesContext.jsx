@@ -13,26 +13,26 @@ const defaultList = {
 };
 
 export function FavoritesProvider({ children }){
-const [favoriteList,setFavoriteList] =useState(defaultList);
-const [isLoading,setIsLoading] = useState(false);
+const [favoriteList, setFavoriteList] =useState(defaultList);
+const [isLoading, setIsLoading] = useState(false);
 const {user} = useUser()
 const { getFavorites, handleFavorite} = useFavorites();
 
 const handleFavoriteButton = async ({productId, isFavorite}) => {
     try {
-        const { updateListOfIds, favoriteListId } = await handleFavorite({
+        const { updatedListOfIds, favoriteListId } = await handleFavorite({
             productId, isFavorite, listOfIds: favoriteList.listOfIds,
             favoriteListId: favoriteList.id,
             userId: user.id,
         });
 
-     
+        let updatedProducts = [];
 
         setFavoriteList({
             ...favoriteList,
-            listOfIds: updateListOfIds,
+            listOfIds: updatedListOfIds,
             id: favoriteListId,
-            products: updateProducts,
+            products: updatedProducts,
         });
 
     } catch (error) {
@@ -64,7 +64,7 @@ return(
             setFavoriteList,
             isLoading,
             setIsLoading,
-            handleFavoriteButton
+            handleFavoriteButton,
     }}
     >
         {children}

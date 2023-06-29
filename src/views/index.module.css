@@ -1,13 +1,14 @@
 .favoriteBtn {
     border: none;
     outline: none;
-    padding: 12px 16px;
-    margin-top: 16px;
+    padding: 2px 6px;
+    margin-top: 150px;
     background:orange;
     border: 1px solid orange;
     color: #fff;
     border-radius: 6px;
     cursor: pointer;
+    font-size: 12px;
 }
 
 .favoriteBtn:hover {
@@ -18,6 +19,6 @@
     background: #181b20;
 }
 
-.favoriteBtn.favoriteBtn.isFavorite:hover {
+.favoriteBtn.isFavorite:hover {
     background: transparent;
 }

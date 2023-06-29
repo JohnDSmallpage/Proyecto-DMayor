@@ -3,7 +3,7 @@ import { createFavoriteList } from "./favorites-service";
 
 
 export function useFavorites() {
-const addNewFavorite = async ({productId, listOfIds, favoriteListId}) => {
+const addNewFavorite = async ({productId, listOfIds = [], favoriteListId}) => {
         const newList = [...listOfIds, productId];
         console.log({newList});
         await updateFavoriteList(favoriteListId, {
@@ -11,7 +11,7 @@ const addNewFavorite = async ({productId, listOfIds, favoriteListId}) => {
         });
 
         return {
-            updateListOfIds: newList,
+            updatedListOfIds: newList,
             favoriteListId,
         }
     };
@@ -24,7 +24,7 @@ const addNewFavorite = async ({productId, listOfIds, favoriteListId}) => {
         });
 
         return {
-            updateListOfIds: newList,
+            updatedListOfIds: newList,
             favoriteListId,
         }
     };
@@ -63,8 +63,8 @@ const addNewFavorite = async ({productId, listOfIds, favoriteListId}) => {
         
         const payload ={
             productId,
-            listOfIds,
-            favoriteListId
+            listOfIds: currentFavorites.listOfIds,
+            favoriteListId: currentFavorites.favoriteListId,
         };
 
         //si el producto es favorito, lo eliminamos
@@ -79,8 +79,8 @@ const addNewFavorite = async ({productId, listOfIds, favoriteListId}) => {
     const getFavorites = async (userId = "") => {
         try {
             const favoritesData = await getFavoritesByUserId(userId);
-
-            console.log({favoritesData});
+//to do: buscar productos
+            console.log(favoritesData);
         } catch (error) {
             console.error("FAILED GET FAVORITES");
         }
