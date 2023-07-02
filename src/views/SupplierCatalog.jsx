@@ -24,6 +24,7 @@ export function SupplierCatalog() {
     setProducts(data);
   };
 
+
   const getSupplierHiddenProducts = async () => {
     const idProducts = user.catalog;
     const data = await getHiddenProductsBySupplier(idProducts);

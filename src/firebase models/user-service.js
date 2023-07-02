@@ -93,6 +93,10 @@ export async function addNewProduct(productId,data){
     return setDoc(doc(db,'products',productId),data);
 }
 
+export async function addNewHistory(historyId,data){
+    return setDoc(doc(db,'history',historyId),data);
+}
+
 export async function getProductsByName(textSearched){
     textSearched = textSearched.toLowerCase();
 
@@ -265,6 +269,17 @@ export const addProductToCatalog = async (id, user) => {
     return result;
   }
 
+  export const addOrderToUserHistory = async (id, user) => {
+    const reference = doc(db, "users", user.uid);
+    if(user.history == undefined){
+      user.history = [];
+    } 
+    user.history.push(id);
+    const result = await updateDoc(reference, user);
+    console.log("Orden añadida al historial");
+    return result;
+  }
+
   export const reduceAvailableQuantity = async (selectedProduct, quantity) => {
     const reference = doc(db, "products", selectedProduct.id);
     selectedProduct.availableQuantity = parseInt(selectedProduct.availableQuantity) - quantity ;
@@ -297,6 +312,24 @@ export const addProductToCatalog = async (id, user) => {
     }
 
 }
+
+export const getHistoryByUser = async (idProducts) => {
+    const userQuery = query(collection(db,"history"), where("id","in",idProducts));
+    const results = await getDocs(userQuery);
+    
+    if(results.size>0){
+        const products = results.docs.map((item)=>({
+            ...item.data(),
+            id: item.id,
+        }));
+        return products;
+    }else{
+        return null;
+    }
+
+}
+
+
 
 export const getHiddenProductsBySupplier = async (idProducts) => {
     const userQuery = query(collection(db,"products"), where("id","in",idProducts), where("hidden","==",true));

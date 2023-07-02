@@ -6,6 +6,7 @@ import { uploadProfilePic } from '../firebase models/user-service';
 const Carrousel = ({photos,bool,editable,send}) => {
     const [currentIndex, setCurrentIndex] = useState(0) ;
     const [PhotoArray,setPhotoArray] = useState([]);
+    const [autoSlide,setAutoSlide] = useState(true);
 
     
 
@@ -39,17 +40,31 @@ const Carrousel = ({photos,bool,editable,send}) => {
         const isFirstSlide = currentIndex === 0;
         const newIndex = isFirstSlide ? PhotoArray.length -1 : currentIndex - 1;
         setCurrentIndex(newIndex);
+        setAutoSlide(false)
     };
 
-    const nextSlide = () => {
+    const nextSlide = (auto) => {
         const isLastSlide = currentIndex === PhotoArray.length -1;
         const newIndex = isLastSlide ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
+        if(!auto){
+            setAutoSlide(false)
+        }
     };
 
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
   };
+  useEffect(() => {
+    if(autoSlide){
+        const timeoutId = setTimeout(() => {
+            nextSlide(true);
+          }, 7000);
+          return () => {
+            clearTimeout(timeoutId);
+          };
+    }
+  }, [currentIndex]);
 
     return (
     <div className='w-full h-full  group flex-col flex items-center justify-center '>
@@ -72,9 +87,9 @@ const Carrousel = ({photos,bool,editable,send}) => {
                     key={slideIndex} 
                     onClick={() => goToSlide(slideIndex)}
                     className='text-2x1 cursor-pointer self-bottom group-hover:block hidden top-[40%]'>
-                        {bool &&
+                        {/* {bool &&
                         <RxDotFilled size={50}/>
-                        }
+                        } */}
                         
                 </div>
             ))}
