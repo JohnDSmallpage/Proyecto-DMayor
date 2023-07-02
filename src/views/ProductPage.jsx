@@ -14,6 +14,7 @@ import { showProduct } from "../firebase models/user-service";
 import { Chat } from "./Chat";
 import { db } from "../firebase models/Config";
 import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import Comments from "../components/comments/Comments";
 
 export function ProductPage() {
   const { id } = useParams();
@@ -375,6 +376,11 @@ export function ProductPage() {
                 </span>
               </div>
             </div>
+          </div>
+          <div>
+            <Comments
+            currentUserId="1" //current user ID
+            />
           </div>
         </section>
       )}
