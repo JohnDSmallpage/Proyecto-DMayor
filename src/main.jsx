@@ -37,9 +37,9 @@ import { PurchasePage } from './views/PurchasePage';
 import { CartPage } from './views/CartPage';
 import { Chat } from './views/Chat';
 import { PrivateUserRoute } from './components/PrivateUserRoute';
-import { Rating } from './components/Rating';
 import { HistoryPage } from './views/HistoryPage';
 import { FavoritesPage } from './views/FavoritesPage';
+import Rating from './components/Rating';
 
 
 

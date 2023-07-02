@@ -17,7 +17,3 @@ export function ProductContextProvider({children}) {
 
   )
 }
-
-export function useProduct(){
-  return useContext(productContext);
-}

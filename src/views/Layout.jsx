@@ -5,7 +5,6 @@ import { UserContextProvider } from "../firebase models/userContext";
 import { SearchContextProvider } from "../firebase models/SearchContext";
 import { ProductContextProvider } from "../firebase models/ProductContext";
 import { ChatContextProvider } from "../firebase models/chatContext";
-import { FeedbackProvider } from "../firebase models/FeedbackContext";
 import { FavoritesProvider } from "../firebase models/FavoritesContext";
 
 export function Layout() {
@@ -13,7 +12,7 @@ export function Layout() {
     <main>
       <UserContextProvider>
        <ChatContextProvider>
-          <FeedbackProvider>  
+           
             <FavoritesProvider>
               <SearchContextProvider>
        
@@ -28,7 +27,7 @@ export function Layout() {
           
               </SearchContextProvider>
             </FavoritesProvider>        
-          </FeedbackProvider>   
+             
         </ChatContextProvider>
       </UserContextProvider>
     </main>

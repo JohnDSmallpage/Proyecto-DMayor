@@ -321,7 +321,7 @@ export function LandingPage() {
             <img className="w-[70px]" src={paypal} alt="" />
           </div>
         </div>
-        
+        </div>
       </footer>
       
     </div>

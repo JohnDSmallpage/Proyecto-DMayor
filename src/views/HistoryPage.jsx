@@ -5,11 +5,14 @@ import { getHistoryByUser } from '../firebase models/user-service';
 import { useEffect } from 'react';
 import { HistoryProduct } from '../components/HistoryProduct';
 
+
+
+
 export function HistoryPage() {
 
     const [products, setProducts] = useState([]);
     const { user } = useUser();
-
+    
     const getHistory = async () => {
         const idProducts = user.history;
         const data = await getHistoryByUser(idProducts);
@@ -19,7 +22,7 @@ export function HistoryPage() {
       useEffect(() => {
         getHistory();
       }, [products]);
-    
+ 
 
   return (
     <>
@@ -33,10 +36,13 @@ export function HistoryPage() {
         ) : (
           products?.map((product, idx) => (
             <>
-                <HistoryProduct info={product} key={idx} />
+                <HistoryProduct info={product} key={idx}/>                            
+
             </>
           ))
         )}
+
+        
         
       </div>
     

@@ -6,7 +6,7 @@ import {
   signInWithPopup, 
   signOut } from "@firebase/auth";
 import { auth } from "./Config";
-import { addProductToCatalog, createSupplierProfile, createUserProfile } from "./user-service";
+import { addFeedbackToProduct, addProductToCatalog, createSupplierProfile, createUserProfile } from "./user-service";
 import { v4 } from "uuid";
 import { addNewProduct } from "./user-service";
 
@@ -82,9 +82,12 @@ export const registerProduct = async(
       id:id,
       ...data,
     })
+
     await addProductToCatalog(id, user);
     console.log("Producto registrado");
+
   } catch (error) {
     console.log(error);
   } 
 };
+

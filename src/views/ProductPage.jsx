@@ -11,13 +11,7 @@ import { useUser } from "../firebase models/userContext";
 import { searchContext } from "../firebase models/SearchContext";
 import { hideProduct } from "../firebase models/user-service";
 import { showProduct } from "../firebase models/user-service";
-import {Rating} from "../components/Rating"
-import { db } from "../firebase models/Config"; // Importa la instancia de Firestore que has creado
-import { collection, query, where, onSnapshot, addDoc } from "firebase/firestore";
-import { FaStar } from 'react-icons/fa';
-import '../components/Rating.module.css';
 import { Chat } from "./Chat";
-import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
 
 export function ProductPage() {
@@ -125,50 +119,19 @@ export function ProductPage() {
     // console.log(descuento);
   }, [product]);
   
-  //SUBIR EL RATING
- 
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
-
-  const handleRating = async () => {
-    try {
-      await addDoc(collection(db, 'ratings'), {
-        productId: id,
-        userId: user.uid,
-        rating: rating,
-      });
-      console.log('Valoración guardada correctamente en Firebase.');
-    } catch (error) {
-      console.error('Error al guardar la valoración en Firebase:', error);
-    }
-  };
-
-
+  
   // ------ RATING --------
-  const [ratings, setRatings] = useState([]);
-  const [averageRating, setAverageRating] = useState(0);
+
+  
+  const getFeedback = async () => {
+    const idProducts = product.feedback;
+    const data = await getFeedbackByProduct(idProducts);
+    setProduct(data);
+  }; 
 
   useEffect(() => {
-    const q = query(collection(db, "ratings"), where("id", "==", id));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const data = snapshot.docs.map((doc) => doc.data());
-      setRatings(data);
-
-      // Calcular el promedio de las valoraciones
-      if (data.length > 0) {
-        const totalRating = data.reduce(
-          (accumulator, currentValue) => accumulator + currentValue.rating,
-          0
-        );
-        const average = totalRating / data.length;
-        setAverageRating(average);
-      } else {
-        setAverageRating(0);
-      }
-    });
-
-    return () => unsubscribe();
-  }, [id]);
+    getFeedback();
+  }, [product]);
 
 
 
@@ -432,51 +395,6 @@ export function ProductPage() {
         </section>   
       )}
 
-    <div>
-    <div className="rating">
-      Rating
-      {[...Array(5)].map((star, index) => {
-        const currentRating = index + 1;
-        return (
-          <label key={index}>
-            <input
-              type="radio"
-              name="rating"
-              value={currentRating}
-              onClick={() => setRating(currentRating)}
-            />
-
-            <FaStar
-              className="star"
-              size={30}
-              color={currentRating <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
-              onMouseEnter={() => setHover(currentRating)}
-              onMouseLeave={() => setHover(null)}
-            ></FaStar>
-          </label>
-        );
-      })}
-      <button onClick={handleRating}>Guardar Valoración</button>
-      <p>Your rating is {rating}</p>
-    </div>
-
-
-
-
-
-      <h2>Producto {product.name}</h2>
-      <p>Valoración promedio: {averageRating}</p>
-
-      <h3>Valoraciones</h3>
-      <ul>
-        {ratings.map((rating, index) => (
-          <li key={index}>
-            <p>Valoración: {rating.rating}</p>
-            <p>Descripción: {rating.description}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
 
     </>
   );

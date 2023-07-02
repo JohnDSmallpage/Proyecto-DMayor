@@ -1,5 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import Rating from "./Rating";
+
 
 export function HistoryProduct({ info }) {
 
@@ -27,6 +30,7 @@ export function HistoryProduct({ info }) {
           <p className="text-sm mt-1 dark:text-black-600">Cantidad: {info.quantity} unidades</p>
         </div>
       </div>
+      Valora el producto <Rating/>
     </div>
   </div> 
   )
