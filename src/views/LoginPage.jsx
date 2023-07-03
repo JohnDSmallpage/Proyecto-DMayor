@@ -7,20 +7,21 @@ import { LANDING_PAGE, REGISTER } from "../routes/Url";
 
 export function LoginPage() {
   const navigate = useNavigate();
+  const [errorMessage,setErrorMessage]=useState();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const handleSigninWithGoogle = async () => {
     await signInWithGoogle();
-    navigate(LANDING_PAGE)
+
   };
 
   const onSubmit = async (event) => {
     event.preventDefault(); //evita que el form recargue la pagina
     const { email, password } = formData; //form destructurado
-    await logInWithEmailAndPassword(email, password);
-    navigate(LANDING_PAGE)
+    const confirmation = await logInWithEmailAndPassword(email, password);
+    setErrorMessage(confirmation)
   };
   //en cada input utiliza la informacion del campo para agregarla al form existente
   const handleOnChange = (event) => {
@@ -73,6 +74,7 @@ export function LoginPage() {
               placeholder="Ingresa tu contraseña"
             />
           </label>
+          <p className="text-red-600">{errorMessage}</p>
           <div className="flex flex-row justify-between">
             <div>
               <label htmlFor="remember" className="text-[14px] flex">

@@ -23,6 +23,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 export function SupplierInfo() {
   const { user, isLoading } = useUser();
   const { id } = useParams();
+  // const navigate = useNavigate();
 
   const [products, setProducts] = useState();
   const [editable, setEditable] = useState(false);
@@ -33,9 +34,10 @@ export function SupplierInfo() {
 
   const getUserProfile = async (id) => {
     const data = await getUserProfileById(id);
-    // console.log(data);
+    console.log(data);
     setProfileUser(data);
-    setPhotoArray(data.PhotoArray);
+    console.log(data)
+    setPhotoArray(data?.PhotoArray);
   };
 
   const productSearched = useContext(searchContext);

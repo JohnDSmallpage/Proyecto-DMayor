@@ -52,12 +52,20 @@ export const registerWithEmailAndPassword = async(
       })
     }
   } catch (error) {
+    return error;
   } 
 };
 export const logInWithEmailAndPassword = async(email,password)=>{
   try {
     const result = await signInWithEmailAndPassword(auth,email,password);
   } catch (error) {  
+    if (error.code === 'auth/user-not-found' || 'auth/wrong-password') {
+      return ('El correo o contraseña ingresados son incorrectos.');
+    }if(error.code === 'too-many-requests'){
+      return ('Muchos intentos, porfavor espere un momento y pruebe mas tarde')
+    } else {
+      return ('Ocurrió un error al iniciar sesión. Por favor, intenta de nuevo.');
+    };
   }
 };
 

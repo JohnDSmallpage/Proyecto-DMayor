@@ -181,7 +181,7 @@ export async function getUserProfileById(id){
         const [user] = users;
         return user;
     }else{
-        const userQuery = query(collection(db,"suppliers"), where("id","==",id));
+        const userQuery = query(collection(db,"suppliers"), where("uid","==",id));
          const results = await getDocs(userQuery);
     if(results.size>0){
         const users = results.docs.map((item)=>({
