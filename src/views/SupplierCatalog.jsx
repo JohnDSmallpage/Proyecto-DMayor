@@ -10,6 +10,8 @@ import { getProductsBySupplier } from "../firebase models/user-service";
 import { useContext } from "react";
 import { searchContext } from "../firebase models/SearchContext";
 import { getHiddenProductsBySupplier } from "../firebase models/user-service";
+import {onSnapshot,query, collection,where } from '@firebase/firestore'
+import { db } from "../firebase models/Config";
 
 export function SupplierCatalog() {
   const [products, setProducts] = useState([]);
@@ -20,7 +22,6 @@ export function SupplierCatalog() {
 
   const getSupplierProducts = async () => {
     const idProducts = user.catalog;
-    console.log("hola")
     const data = await getProductsBySupplier(idProducts);
     setProducts(data);
   };
@@ -36,6 +37,20 @@ export function SupplierCatalog() {
     getSupplierProducts();
     getSupplierHiddenProducts();
     productSearched.setSupplierMode(true);
+
+    const unSub = onSnapshot(
+      query(
+        collection(db, "products"),
+        where("id","in",user.catalog), where("hidden","==",false) // Agrega aquí tu cláusula where
+      ),
+      (querySnapshot) => {
+        const applications = [];
+        querySnapshot.forEach((doc) => {
+          applications.push(doc.data());
+        });
+        setProducts(applications);
+      }
+    );
   }, []);
 
   return (

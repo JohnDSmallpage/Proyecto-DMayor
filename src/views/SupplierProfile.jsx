@@ -8,9 +8,13 @@ import { Link } from "react-router-dom";
 import { CATALOG, CHAT } from "../routes/Url";
 import { productContext } from "../firebase models/ProductContext";
 import { SUPPLIER_INFO } from "../routes/Url";
+import { searchContext } from "../firebase models/SearchContext";
+import { useContext, useEffect } from "react";
 
 export function SupplierProfile() {
   const { user, isLoading } = useUser();
+  const contextInfo = useContext(searchContext);
+
 
   return (
     <div id="main-container" className="flex justify-center items-center">

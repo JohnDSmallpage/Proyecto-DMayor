@@ -20,11 +20,11 @@ export function Product({ info}) {
       <Link to={`/supplierProduct/${info.id}`}>
         <div
           id="main-container"
-          className="flex flex-col bg-[#F3F5F6] rounded-[10px] w-[174px] h-[134px]"
+          className="flex flex-col bg-[#F3F5F6] rounded p-4 w-[240px] h-[290px]"
         >
           <div
             id="img-container"
-            className="flex justify-center items-center rounded-[5px] h-[90px]"
+            className="flex justify-center items-center rounded-[5px] h-[160px]"
           >
             <img
               className=" w-full h-full"

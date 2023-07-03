@@ -34,7 +34,7 @@ import alimentosIcon from "../images/alimentosIcon.png";
 import ganaderiaIcon from "../images/ganaderiaIcon.png";
 import quimicosIcon from "../images/quimicosIcon.png";
 import saludIcon from "../images/saludIcon.png";
-
+import { useUser } from "../firebase models/userContext";
 import { useNavigate } from "react-router-dom";
 import { SEARCH_PAGE } from "../routes/Url";
 
@@ -45,6 +45,7 @@ export function LandingPage() {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
+  const { user, isLoading } = useUser();
 
   const handleCategorySearch = (value) => {
     textSearched.setCategoryLanding(value);
@@ -57,7 +58,9 @@ export function LandingPage() {
 
   useEffect(() => {
     getProducts();
+
     textSearched.setSupplierMode(false);
+   
   }, []);
 
   let product = {
