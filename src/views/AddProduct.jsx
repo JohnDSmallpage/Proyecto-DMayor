@@ -158,6 +158,7 @@ export const AddProduct = () => {
               <option value="Químicos">Químicos</option>
               <option value="Salud">Salud</option>
               <option value="Mecánica">Mecánica</option>
+              <option value="Hogar">Hogar</option>
             </select>
 
             <p className="text-red-600">{errors.category?.message}</p>

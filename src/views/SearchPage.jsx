@@ -5,32 +5,40 @@ import { useContext, useState } from "react";
 import { searchContext } from "../firebase models/SearchContext";
 import { getProductsByCategory } from "../firebase models/user-service";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom"
+import { Link } from "react-router-dom";
 
-export function SearchPage() {
+
+export function SearchPage(props) {
   
-
+  const location = useLocation();
   const productSearched = useContext(searchContext);
-  const [categorySelected, setCategorySelected] = useState("Textiles");
-
+  const [categorySelected, setCategorySelected] = useState("");
   
 
   const handleSelectChange = async (event) => {
-    setCategorySelected(event.target.value);
-  const data = await getProductsByCategory(event.target.value);
+    console.log(event)
+    setCategorySelected(event);
+  const data = await getProductsByCategory(event);
   console.log(data);
   productSearched.setProducts(data);
   };
 
-  const handleSelectChangeFromLandingPage = async (value) => {
-    setCategorySelected(value);
-    console.log(value);
-  const data = await getProductsByCategory(value);
-  console.log(data);
-  productSearched.setProducts(data);
-  };
+  // const handleSelectChangeFromLandingPage = async (value) => {
+  //   console.log(value)
+    // handleSelectChange(value);
+  //   console.log(value);
+  // const data = await getProductsByCategory(value);
+  // console.log(data);
+  // productSearched.setProducts(data);
+  // };
 
   useEffect (() => {
-    handleSelectChangeFromLandingPage(productSearched.categoryLanding);
+    // handleSelectChangeFromLandingPage(productSearched.categoryLanding);
+    const {value} = location?.state ?? "valor por defecto";
+    if(value){
+    handleSelectChange(value)
+    }
   }, []);
 
   return (
@@ -43,8 +51,9 @@ export function SearchPage() {
           <select id="category"
               type="text"
               name="category" 
+              value={categorySelected}
               className=" ml-2 py-2 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow text-black"
-              onChange={handleSelectChange}
+              onChange={e =>handleSelectChange(e.target.value)}
               
               >
               <option value="">Seleccione</option>
@@ -58,6 +67,7 @@ export function SearchPage() {
               <option value="Químicos">Químicos</option>
               <option value="Salud">Salud</option>
               <option value="Mecánica">Mecánica</option>
+              <option value="Hogar">Hogar</option>
           </select>
 
         </div>

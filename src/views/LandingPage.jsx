@@ -89,13 +89,13 @@ export function LandingPage() {
         className="flex flex-row justify-between w-full h-[500px] px-5 gap-5 "
       >
         <div id="izq-cont" className="flex flex-col w-1/4  rounded-sm gap-5">
-          <Link to={SEARCH_PAGE} className="h-1/5 rounded ">
+          <Link to={SEARCH_PAGE} state= {{value:"Construcción"}} className="h-1/5 rounded ">
             <img className="h-full w-full rounded" src={construccion} />
           </Link>
-          <Link to={SEARCH_PAGE} className="h-3/5 rounded ">
+          <Link to={SEARCH_PAGE} state= {{value:"Alimentos"}} className="h-3/5 rounded ">
             <img className="h-full w-full rounded" src={alimentos} />
           </Link>
-          <Link to={SEARCH_PAGE} className="h-1/5 rounded ">
+          <Link to={SEARCH_PAGE} state= {{value:"Textiles"}} className="h-1/5 rounded ">
             <img className="h-full w-full rounded" src={ropa} />
           </Link>
         </div>
@@ -104,24 +104,24 @@ export function LandingPage() {
           id="mid-cont"
           className="flex flex-col w-2/4 h-full rounded-sm gap-5"
         >
-          <Link to={SEARCH_PAGE} className="h-[300px] rounded">
+          <Link to={SEARCH_PAGE} state= {{value:""}} className="h-[300px] rounded">
             <img className="h-full w-full rounded " src={portada} />
           </Link>
           <div className="flex flex-row gap-5">
-            <Link to={SEARCH_PAGE} className="h-[180px] w-1/2 rounded">
+            <Link to={SEARCH_PAGE} state= {{value:"Electrodomésticos"}} className="h-[180px] w-1/2 rounded">
               <img className="h-full w-full rounded " src={electronicos} />
             </Link>
-            <Link to={SEARCH_PAGE} className="h-[180px] w-1/2 rounded">
+            <Link to={SEARCH_PAGE} state= {{value:"Mecánica"}} className="h-[180px] w-1/2 rounded">
               <img className="h-full w-full rounded " src={herramientas} />
             </Link>
           </div>
         </div>
 
         <div id="der-cont" className="flex flex-col w-1/4 h-full gap-5">
-          <Link to={SEARCH_PAGE} className="h-2/5 rounded">
+          <Link to={SEARCH_PAGE} state= {{value:"Hogar"}} className="h-2/5 rounded">
             <img className="h-full w-full rounded " src={home} />
           </Link>
-          <Link to={SEARCH_PAGE} className="h-3/5 rounded">
+          <Link to={SEARCH_PAGE} state= {{value:"Químicos"}} className="h-3/5 rounded">
             <img className="h-full w-full rounded " src={productsimg} />
           </Link>
         </div>
@@ -166,7 +166,7 @@ export function LandingPage() {
           className="flex  flex-row justify-around mx-5 mb-5"
         >
           <div className="flex flex-col gap-[5px]">
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Agricultura"}}>
               <button
                 id="Agricultura"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
@@ -175,7 +175,7 @@ export function LandingPage() {
                 <img className="" src={agriculturaIcon} />
               </button>
             </Link>
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Agricultura"}}>
               <button
                 className="flex justify-center items-center w-full"
                 onClick={handleCategorySearch("Agricultura")}
@@ -185,7 +185,7 @@ export function LandingPage() {
             </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Tecnología"}}>
               <button
                 id="Tecnología"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
@@ -193,14 +193,14 @@ export function LandingPage() {
                 <img className="" src={tecnologiaIcon} />
               </button>
             </Link>
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Tecnología"}}>
               <button className="flex justify-center items-center w-full">
                 Tecnología
               </button>
             </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Construcción"}}>
               <button
                 id="Construcción"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
@@ -209,7 +209,7 @@ export function LandingPage() {
                 <img className="" src={construccionIcon} />
               </button>
             </Link>
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Construcción"}}>
               <button
                 className="flex justify-center items-center w-full"
                 onClick={handleCategorySearch("Construcción")}
@@ -219,7 +219,7 @@ export function LandingPage() {
             </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Alimentos"}}>
               <button
                 id="Alimentos"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
@@ -227,14 +227,14 @@ export function LandingPage() {
                 <img className="" src={alimentosIcon} />
               </button>
             </Link>
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Alimentos"}}>
               <button className="flex justify-center items-center w-full">
                 Alimentos
               </button>
             </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Ganadería"}}>
               <button
                 id="Ganadería"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
@@ -242,14 +242,14 @@ export function LandingPage() {
                 <img className="" src={ganaderiaIcon} />
               </button>
             </Link>
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Ganadería"}}>
               <button className="flex justify-center items-center w-full">
                 Ganadería
               </button>
             </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Químicos"}}>
               <button
                 id="Químicos"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
@@ -257,14 +257,14 @@ export function LandingPage() {
                 <img className="" src={quimicosIcon} />
               </button>
             </Link>
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Químicos"}}>
               <button className="flex justify-center items-center w-full">
                 Químicos
               </button>
             </Link>
           </div>
           <div className="flex flex-col gap-[5px]">
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Salud"}}>
               <button
                 id="Salud"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
@@ -272,7 +272,7 @@ export function LandingPage() {
                 <img className="" src={saludIcon} />
               </button>
             </Link>
-            <Link to={SEARCH_PAGE}>
+            <Link to={SEARCH_PAGE} state= {{value:"Salud"}}>
               <button className="flex justify-center items-center w-full">
                 Salud
               </button>
