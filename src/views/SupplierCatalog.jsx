@@ -20,6 +20,7 @@ export function SupplierCatalog() {
 
   const getSupplierProducts = async () => {
     const idProducts = user.catalog;
+    console.log("hola")
     const data = await getProductsBySupplier(idProducts);
     setProducts(data);
   };
@@ -35,7 +36,7 @@ export function SupplierCatalog() {
     getSupplierProducts();
     getSupplierHiddenProducts();
     productSearched.setSupplierMode(true);
-  }, [products]);
+  }, []);
 
   return (
     <>
