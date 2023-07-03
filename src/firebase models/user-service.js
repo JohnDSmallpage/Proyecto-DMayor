@@ -234,7 +234,6 @@ export async function updateApplications(uid){
             ...item.data(),
             accepted: true,
         }))
-        console.log(applications[0])
         const reference = doc(db, "suppliers",applications[0].uid);
         const result = await updateDoc(reference, applications[0]);
             
