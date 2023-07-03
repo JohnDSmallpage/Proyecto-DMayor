@@ -36,8 +36,9 @@ export function ApplicationPage() {
 
   const onSubmit = async (data) => {
     const { Email, Password, ...extraData } = data; //form destructurado
+    
     await registerWithEmailAndPassword(
-      Email,
+      Email.toLowerCase(),
       Password,
       extraData
     );

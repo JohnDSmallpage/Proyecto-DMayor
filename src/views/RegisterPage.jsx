@@ -29,6 +29,7 @@ export function RegisterPage() {
 
   const onSubmit = async (data) => {
     const { email, password, ...extraData } = data; //form destructurado
+    email= email.toLowerCase();
     await registerWithEmailAndPassword(
       email,
       password,

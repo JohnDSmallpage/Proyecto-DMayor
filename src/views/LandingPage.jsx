@@ -34,7 +34,7 @@ import alimentosIcon from "../images/alimentosIcon.png";
 import ganaderiaIcon from "../images/ganaderiaIcon.png";
 import quimicosIcon from "../images/quimicosIcon.png";
 import saludIcon from "../images/saludIcon.png";
-
+import { useUser } from "../firebase models/userContext";
 import { useNavigate } from "react-router-dom";
 import { SEARCH_PAGE } from "../routes/Url";
 
@@ -45,6 +45,7 @@ export function LandingPage() {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
+  const { user, isLoading } = useUser();
 
   const handleCategorySearch = (value) => {
     textSearched.setCategoryLanding(value);
@@ -57,7 +58,9 @@ export function LandingPage() {
 
   useEffect(() => {
     getProducts();
+
     textSearched.setSupplierMode(false);
+   
   }, []);
 
   let product = {
@@ -116,11 +119,7 @@ export function LandingPage() {
           id="mid-cont"
           className="flex flex-col w-2/4 h-full rounded-sm gap-5"
         >
-          <Link
-            to={SEARCH_PAGE}
-            state={{ value: "" }}
-            className="h-[300px] rounded"
-          >
+          <Link to={SEARCH_PAGE} state= {{value:"Sin Categoria"}} className="h-[300px] rounded">
             <img className="h-full w-full rounded " src={portada} />
           </Link>
           <div className="flex flex-row gap-5">
@@ -202,7 +201,7 @@ export function LandingPage() {
               <button
                 id="Agricultura"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
-                onClick={handleCategorySearch("Agricultura")}
+                // onClick={handleCategorySearch("Agricultura")}
               >
                 <img className="" src={agriculturaIcon} />
               </button>
@@ -210,7 +209,7 @@ export function LandingPage() {
             <Link to={SEARCH_PAGE} state={{ value: "Agricultura" }}>
               <button
                 className="flex justify-center items-center w-full"
-                onClick={handleCategorySearch("Agricultura")}
+                // onClick={handleCategorySearch("Agricultura")}
               >
                 Agricultura
               </button>
@@ -236,7 +235,7 @@ export function LandingPage() {
               <button
                 id="Construcción"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
-                onClick={handleCategorySearch("Construcción")}
+                // onClick={handleCategorySearch("Construcción")}
               >
                 <img className="" src={construccionIcon} />
               </button>
@@ -244,7 +243,7 @@ export function LandingPage() {
             <Link to={SEARCH_PAGE} state={{ value: "Construcción" }}>
               <button
                 className="flex justify-center items-center w-full"
-                onClick={handleCategorySearch("Construcción")}
+                // onClick={handleCategorySearch("Construcción")}
               >
                 Construcción
               </button>

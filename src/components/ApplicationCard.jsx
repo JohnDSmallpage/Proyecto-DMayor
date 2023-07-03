@@ -6,9 +6,6 @@ export function ApplicationCard({info}) {
         updateApplications(info.uid);
 
     }
-    const DenyApplication=()=>{
-        
-    }
   return (
     <>
     <div className='flex flex-col text-[18px] mt-2 border-black border rounded

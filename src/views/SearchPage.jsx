@@ -6,10 +6,9 @@ import { searchContext } from "../firebase models/SearchContext";
 import { getAllProducts, getProductsByCategory } from "../firebase models/user-service";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom"
-import { Link } from "react-router-dom";
 
 
-export function SearchPage(props) {
+export function SearchPage() {
   
   const location = useLocation();
   const productSearched = useContext(searchContext);
@@ -17,15 +16,15 @@ export function SearchPage(props) {
   
 
   const handleSelectChange = async (event) => {
-    console.log(event)
+    
     if(event == "Sin Categoria"){
       setCategorySelected("Sin Categoria")
       getProducts();
     }else{
-    console.log(event)
+    
     setCategorySelected(event);
   const data = await getProductsByCategory(event);
-  console.log(data);
+ 
   productSearched.setProducts(data);
   };
 }
@@ -34,20 +33,14 @@ export function SearchPage(props) {
     productSearched.setProducts(data);
   };
 
-  // const handleSelectChangeFromLandingPage = async (value) => {
-  //   console.log(value)
-    // handleSelectChange(value);
-  //   console.log(value);
-  // const data = await getProductsByCategory(value);
-  // console.log(data);
-  // productSearched.setProducts(data);
-  // };
+ 
 
   useEffect (() => {
-    // handleSelectChangeFromLandingPage(productSearched.categoryLanding);
-    const {value} = location?.state ?? "valor por defecto";
+    const {value} = location?.state ?? "Sin Categoria";
     if(value){
     handleSelectChange(value)
+    }else{
+      handleSelectChange("Sin Categoria")
     }
   }, []);
 

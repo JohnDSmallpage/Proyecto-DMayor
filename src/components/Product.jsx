@@ -1,22 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../firebase models/userContext";
-import { useFavoritesContext } from "../firebase models/FavoritesContext";
+// import { useFavoritesContext } from "../firebase models/FavoritesContext";
 
 export function Product({ info }) {
   const { user } = useUser();
 
-  const { favoriteList, handleFavoriteButton } = useFavoritesContext();
-  const isFavorite = favoriteList?.listOfIds?.includes(info.id);
+  
+
+  // const { favoriteList, handleFavoriteButton} = useFavoritesContext();
+  // const isFavorite = favoriteList?.listOfIds?.includes(info.id);
 
   return (
     <>
-      {user?.accepted ? (
-        <Link to={`/supplierProduct/${info.id}`}>
-          <div
-            id="main-container"
-            className="flex flex-col bg-[#F3F5F6] rounded p-4 w-[240px] h-[300px]"
-          >
+    {user?.accepted ? (
+
+
+      <Link to={`/supplierProduct/${info.id}`}>
+        <div
+          id="main-container"
+          className="flex flex-col bg-[#F3F5F6] rounded p-4 w-[240px] h-[300px]"
+        >
+          
             <div
               id="img-container"
               className="flex justify-center items-center rounded-[5px] h-[160px]"
@@ -59,7 +64,7 @@ export function Product({ info }) {
               className="flex justify-center items-center rounded-[5px] h-[160px]"
             >
               <img
-                className=" w-full h-full"
+                className="w-[208px] h-[150px]"
                 src={
                   info.photos[0]
                     ? info.photos[0]
