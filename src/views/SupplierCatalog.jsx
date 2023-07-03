@@ -21,6 +21,8 @@ export function SupplierCatalog() {
   const getSupplierProducts = async () => {
     const idProducts = user.catalog;
     const data = await getProductsBySupplier(idProducts);
+    console.log(user);
+    console.log(data);
     setProducts(data);
   };
 

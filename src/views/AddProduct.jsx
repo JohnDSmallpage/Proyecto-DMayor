@@ -93,6 +93,7 @@ export const AddProduct = () => {
     data.photos = [];
     const result = await uploadPhoto(file);
     data.photos.push(result);
+    data.hidden = false;
 
     for (let key in data.discounts) {
       if (data.discounts.hasOwnProperty(key)) {

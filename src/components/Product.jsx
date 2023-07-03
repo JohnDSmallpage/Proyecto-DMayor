@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../firebase models/userContext";
-import { useFavoritesContext } from "../firebase models/FavoritesContext";
+// import { useFavoritesContext } from "../firebase models/FavoritesContext";
 
 
 export function Product({ info}) {
@@ -9,8 +9,8 @@ export function Product({ info}) {
 
   
 
-  const { favoriteList, handleFavoriteButton} = useFavoritesContext();
-  const isFavorite = favoriteList?.listOfIds?.includes(info.id);
+  // const { favoriteList, handleFavoriteButton} = useFavoritesContext();
+  // const isFavorite = favoriteList?.listOfIds?.includes(info.id);
 
   return (
     <>

@@ -17,15 +17,15 @@ export function SearchPage(props) {
   
 
   const handleSelectChange = async (event) => {
-    console.log(event)
+    
     if(event == "Sin Categoria"){
       setCategorySelected("Sin Categoria")
       getProducts();
     }else{
-    console.log(event)
+    
     setCategorySelected(event);
   const data = await getProductsByCategory(event);
-  console.log(data);
+ 
   productSearched.setProducts(data);
   };
 }
@@ -34,14 +34,7 @@ export function SearchPage(props) {
     productSearched.setProducts(data);
   };
 
-  // const handleSelectChangeFromLandingPage = async (value) => {
-  //   console.log(value)
-    // handleSelectChange(value);
-  //   console.log(value);
-  // const data = await getProductsByCategory(value);
-  // console.log(data);
-  // productSearched.setProducts(data);
-  // };
+ 
 
   useEffect (() => {
     // handleSelectChangeFromLandingPage(productSearched.categoryLanding);

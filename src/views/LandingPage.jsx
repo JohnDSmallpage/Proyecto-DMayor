@@ -170,7 +170,7 @@ export function LandingPage() {
               <button
                 id="Agricultura"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
-                onClick={handleCategorySearch("Agricultura")}
+                // onClick={handleCategorySearch("Agricultura")}
               >
                 <img className="" src={agriculturaIcon} />
               </button>
@@ -178,7 +178,7 @@ export function LandingPage() {
             <Link to={SEARCH_PAGE} state= {{value:"Agricultura"}}>
               <button
                 className="flex justify-center items-center w-full"
-                onClick={handleCategorySearch("Agricultura")}
+                // onClick={handleCategorySearch("Agricultura")}
               >
                 Agricultura
               </button>
@@ -204,7 +204,7 @@ export function LandingPage() {
               <button
                 id="Construcción"
                 className="bg-gray-100 rounded-[50%] h-[100px] w-[100px] flex justify-center items-center"
-                onClick={handleCategorySearch("Construcción")}
+                // onClick={handleCategorySearch("Construcción")}
               >
                 <img className="" src={construccionIcon} />
               </button>
@@ -212,7 +212,7 @@ export function LandingPage() {
             <Link to={SEARCH_PAGE} state= {{value:"Construcción"}}>
               <button
                 className="flex justify-center items-center w-full"
-                onClick={handleCategorySearch("Construcción")}
+                // onClick={handleCategorySearch("Construcción")}
               >
                 Construcción
               </button>

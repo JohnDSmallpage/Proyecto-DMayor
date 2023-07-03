@@ -30,36 +30,36 @@ export function FavoritesPage() {
 
   )}*/
 
-  import React, { useEffect } from "react";
-  import { Product } from "../components/Product";
-  import { useFavoritesContext } from "../firebase models/FavoritesContext";
+  // import React, { useEffect } from "react";
+  // import { Product } from "../components/Product";
+  // import { useFavoritesContext } from "../firebase models/FavoritesContext";
   
-  export function FavoritesPage() {
-    const { favoriteList, isLoading, handleFavoriteButton, handleGetFavorites } = useFavoritesContext();
+  // export function FavoritesPage() {
+  //   const { favoriteList, isLoading, handleFavoriteButton, handleGetFavorites } = useFavoritesContext();
   
-    useEffect(() => {
-      if (!isLoading && favoriteList === null) {
-        handleGetFavorites();
-      }
-    }, [isLoading, favoriteList, handleGetFavorites]);
+  //   useEffect(() => {
+  //     if (!isLoading && favoriteList === null) {
+  //       handleGetFavorites();
+  //     }
+  //   }, [isLoading, favoriteList, handleGetFavorites]);
   
-    return (
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Productos Favoritos</h1>
-        {isLoading && <p>Loading...</p>}
+  //   return (
+  //     <div>
+  //       <h1 className="text-2xl font-bold mb-4">Productos Favoritos</h1>
+  //       {isLoading && <p>Loading...</p>}
         
-        {!isLoading && favoriteList?.products?.length > 0 && (
-          <div className="grid grid-cols-3 gap-4">
-            {favoriteList.products.map((product) => (
-              <Product
-                key={product.id}
-                info={product}
-                handleFavoriteButton={handleFavoriteButton}
-                isFavorite={true}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
+  //       {!isLoading && favoriteList?.products?.length > 0 && (
+  //         <div className="grid grid-cols-3 gap-4">
+  //           {favoriteList.products.map((product) => (
+  //             <Product
+  //               key={product.id}
+  //               info={product}
+  //               handleFavoriteButton={handleFavoriteButton}
+  //               isFavorite={true}
+  //             />
+  //           ))}
+  //         </div>
+  //       )}
+  //     </div>
+  //   );
+  // }

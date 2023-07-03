@@ -27,6 +27,19 @@ export function ProductPage() {
   const [product, setProduct] = useState([]);
   const [descuentos, setDescuentos] = useState("");
   const [cantidad, setCantidad] = useState(1);
+  const [finalDiscount, setFinalDiscount] = useState(1);
+
+  const handleDiscount = () => {
+    const discounts = selectProduct.discounts;
+    const unit = selectProduct.quantity;
+    for (const clave in discounts) {
+      if (parseInt(unit) < clave) {
+        break;
+      } else if (parseInt(unit) >= clave) {
+        setFinalDiscount(discounts[clave]);
+      }
+    }
+  };
 
     const setChat = async ()=>{
       const combinedID = user?.uid > product.supplierId ? 
@@ -56,6 +69,7 @@ export function ProductPage() {
     } else {
       setCantidad(nuevoValor);
     }
+    handleDiscount();
   };
 
   const handleError = () => {
@@ -373,6 +387,7 @@ export function ProductPage() {
                     <p>{descuentos}</p>
                   )}
                 </span>
+                <div className="text-xl">Monto total sin descuento: {parseFloat(product.price)*cantidad}$</div>
               </div>
             </div>
           </div>

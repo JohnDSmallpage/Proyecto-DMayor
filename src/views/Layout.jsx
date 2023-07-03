@@ -5,14 +5,14 @@ import { UserContextProvider } from "../firebase models/userContext";
 import { SearchContextProvider } from "../firebase models/SearchContext";
 import { ProductContextProvider } from "../firebase models/ProductContext";
 import { ChatContextProvider } from "../firebase models/chatContext";
-import { FavoritesProvider } from "../firebase models/FavoritesContext";
+// import { FavoritesProvider } from "../firebase models/FavoritesContext";
 
 export function Layout() {
   return (
     <main>
       <UserContextProvider>
       <ChatContextProvider>
-      <FavoritesProvider>
+      {/* <FavoritesProvider> */}
         <SearchContextProvider>
           <ProductContextProvider>
             
@@ -23,7 +23,7 @@ export function Layout() {
             
           </ProductContextProvider>
         </SearchContextProvider>
-        </FavoritesProvider>
+        {/* </FavoritesProvider> */}
         </ChatContextProvider>
       </UserContextProvider>
     </main>

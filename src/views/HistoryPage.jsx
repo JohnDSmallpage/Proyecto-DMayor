@@ -13,6 +13,7 @@ export function HistoryPage() {
     const getHistory = async () => {
         const idProducts = user.history;
         const data = await getHistoryByUser(idProducts);
+        console.log(data);
         setProducts(data);
       };
 

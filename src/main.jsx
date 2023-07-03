@@ -39,7 +39,7 @@ import { Chat } from './views/Chat';
 import { PrivateUserRoute } from './components/PrivateUserRoute';
 import { PrivateNotUserRoute } from './components/PrivateNotUserRoute';
 import { HistoryPage } from './views/HistoryPage';
-import { FavoritesPage } from './views/FavoritesPage';
+// import { FavoritesPage } from './views/FavoritesPage';
 
 
 
@@ -73,7 +73,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={CART_PAGE} element={<PrivateRouteClient> <CartPage/> </PrivateRouteClient>}/>
           <Route path={HISTORY} element={<PrivateRouteClient> <HistoryPage/> </PrivateRouteClient>}/>
 
-          <Route path={FAV_PAGE} element={<PrivateRouteClient> <FavoritesPage/> </PrivateRouteClient>}/>
+          {/* <Route path={FAV_PAGE} element={<PrivateRouteClient> <FavoritesPage/> </PrivateRouteClient>}/> */}
 
 
         </Route>
