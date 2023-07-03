@@ -6,7 +6,7 @@ export function Sidebar() {
   return (
     <div className="flex flex-col w-1/3    bg-white">
         {/* <Search></Search> */}
-        <h1 className='flex items-center w-full text-3xl p-2 bg-white text-black h-[61px]'>Chats:</h1>
+        <h1 className='flex items-center w-full text-3xl p-2 bg-white text-black h-[61px] ml-2'>Chats:</h1>
         <Chats></Chats>
     </div>
   )
