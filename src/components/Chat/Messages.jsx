@@ -80,10 +80,15 @@ export function Messages() {
     <div className="flex flex-col  w-full h-full  bg-white">
       <div className="flex justify-center items-center w-full text-3xl p-2 lg:p-3 bg-[#ff7a00] text-white h-[70px]">
         <span>{data.user?.name}</span>
-
         {/* <button onClick={}>Actualizar</button> */}
       </div>
+      
+      {data.user.uid != user.uid ? (
+        
+      
+      <>
       <div className="w-full h-full overflow-y-scroll p-5  bg-[#D1D5DB]">
+        
         {messages.map((m) => (
           <Message message={m} key={m.id} />
         ))}
@@ -123,12 +128,29 @@ export function Messages() {
           </label>
           <button
             onClick={handleSend}
+            disabled={disabled}
             className="flex items-center gap-2 text-2xl text-black"
           >
             <img className=" h-[40px]" src={sendIcon}></img>
           </button>
         </div>
       </div>
+      </>
+    ):(
+        <div className="flex flex-col justify-center items-center w-full h-full overflow-y-scroll p-5  bg-[#D1D5DB]">
+            <h1 className="text-black text-4xl text-center font-bold"> No tienes ningun chat seleccionado.</h1>
+            <p>Puedes seleccionar tus chats en la parte izquierda</p>
+            {user.Company ? (
+                <p>Si no aparece ningun chat, espere a que un cliente se comunique con usted! </p>
+            ):(
+                <p>Si no aparece ningun chat, es porque no ha establecido comunicación con algún proveedor! </p>
+            )
+            
+            }
+        </div>
+        )}
+      
     </div>
+    
   );
 }

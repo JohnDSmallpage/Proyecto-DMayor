@@ -52,7 +52,9 @@ export const registerWithEmailAndPassword = async(
       })
     }
   } catch (error) {
-    return error;
+    if(error.code === "auth/email-already-in-use"){
+      return ("El email ya está en uso.")
+    }
   } 
 };
 export const logInWithEmailAndPassword = async(email,password)=>{

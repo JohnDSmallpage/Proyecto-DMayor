@@ -6,8 +6,7 @@ import { useForm, useWatch } from "react-hook-form";
 
 
 export function RegisterPage() {
-  const navigate = useNavigate();
-  
+  const [errorMessage,setErrorMessage]=useState();
   const {
     register,
     handleSubmit,
@@ -24,18 +23,16 @@ export function RegisterPage() {
   //const para el login con google
   const handleSigninWithGoogle = async () => {
     await signInWithGoogle();
-    navigate(LANDING_PAGE)
   };
 
   const onSubmit = async (data) => {
     const { email, password, ...extraData } = data; //form destructurado
-    email= email.toLowerCase();
-    await registerWithEmailAndPassword(
-      email,
+    const confirmation = await registerWithEmailAndPassword(
+      email.toLowerCase(),
       password,
       extraData
     );
-    navigate(LANDING_PAGE)
+    setErrorMessage(confirmation);
   };
 
 
@@ -98,7 +95,7 @@ export function RegisterPage() {
              
             />
             <p className="text-red-600">{errors.email?.message}</p>
-            
+            <p className="text-red-600">{errorMessage}</p>
           </label>
           <label htmlFor="telefono">
             <div className="flex flex-row">

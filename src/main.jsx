@@ -54,9 +54,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={FAQ} element={<Faq/>} />
           <Route path={SEARCH_PAGE} element={<SearchPage/>} />
           <Route path={DEFAULT} element={<Error/>} />
-          <Route path={REGISTER} element={<RegisterPage/>}/>
+          <Route path={REGISTER} element={<PrivateNotUserRoute><RegisterPage/></PrivateNotUserRoute>}/>
           <Route path={LOGIN} element={<PrivateNotUserRoute><LoginPage/></PrivateNotUserRoute>}/>
-          <Route path={APPLICATION} element={<ApplicationPage/>}/>
+          <Route path={APPLICATION} element={<PrivateNotUserRoute><ApplicationPage/></PrivateNotUserRoute>}/>
           <Route path={ADMIN} element={<PrivateRoute><AdminView/></PrivateRoute>}/>
           <Route path={PRODUCT_PAGE} element={<ProductPage/>} />
           <Route path={SUPPLIER_PROFILE} element={<PrivateSupplier><SupplierProfile/></PrivateSupplier>} />

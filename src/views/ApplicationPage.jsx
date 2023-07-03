@@ -6,8 +6,7 @@ import { useForm, useWatch } from "react-hook-form";
 
 
 export function ApplicationPage() {
-  const navigate = useNavigate();
-  
+  const [errorMessage,setErrorMessage]=useState();
   const {
     register,
     handleSubmit,
@@ -37,12 +36,12 @@ export function ApplicationPage() {
   const onSubmit = async (data) => {
     const { Email, Password, ...extraData } = data; //form destructurado
     
-    await registerWithEmailAndPassword(
+    const confirmation = await registerWithEmailAndPassword(
       Email.toLowerCase(),
       Password,
       extraData
     );
-    navigate(SUPPLIER_PROFILE)
+    setErrorMessage(confirmation)
   };
 
 
@@ -91,7 +90,7 @@ export function ApplicationPage() {
              
             />
             <p className="text-red-600">{errors.Email?.message}</p>
-            
+            <p className="text-red-600">{errorMessage}</p>
           </label>
           <label htmlFor="telefono">
             <div className="flex flex-row">
