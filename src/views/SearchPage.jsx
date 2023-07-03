@@ -3,7 +3,7 @@ import { Searchbar } from "../components/Searchbar";
 import { Product } from "../components/Product";
 import { useContext, useState } from "react";
 import { searchContext } from "../firebase models/SearchContext";
-import { getProductsByCategory } from "../firebase models/user-service";
+import { getAllProducts, getProductsByCategory } from "../firebase models/user-service";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom"
 import { Link } from "react-router-dom";
@@ -18,10 +18,20 @@ export function SearchPage(props) {
 
   const handleSelectChange = async (event) => {
     console.log(event)
+    if(event == "Sin Categoria"){
+      setCategorySelected("Sin Categoria")
+      getProducts();
+    }else{
+    console.log(event)
     setCategorySelected(event);
   const data = await getProductsByCategory(event);
   console.log(data);
   productSearched.setProducts(data);
+  };
+}
+  const getProducts = async () => {
+    const data = await getAllProducts();
+    productSearched.setProducts(data);
   };
 
   // const handleSelectChangeFromLandingPage = async (value) => {
@@ -56,7 +66,7 @@ export function SearchPage(props) {
               onChange={e =>handleSelectChange(e.target.value)}
               
               >
-              <option value="">Seleccione</option>
+              <option value="Sin Categoria">Sin Categoria</option>
               <option value="Tecnología">Tecnología</option>
               <option value="Textiles">Textiles</option>
               <option value="Construcción">Construcción</option>
