@@ -80,6 +80,7 @@ const addNewFavorite = async ({productId, listOfIds = [], favoriteListId}) => {
     const getFavorites = async (userId = "") => {
         try {
             const favoritesData = await getFavoritesByUserId(favoritesData.listOfIds);
+            
 // lógica para buscar los productos relacionados con los favoritos
 console.log(favoritesData);
             return {favoritesData};

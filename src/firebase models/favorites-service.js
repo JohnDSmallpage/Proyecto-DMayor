@@ -13,7 +13,7 @@ export async function createFavoriteList(data) {
     return addDoc(collection(db, "favorites"), data);
 }
 
-export async function getFavoritesByUserId(favoriteIds){
+export async function getFavoritesByUserId(favoriteIds){ 
     const favoriteQuery = query(
         collection(db, "products"),
         where("id", "in", favoriteIds)
