@@ -34,9 +34,7 @@ export function SupplierInfo() {
 
   const getUserProfile = async (id) => {
     const data = await getUserProfileById(id);
-    console.log(data);
     setProfileUser(data);
-    console.log(data)
     setPhotoArray(data?.PhotoArray);
   };
 
@@ -253,18 +251,49 @@ export function SupplierInfo() {
                 </div>
               </>
             )}
-            {user?.id == profileUser?.id ? (
+            
+          </div>
+          <div className="flex flex-wrap h-full w-full gap-4 items-center justify-center p-3 pb-0 bg-white shadow-xl overflow-scroll">
+            <h1 className="text-2xl text-center text-gray-800 font-serif font-bold">
+              Nuestros productos
+            </h1>
+            <div className="flex flex-wrap">
+              {products == null ? (
+                <div>No hay resultados para su búsqueda</div>
+              ) : (
+                products?.map((product, idx) => (
+                  <>
+                    <Product info={product} key={idx} />
+                  </>
+                ))
+              )}
+            </div>
+            {user?.uid == profileUser?.uid ? (
+              <Link
+                to={CATALOG}
+                className="text-orange-600 text-center font-bold"
+              >
+                Ver catalogo Completo{">"}
+              </Link>
+            ) : (
+              <></>
+            )}
+            
+          </div>
+          
+        </div>
+        {user?.id == profileUser?.id ? (
               editable ? (
                 <div className="flex flex-row justify-evenly gap-5 p-3">
                   <Link
-                    className="w-full py-3 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
+                    className="w-1/4 py-3 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
                     onClick={handleResetForm}
                     type="button"
                   >
                     cancel
                   </Link>
                   <button
-                    className="w-full py-3 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
+                    className="w-1/4 py-3 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
                     type="submit"
                   >
                     <svg
@@ -286,7 +315,7 @@ export function SupplierInfo() {
                 </div>
               ) : (
                 <div className="flex items-center justify-center">
-                  <button className="w-3/4 self-center py-3 m-4  font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
+                  <button className="w-1/4 self-center py-3 m-4  font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
                     Editar Perfil
                   </button>
                 </div>
@@ -294,34 +323,6 @@ export function SupplierInfo() {
             ) : (
               <></>
             )}
-          </div>
-          <div className="flex flex-col w-full gap-4 items-center justify-center p-3 pb-0 bg-white shadow-xl">
-            <h1 className="text-2xl text-center text-gray-800 font-serif font-bold">
-              Nuestros productos
-            </h1>
-            <div className="flex flex-wrap">
-              {products == null ? (
-                <div>No hay resultados para su búsqueda</div>
-              ) : (
-                products?.map((product, idx) => (
-                  <>
-                    <Product info={product} key={idx} />
-                  </>
-                ))
-              )}
-            </div>
-            {user?.id == profileUser?.id ? (
-              <Link
-                to={CATALOG}
-                className="text-orange-600 text-center font-bold"
-              >
-                Ver catalogo Completo{">"}
-              </Link>
-            ) : (
-              <></>
-            )}
-          </div>
-        </div>
       </form>
     </div>
   );

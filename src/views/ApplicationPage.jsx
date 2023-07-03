@@ -22,7 +22,7 @@ export function ApplicationPage() {
         LegalRepresentative:"",
         Password:"",
         PhotoArray:[],
-        ProfilePic:"",
+        ProfilePic:"https://firebasestorage.googleapis.com/v0/b/copia-8df64.appspot.com/o/images%2Fc78867de-e0db-485c-a178-9512322d3b5d?alt=media&token=aef68b65-42fb-49db-988b-7e7f36a608f1",
         Rif:"",
         WorkField:"",
         accepted:false,
