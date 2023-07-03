@@ -299,6 +299,7 @@ export const addProductToCatalog = async (id, user) => {
   export const getProductsBySupplier = async (idProducts) => {
     const userQuery = query(collection(db,"products"), where("id","in",idProducts), where("hidden","==",false));
     const results = await getDocs(userQuery);
+    
     if(results.size>0){
         const products = results.docs.map((item)=>({
             ...item.data(),

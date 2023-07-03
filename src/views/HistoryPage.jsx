@@ -19,7 +19,7 @@ export function HistoryPage() {
 
       useEffect(() => {
         getHistory();
-      }, [products]);
+      }, []);
     
 
   return (

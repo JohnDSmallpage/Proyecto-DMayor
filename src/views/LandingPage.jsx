@@ -104,7 +104,7 @@ export function LandingPage() {
           id="mid-cont"
           className="flex flex-col w-2/4 h-full rounded-sm gap-5"
         >
-          <Link to={SEARCH_PAGE} state= {{value:""}} className="h-[300px] rounded">
+          <Link to={SEARCH_PAGE} state= {{value:"Sin Categoria"}} className="h-[300px] rounded">
             <img className="h-full w-full rounded " src={portada} />
           </Link>
           <div className="flex flex-row gap-5">
