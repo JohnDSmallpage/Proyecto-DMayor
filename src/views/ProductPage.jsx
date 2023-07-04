@@ -157,9 +157,9 @@ export function ProductPage() {
     let descuento = "";
 
     for (const clave in objetoJSON) {
-      descuento += `>=${clave} ${product.unity}: ${
+      descuento += `>= ${clave} ${product.unity}: ${
         parseFloat(objetoJSON[clave]) * 100
-      }% de descuento\n`;
+      }%\n`;
       // console.log(descuento);
     }
 
@@ -436,7 +436,7 @@ export function ProductPage() {
                   </div>
                 </div>
                 <div id="discounts-total" className="flex flex-row w-full">
-                  <span className="w-2/3 flex flex-col mt-2 leading-normal text-left whitespace-pre-line title-font font-medium text-md text-gray-900">
+                  <span className="w-3/5 flex flex-col mt-2 leading-normal text-left whitespace-pre-line title-font font-medium text-lg text-gray-900">
                     <p className="text-xl font-semibold">Descuentos:</p>
                     {product.discounts == [] ? (
                       <div>
@@ -446,7 +446,7 @@ export function ProductPage() {
                       <p>{descuentos}</p>
                     )}
                   </span>
-                  <div className="w-1/3 mt-2 ">
+                  <div className="w-2/5 mt-2 ">
                     <p className="text-xl text-gray-900 font-semibold">
                       Monto total*:
                     </p>
