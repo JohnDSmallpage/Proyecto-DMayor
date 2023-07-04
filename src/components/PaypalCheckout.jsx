@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { SEARCH_PAGE } from "../routes/Url";
 import { productContext } from "../firebase models/ProductContext";
 import { CHAT } from "../routes/Url";
-import { addOrderToUserHistory, addPurchased, reduceAvailableQuantity } from "../firebase models/user-service";
+import { addOrderToUserHistory, addPurchased, reduceAvailableQuantity, searchChat, setChats } from "../firebase models/user-service";
 import { addNewHistory } from "../firebase models/user-service";
 import { useUser } from "../firebase models/userContext";
 
@@ -51,7 +51,18 @@ export function PaypalCheckout({price}) {
         setErrorMessage("An Error occured with your payment ");
     };
 
-   
+    const setChat = async () => {
+        const combinedID =
+          user?.uid > selectProduct.selectedProduct.supplierId
+            ? user?.uid + selectProduct.selectedProduct.supplierId
+            : selectProduct.selectedProduct.supplierId + user?.uid;
+        const res = await searchChat(combinedID);
+        // try{
+        if (!res.exists()) {
+          //crea el chat
+          await setChats(combinedID, user, selectProduct.selectedProduct);
+        }
+      };
     useEffect(() => {
         if (success) {
             reduceAvailableQuantity(selectProduct.selectedProduct, selectProduct.quantity)
@@ -68,8 +79,8 @@ export function PaypalCheckout({price}) {
             console.log(newData);
             addNewHistory(orderID, newData);
             addOrderToUserHistory(orderID, user);
-            addPurchased(selectProduct.selectedProduct.id,user);
-            alert("Compra realizada con exito" + "\n" + "ID de compra: " + orderID);
+            addPurchased(selectProduct.selectedProduct.id,user)
+            setChat();
             navigate(CHAT);
         }
         

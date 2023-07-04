@@ -5,7 +5,7 @@ export function HistoryProduct({ info }) {
 
     
   return (
-    <div className="flex space-x-4 sm:p-10 bg-orange-500 dark:text-gray-100 border border-gray-300 rounded-md">
+    <div className="flex space-x-4 w-[500px] sm:p-10 bg-orange-500 dark:text-gray-100 border border-gray-300 rounded-md">
     <img
       className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500"
       src={info.photo[0]}

@@ -113,7 +113,7 @@ export function SupplierInfo() {
       >
         <div
           id="carrusel"
-          className="h-[300px] w-full flex items-center justify-center pb-0 bg-white shadow-xl"
+          className="h-[300px] w-full flex items-center justify-center mb-12 bg-white shadow-xl"
         >
           <div className="bg-white  w-full h-full p-4 shadow-xl rounded">
             {profileUser?.PhotoArray ? (
@@ -150,7 +150,7 @@ export function SupplierInfo() {
               <input id="ProfilePic" type="file" onChange={handlePhotoChange} />
             </div>
           )}
-          <div className="bg-white  w-full h-full p-4 shadow-xl rounded">
+          <div className="bg-white  w-1/3 h-full p-4 shadow-xl rounded">
             <h1 className="text-2xl font-bold text-gray-800 font-serif">
               {profileUser?.Company}
             </h1>
@@ -255,11 +255,21 @@ export function SupplierInfo() {
             )}
             
           </div>
-          <div className="flex flex-wrap h-full w-full gap-4 items-center justify-center p-3 pb-0 bg-white shadow-xl overflow-y-scroll">
-            <h1 className="text-2xl text-center text-gray-800 font-serif font-bold">
+          <div className="flex w-2/4 flex-col max-h-full gap-4 items-center justify-center p-3 pb-0 bg-white shadow-xl overflow-scroll">
+            <h1 className="h-1/6 text-2xl text-center text-gray-800 font-serif font-bold">
               Nuestros productos
             </h1>
-            <div className="flex flex-col items-center gap-5">
+            {user?.uid == profileUser?.uid ? (
+              <Link
+                to={CATALOG}
+                className="text-orange-600 text-center font-bold h-1/6"
+              >
+                Ver catalogo Completo{">"}
+              </Link>
+            ) : (
+              <></>
+            )}
+            <div className="flex flex-col items-center gap-5 h-4/6">
               {products == null ? (
                 <div>No hay resultados para su búsqueda</div>
               ) : (
@@ -270,16 +280,6 @@ export function SupplierInfo() {
                 ))
               )}
             </div>
-            {user?.uid == profileUser?.uid ? (
-              <Link
-                to={CATALOG}
-                className="text-orange-600 text-center font-bold"
-              >
-                Ver catalogo Completo{">"}
-              </Link>
-            ) : (
-              <></>
-            )}
             
           </div>
           
