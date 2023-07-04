@@ -341,6 +341,10 @@ export const addProductToCatalog = async (id, user) => {
 
 
 export const getFavoritesByUser = async (idFavorites) => {
+    if(idFavorites?.length==0 || idFavorites==undefined || idFavorites==null) {
+        return null;
+    }
+
     const userQuery = query(collection(db,"products"), where("id","in",idFavorites));
     const results = await getDocs(userQuery);
     
