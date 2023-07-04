@@ -278,6 +278,26 @@ export const addProductToCatalog = async (id, user) => {
     return result;
   }
 
+  export const addProductToFavorite = async (id, user) => {
+    const reference = doc(db, "users", user.uid);
+    if(user.favorites == undefined){
+      user.favorites = [];
+    } 
+    user.favorites.push(id);
+    const result = await updateDoc(reference, user);
+    console.log("Producto añadido a favoritos");
+    return result;
+  }
+
+  export const deleteProductFromFavorite = async (productId, user) => {
+
+    const reference = doc(db, "users", user.uid);
+    user.favorites =user.favorites.filter((elemento) => elemento !== productId);
+    await updateDoc(reference, user);
+    console.log("Producto eliminado de favoritos");
+
+}
+
   export const reduceAvailableQuantity = async (selectedProduct, quantity) => {
     const reference = doc(db, "products", selectedProduct.id);
     selectedProduct.availableQuantity = parseInt(selectedProduct.availableQuantity) - quantity ;
@@ -297,6 +317,26 @@ export const addProductToCatalog = async (id, user) => {
 
   export const getProductsBySupplier = async (idProducts) => {
     const userQuery = query(collection(db,"products"), where("id","in",idProducts), where("hidden","==",false));
+    const results = await getDocs(userQuery);
+    
+    if(results.size>0){
+        const products = results.docs.map((item)=>({
+            ...item.data(),
+            id: item.id,
+        }));
+        console.log(products);
+        return products;
+    }else{
+        return null;
+    }
+
+
+}
+
+
+
+export const getFavoritesByUser = async (idFavorites) => {
+    const userQuery = query(collection(db,"products"), where("id","in",idFavorites));
     const results = await getDocs(userQuery);
     
     if(results.size>0){

@@ -8,6 +8,7 @@ import { useUser } from "../firebase models/userContext";
 import { Link } from "react-router-dom";
 import { CHAT, CLIENT_CHAT, HISTORY } from "../routes/Url";
 import { CLIENT_INFO } from "../routes/Url";
+import { FAV_PAGE } from "../routes/Url";
 
 export function ClientProfile() {
   const { user, isLoading } = useUser();
@@ -107,6 +108,26 @@ export function ClientProfile() {
                 className="flex justify-center items-center text-sm"
               >
                 Ve el historial de tus compras
+              </h4>
+            </button>
+          </Link>
+          <Link className="w-1/3" to={FAV_PAGE}>
+            <button
+              id="option-4"
+              className="flex flex-col justify-center items-center w-full h-[115px] bg-[#F3F5F6] rounded-[17px] gap-[3px] hover:bg-[#59595942] border-2"
+            >
+              <img className="w-[30px] h-[30px]" src={Catalogo} alt="" />
+              <h2
+                id="history"
+                className="flex justify-center items-center text-xl font-semibold"
+              >
+                Favoritos
+              </h2>
+              <h4
+                id="historial-description"
+                className="flex justify-center items-center text-sm"
+              >
+                Ve tus productos favoritos
               </h4>
             </button>
           </Link>

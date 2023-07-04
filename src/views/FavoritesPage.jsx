@@ -1,65 +1,51 @@
-/*import React from "react";
-import { Product } from "../components/Product";
-import { useEffect } from "react";
-import { useFavoritesContext } from "../firebase models/FavoritesContext";
-
+import React from 'react'
+import { getFavoritesByUser } from '../firebase models/user-service'
+import { useUser } from '../firebase models/userContext';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { Product } from '../components/Product';
 
 export function FavoritesPage() {
-  const {favoriteList, isLoading} = useFavoritesContext();
-  const { products } = favoriteList;
 
-  console.log(favoriteList)
+  const [products, setProducts] = useState([]);
+  const { user } = useUser();
 
+  const getFavorites = async () => {
+
+    if(user.favorites.length === 0){
+      setProducts(null);
+      return;
+    }
+    const idProducts = user.favorites;
+    const data = await getFavoritesByUser(idProducts);
+    setProducts(data);
+  };
+
+  useEffect(() => {
+    getFavorites();
+  }, []);
 
 
   return (
-    
     <>
-    <div className="container mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Productos Favoritos</h1>
-      <div className="grid grid-cols-2 gap-4">
-        {isLoading && <p className="text-gray-500">Loading...</p>}
+        <h1 className="text-[30px] font-bold text-gray-800 text-center mt-3">
+        Favoritos
+      </h1>
 
-        {!isLoading &&
-          products?.map((product) => (
-            <Product product={product} key={product.name} />
-          ))}
-      </div>
-    </div>
-    </>
-
-  )}*/
-
-  // import React, { useEffect } from "react";
-  // import { Product } from "../components/Product";
-  // import { useFavoritesContext } from "../firebase models/FavoritesContext";
-  
-  // export function FavoritesPage() {
-  //   const { favoriteList, isLoading, handleFavoriteButton, handleGetFavorites } = useFavoritesContext();
-  
-  //   useEffect(() => {
-  //     if (!isLoading && favoriteList === null) {
-  //       handleGetFavorites();
-  //     }
-  //   }, [isLoading, favoriteList, handleGetFavorites]);
-  
-  //   return (
-  //     <div>
-  //       <h1 className="text-2xl font-bold mb-4">Productos Favoritos</h1>
-  //       {isLoading && <p>Loading...</p>}
+      <div className="flex flex-wrap">
+        {products == null ? (
+          <div>No hay productos como favoritos</div>
+        ) : (
+          products?.map((product, idx) => (
+            <>
+                <Product info={product} key={idx} />
+            </>
+          ))
+        )}
         
-  //       {!isLoading && favoriteList?.products?.length > 0 && (
-  //         <div className="grid grid-cols-3 gap-4">
-  //           {favoriteList.products.map((product) => (
-  //             <Product
-  //               key={product.id}
-  //               info={product}
-  //               handleFavoriteButton={handleFavoriteButton}
-  //               isFavorite={true}
-  //             />
-  //           ))}
-  //         </div>
-  //       )}
-  //     </div>
-  //   );
-  // }
+      </div>
+    
+    
+    </>
+  )
+}

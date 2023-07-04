@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getProductById, searchChat, setChats } from "../firebase models/user-service";
+import { deleteProduct, getFavoritesByUser, getProductById, searchChat, setChats } from "../firebase models/user-service";
 import { useState } from "react";
 import { set } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,8 @@ import { showProduct } from "../firebase models/user-service";
 import { Chat } from "./Chat";
 import { db } from "../firebase models/Config";
 import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { addProductToFavorite } from "../firebase models/user-service";
+import { deleteProductFromFavorite } from "../firebase models/user-service";
 
 export function ProductPage() {
   const { id } = useParams();
@@ -21,6 +23,7 @@ export function ProductPage() {
 
   const selectProduct = useContext(productContext);
   const productSearched = useContext(searchContext);
+  const [showMessage, setShowMessage] = useState(false);
 
   const {user} = useUser();
 
@@ -28,6 +31,7 @@ export function ProductPage() {
   const [descuentos, setDescuentos] = useState("");
   const [cantidad, setCantidad] = useState(1);
   const [finalDiscount, setFinalDiscount] = useState(1);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const handleDiscount = () => {
     const discounts = selectProduct.discounts;
@@ -106,11 +110,30 @@ export function ProductPage() {
     
   };
 
+  const handleFavoriteProduct = () => {
+    console.log(user.favorites);
+    const valueInArray = user?.favorites?.includes(product.id);
+    if (user?.favorites==[] || valueInArray==false || user?.favorites==undefined) {
+      const data = addProductToFavorite(product.id, user);
+      setIsFavorite(true);
+      setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 2000); // Oculta el mensaje después de 2 segundos
+    }
+    else{
+      const data = deleteProductFromFavorite(product.id, user);
+      setIsFavorite(false);
+      setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 2000); // Oculta el mensaje después de 2 segundos
+    }
+
+  };
+
   const getDiscountJson = () => {};
 
   useEffect(() => {
     if (selectProduct != null && productSearched != null) {
       getProduct(id);
+      setIsFavorite(user?.favorites?.includes(id));
     } else {
       navigate(CATALOG);
     }
@@ -119,7 +142,7 @@ export function ProductPage() {
   useEffect(() => {
     const objetoJSON = product.discounts;
     selectProduct.setDiscounts(objetoJSON);
-    // console.log(user);
+    console.log(isFavorite);
 
     let descuento = "";
 
@@ -133,6 +156,8 @@ export function ProductPage() {
     setDescuentos(descuento);
     // console.log(descuento);
   }, [product]);
+
+  
 
   return (
     <>
@@ -341,21 +366,25 @@ export function ProductPage() {
                     Comprar
                   </button>
                   }
-                 
+                  {user?.Company==undefined &&
+                  <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
+                  onClick={handleFavoriteProduct}
+                >
                   
-                  {/*<button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                    <svg
-                      fill="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-5 h-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                    </svg>
-                      </button>*/}
+                  <svg
+        fill={isFavorite ? "red" : "gray"} // Si el producto está en favoritos, el color es rojo, sino es gris
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        className="w-5 h-5"
+        viewBox="0 0 24 24"
+      >
+        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+      </svg>
+                </button>
+              }
                 </div>
+                {showMessage && <div className="flex justify-end mt-2">{isFavorite ? "Producto agregado a favoritos" : "Producto eliminado de favoritos"}</div>}
 
                 <div className="flex flex-col mt-2">
                   <div className=" mt-1 title-font font-medium text-xl text-gray-900">
@@ -395,6 +424,7 @@ export function ProductPage() {
               </div>
             </div>
           </div>
+       
         </section>
       )}
     </>
