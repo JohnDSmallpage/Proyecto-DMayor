@@ -54,9 +54,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={FAQ} element={<Faq/>} />
           <Route path={SEARCH_PAGE} element={<SearchPage/>} />
           <Route path={DEFAULT} element={<Error/>} />
-          <Route path={REGISTER} element={<RegisterPage/>}/>
+          <Route path={REGISTER} element={<PrivateNotUserRoute><RegisterPage/></PrivateNotUserRoute>}/>
           <Route path={LOGIN} element={<PrivateNotUserRoute><LoginPage/></PrivateNotUserRoute>}/>
-          <Route path={APPLICATION} element={<ApplicationPage/>}/>
+          <Route path={APPLICATION} element={<PrivateNotUserRoute><ApplicationPage/></PrivateNotUserRoute>}/>
           <Route path={ADMIN} element={<PrivateRoute><AdminView/></PrivateRoute>}/>
           <Route path={PRODUCT_PAGE} element={<ProductPage/>} />
           <Route path={SUPPLIER_PROFILE} element={<PrivateSupplier><SupplierProfile/></PrivateSupplier>} />
@@ -66,7 +66,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={ADD_PRODUCT} element={<PrivateSupplier><AddProduct/></PrivateSupplier>}/>
           <Route path={CATALOG} element={<PrivateSupplier><SupplierCatalog/></PrivateSupplier>}/>
           <Route path={SUPPLIER_PRODUCT} element={<PrivateSupplier><ProductPage/></PrivateSupplier>}/>
-          <Route path={SUPPLIER_INFO} element={<PrivateSupplier><SupplierInfo/></PrivateSupplier>}/>
+          <Route path={SUPPLIER_INFO} element={<SupplierInfo/>}/>
           <Route path={CLIENT_CHAT} element={<PrivateRouteClient><ClientChat/></PrivateRouteClient>}/>
           <Route path={CLIENT_INFO} element={<PrivateRouteClient><ClientInfo/></PrivateRouteClient>}/>
           <Route path={PAY_ORDER} element={<PrivateRouteClient><PurchasePage/></PrivateRouteClient>}/>

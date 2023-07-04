@@ -6,8 +6,7 @@ import { useForm, useWatch } from "react-hook-form";
 
 
 export function ApplicationPage() {
-  const navigate = useNavigate();
-  
+  const [errorMessage,setErrorMessage]=useState();
   const {
     register,
     handleSubmit,
@@ -23,7 +22,7 @@ export function ApplicationPage() {
         LegalRepresentative:"",
         Password:"",
         PhotoArray:[],
-        ProfilePic:"",
+        ProfilePic:"https://firebasestorage.googleapis.com/v0/b/copia-8df64.appspot.com/o/images%2Fc78867de-e0db-485c-a178-9512322d3b5d?alt=media&token=aef68b65-42fb-49db-988b-7e7f36a608f1",
         Rif:"",
         WorkField:"",
         accepted:false,
@@ -37,12 +36,12 @@ export function ApplicationPage() {
   const onSubmit = async (data) => {
     const { Email, Password, ...extraData } = data; //form destructurado
     
-    await registerWithEmailAndPassword(
+    const confirmation = await registerWithEmailAndPassword(
       Email.toLowerCase(),
       Password,
       extraData
     );
-    navigate(SUPPLIER_PROFILE)
+    setErrorMessage(confirmation)
   };
 
 
@@ -91,7 +90,7 @@ export function ApplicationPage() {
              
             />
             <p className="text-red-600">{errors.Email?.message}</p>
-            
+            <p className="text-red-600">{errorMessage}</p>
           </label>
           <label htmlFor="telefono">
             <div className="flex flex-row">
