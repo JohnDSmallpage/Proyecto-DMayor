@@ -37,15 +37,15 @@ export function SupplierCatalog() {
   }, [products]);
 
   return (
-    <div id="main-container" className="flex justify-center items-center">
+    <div id="main-container" className="flex justify-center items-center w-screen">
       <div
         id="internal-container"
         className="my-5 mx-5 flex flex-col justify-center gap-[10px]"
       >
         <div id="top-container" className="flex flex-col gap-2">
-          <h1 className="text-2xl font-semibold ml-[20px]">Catálogo</h1>
+          <h1 className="text-2xl font-semibold flex justify-center">Catálogo</h1>
 
-          <div className="flex flex-wrap gap-5">
+          <div className="flex flex-wrap justify-center gap-5">
             {products == null ? (
               <div>No hay resultados para su búsqueda</div>
             ) : (
@@ -67,7 +67,7 @@ export function SupplierCatalog() {
           </div>
         </div>
         <div id="bottom-container" className="flex flex-col gap-2">
-          <h1 className="text-2xl font-semibold ml-[20px]">
+          <h1 className="text-2xl font-semibold flex justify-center">
             Productos ocultos
           </h1>
 
