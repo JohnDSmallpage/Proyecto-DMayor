@@ -65,16 +65,24 @@ import React from 'react'
 import '../components/Rating.module.css'
 import { db } from '../firebase models/Config'
 import { doc, setDoc } from "firebase/firestore";
+import { useUser } from '../firebase models/userContext'
+import { getHistoryByUser } from '../firebase models/user-service'
 
 export default function Rating() {
 
+    const [products, setProducts] = useState([]);
+    const { user } = useUser();
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
-    
+
     const guardarRatingEnFirestore = async () => {
       if (rating) {
         try {
-          const ratingRef = doc(db, "ratings", "ratingId");
+          const idProducts = user.history;
+          const data = await getHistoryByUser(idProducts);
+          setProducts(data);
+
+          const ratingRef = doc(db, "ratings", "ratingId", "");
           await setDoc(ratingRef, { rating });
           console.log("Rating guardado en Firestore");
         } catch (error) {
@@ -93,7 +101,6 @@ export default function Rating() {
             return(
                 <label>
                     <input 
-                      className='estrellita'
                       type="radio"
                       name="rating"
                       value={currentRating}
