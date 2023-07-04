@@ -108,7 +108,7 @@ export const AddProduct = () => {
   };
 
   return (
-    <div className="md:max-w-lg max-w-sm mx-auto bg-white p-8 rounded-xl shadow shadow-slate-300 mt-2">
+    <div className="md:max-w-lg max-w-sm mx-auto bg-white p-8 rounded-xl shadow shadow-slate-300 my-5">
       <h1 className="text-3xl lg:text-4xl font-medium text-center p-2">
         Añadir Nuevo Producto
       </h1>
@@ -137,7 +137,7 @@ export const AddProduct = () => {
 
           <label htmlFor="category">
             <div className="flex flex-row">
-              <h1 className="font-medium text-slate-700 pb-2">Categoría.</h1>
+              <h1 className="font-medium text-slate-700 pb-2">Categoría</h1>
             </div>
 
             <select
@@ -166,7 +166,7 @@ export const AddProduct = () => {
           </label>
           <label htmlFor="description">
             <div className="flex flex-row">
-              <h1 className="font-medium text-slate-700 pb-2">Descripción.</h1>
+              <h1 className="font-medium text-slate-700 pb-2">Descripción</h1>
             </div>
 
             <input
@@ -186,7 +186,7 @@ export const AddProduct = () => {
           <label htmlFor="price">
             <div className="flex flex-row">
               <h1 className="font-medium text-slate-700 pb-2">
-                Precio por unidad ($).
+                Precio por unidad ($)
               </h1>
             </div>
 
@@ -211,7 +211,7 @@ export const AddProduct = () => {
           <label htmlFor="unity">
             <div className="flex flex-row">
               <h1 className="font-medium text-slate-700 pb-2">
-                Unidad de venta.
+                Unidad de venta
               </h1>
             </div>
 
@@ -225,7 +225,6 @@ export const AddProduct = () => {
                 required: "Este campo no puede estar vacio",
               })}
             >
-
               <option value="Metros">Metros</option>
               <option value="Centrímetros">Centímetros</option>
               <option value="Kg">Kg</option>
@@ -234,9 +233,7 @@ export const AddProduct = () => {
               <option value="Cajas">Cajas</option>
               <option value="Paletas">Paletas</option>
               <option value="Unidades">Unidades</option>
-
-              </select>
-           
+            </select>
 
             <p className="text-red-600">{errors.unity?.message}</p>
           </label>
@@ -258,25 +255,27 @@ export const AddProduct = () => {
                 required: "Este campo no puede estar vacio",
                 pattern: {
                   value: /^[0-9]+$/i,
-                  message: "La cantidad disponible no puede contener letras y debe ser un número entero",
+                  message:
+                    "La cantidad disponible no puede contener letras y debe ser un número entero",
                 },
-                min: { value: 0, message: "La cantidad disponible debe ser mayor a 0" },
+                min: {
+                  value: 0,
+                  message: "La cantidad disponible debe ser mayor a 0",
+                },
               })}
             />
             <p className="text-red-600">{errors.availableQuantity?.message}</p>
           </label>
 
-          
-
           <label htmlFor="discount">
             <div className="flex flex-row">
               <h1 className="font-medium text-slate-700 pb-2">
-                Porcentaje de Descuento.
+                Porcentaje de Descuento
               </h1>
             </div>
 
             <div className="flex flex-row">
-              <div>
+              <div className="flex flex-col w-full gap-2">
                 <input
                   type="text"
                   name="keyInput"
@@ -284,7 +283,7 @@ export const AddProduct = () => {
                   onChange={handleKeyInputChange}
                   className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
                   placeholder="Cantidad de productos"
-                />
+                ></input>
                 {errors2.key && <span>La clave debe ser un número entero</span>}
                 <input
                   type="text"
@@ -292,7 +291,7 @@ export const AddProduct = () => {
                   value={valueInput}
                   onChange={handleValueInputChange}
                   className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
-                  placeholder="Porcentaje de descuento (Rangos)"
+                  placeholder="Porcentaje de descuento (%)"
                 />
                 {errors2.value && (
                   <span>El valor debe ser un número entre 1 y 99</span>
@@ -326,13 +325,13 @@ export const AddProduct = () => {
           <label htmlFor="photo">
             <div className="flex flex-row">
               <h1 className="font-medium text-slate-700 pb-2">
-                Imagen del producto.
+                Imagen del producto
               </h1>
             </div>
 
             <div className="flex flex-col  py-1 mt-2">
               <h1 className="font-medium text-slate-700 pb-2 text-sm">
-                Subir foto producto
+                Subir foto del producto
               </h1>
               <div className="flex justify-center">
                 <img className="w-[110px] h-[110px] mb-2" src={image} alt="" />
@@ -356,21 +355,9 @@ export const AddProduct = () => {
             className="w-full py-3 font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
             type="submit"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-              />
-            </svg>
+            
             <span>Añadir producto</span>
+             <p className="text-xl">+</p> 
           </button>
         </div>
       </form>
