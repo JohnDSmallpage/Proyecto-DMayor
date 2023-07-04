@@ -43,7 +43,7 @@ export function Product({ info }) {
               <p className=" text-[#FF7A00] text-2xl font-bold w-[208px] h-[28px]">
                 {"$" + info.price}
               </p>
-              <h2 className="text-xl text-gray-900 w-[208px] h-[28px] hover:text-[#FF7A00]">
+              <h2 className="text-xl text-gray-900 w-[208px] h-[28px] hover:text-[#FF7A00] truncate">
                 {info.name.charAt(0).toUpperCase() + info.name.slice(1)}
               </h2>
               <p className="w-full h-[50px] text-sm text-gray-700 overflow-auto mt-2">
@@ -80,7 +80,7 @@ export function Product({ info }) {
               <p className=" text-[#FF7A00] text-2xl font-bold w-[208px] h-[28px]">
                 {"$" + info.price}
               </p>
-              <h2 className="text-xl text-gray-900 w-[208px] h-[28px] hover:text-[#FF7A00]">
+              <h2 className="text-xl text-gray-900 w-[208px] h-[28px] hover:text-[#FF7A00] truncate">
                 {info.name.charAt(0).toUpperCase() + info.name.slice(1)}
               </h2>
               <p className="w-full h-[50px] text-sm text-gray-700 overflow-ellipsis mt-2">
