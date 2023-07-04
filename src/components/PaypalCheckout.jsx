@@ -68,7 +68,8 @@ export function PaypalCheckout({price}) {
             console.log(newData);
             addNewHistory(orderID, newData);
             addOrderToUserHistory(orderID, user);
-            addPurchased(selectProduct.selectedProduct.id,user)
+            addPurchased(selectProduct.selectedProduct.id,user);
+            alert("Compra realizada con exito" + "\n" + "ID de compra: " + orderID);
             navigate(CHAT);
         }
         
