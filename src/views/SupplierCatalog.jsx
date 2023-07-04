@@ -71,7 +71,7 @@ export function SupplierCatalog() {
             Productos ocultos
           </h1>
 
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap justify-center gap-5">
             {hiddenProducts == null ? (
               <div>No hay productos ocultos</div>
             ) : (

@@ -164,7 +164,7 @@ export function LandingPage() {
             Productos destacados en D'Mayor
           </h1>
         </div>
-        <section className="flex flex-row w-1/2 gap-[10px] ">
+        <section className="flex flex-row gap-[10px] overflow-x-scroll">
           {products == null ? (
             <div>No hay resultados para su búsqueda</div>
           ) : (

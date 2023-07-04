@@ -111,7 +111,7 @@ export function SupplierInfo() {
       >
         <div
           id="carrusel"
-          className="h-[200px] w-full flex items-center justify-center pb-0 bg-white shadow-xl"
+          className="h-[300px] w-full flex items-center justify-center pb-0 bg-white shadow-xl"
         >
           <div className="bg-white  w-full h-full p-4 shadow-xl rounded">
             {profileUser?.PhotoArray ? (
@@ -253,11 +253,11 @@ export function SupplierInfo() {
             )}
             
           </div>
-          <div className="flex flex-wrap h-full w-full gap-4 items-center justify-center p-3 pb-0 bg-white shadow-xl overflow-scroll">
+          <div className="flex flex-wrap h-full w-full gap-4 items-center justify-center p-3 pb-0 bg-white shadow-xl overflow-y-scroll">
             <h1 className="text-2xl text-center text-gray-800 font-serif font-bold">
               Nuestros productos
             </h1>
-            <div className="flex flex-wrap">
+            <div className="flex flex-col items-center gap-5">
               {products == null ? (
                 <div>No hay resultados para su búsqueda</div>
               ) : (
@@ -315,7 +315,7 @@ export function SupplierInfo() {
                 </div>
               ) : (
                 <div className="flex items-center justify-center">
-                  <button className="w-1/4 self-center py-3 m-4  font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
+                  <button className="w-1/4 self-center py-3 mb-4  font-medium text-white bg-[#ff7a00] hover:bg-[#ff8800] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
                     Editar Perfil
                   </button>
                 </div>
