@@ -74,7 +74,7 @@ export function LandingPage() {
     <div id="main-container" className="flex flex-col justify-center">
       <div
         id="carrusel-container"
-        className="flex justify-center items-center font-bold h-[300px] "
+        className="hidden md:flex justify-center items-center font-bold h-[300px] "
       >
         <Carrousel photos={slides} bool={true} />
       </div>
@@ -82,14 +82,14 @@ export function LandingPage() {
         id="message-container"
         className="flex flex-col justify-center items-center shadow-2xl shadow-white bg-gradient-to-b from-orange-400 to-orange-600  p-5 gap-[5px] mb-4"
       >
-        <h1 className="w-full text-3xl font-semibold font-ysabeau text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-2 ">
+        <h1 className="w-full  text-lg md:text-3xl font-semibold font-ysabeau text-white tracking-wide leading-tight uppercase text-center border-b-4 border-gray-800 pb-2 ">
           Consigue lo que tu negocio necesita para crecer
         </h1>
       </div>
 
       <div
         id="ofertas-container"
-        className="flex flex-row justify-between w-full h-[500px] px-5 gap-5 "
+        className="hidden md:flex  md:flex-row justify-between w-full h-[500px] px-5 gap-5 "
       >
         <div id="izq-cont" className="flex flex-col w-1/4  rounded-sm gap-5">
           <Link
@@ -160,7 +160,7 @@ export function LandingPage() {
 
       <div id="products-container" className="flex flex-col mx-5 gap-2 py-4">
         <div className="flex flex-row justify-between">
-          <h1 className="font-semibold text-2xl">
+          <h1 className="font-semibold text-sm md:text-2xl lg:mt-6">
             Productos destacados en D'Mayor
           </h1>
         </div>
@@ -182,7 +182,7 @@ export function LandingPage() {
         className="flex flex-col bg-gradient-to-b from-orange-500 to-orange-600 gap-4 font-bold text-white"
       >
         <div className="flex flex-row justify-between mx-5 mt-5">
-          <h2 className="text-2xl text-center">
+          <h2 className="text-sm md:text-2xl">
             Consíguelo todo en nuestros departamentos
           </h2>
           <Link to={SEARCH_PAGE}>
@@ -194,7 +194,7 @@ export function LandingPage() {
 
         <div
           id="category-buttons"
-          className="flex  flex-row justify-around mx-5 mb-5"
+          className="flex  flex-row justify-start md:justify-around mx-5 mb-5 overflow-x-scroll gap-[5px]"
         >
           <div className="flex flex-col gap-[5px]">
             <Link to={SEARCH_PAGE} state={{ value: "Agricultura" }}>
