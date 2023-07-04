@@ -34,7 +34,7 @@ export function SupplierCatalog() {
     getSupplierProducts();
     getSupplierHiddenProducts();
     productSearched.setSupplierMode(true);
-  }, [products]);
+  }, []);
 
   return (
     <div id="main-container" className="flex justify-center items-center w-screen">

@@ -11,6 +11,7 @@ const Carrousel = ({ photos, bool, editable, send }) => {
   useEffect(() => {
     const copy = [...photos];
     setPhotoArray(copy);
+    console.log("PRUEBA");
     if (editable == false) {
       setCurrentIndex(0);
     }

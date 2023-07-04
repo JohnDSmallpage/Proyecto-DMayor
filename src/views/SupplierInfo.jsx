@@ -93,9 +93,11 @@ export function SupplierInfo() {
   useEffect(() => {
     if (!profileUser) {
       getUserProfile(id);
+      console.log("PRUEBA1");
     }
     if (profileUser && !products) {
       getSupplierProducts();
+      console.log("PRUEBA2");
     }
     productSearched.setSupplierMode(true);
   }, [products, profileUser]);
