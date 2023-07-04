@@ -134,18 +134,6 @@ export function Navbar() {
                   </Link>
                   <Link
                     className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
-                    to={PROVEEDORES}
-                    onClick={() => setOpen(false)}
-                  >
-                    <img
-                      className="ml-[15px] w-[24px] h-[24px]"
-                      src={Proveedores}
-                      alt=""
-                    />
-                    Proveedores
-                  </Link>
-                  <Link
-                    className="flex flex-row items-center gap-[10px] hover:bg-white hover:text-[#FF914D] py-3 mb-2"
                     to={FAQ}
                     onClick={() => setOpen(false)}
                   >
