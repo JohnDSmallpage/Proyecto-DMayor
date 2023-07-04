@@ -33,6 +33,18 @@ export async function uploadMessage(data,user,text){
     })
     upload(user,data,text);
 }
+export async function uploadFeedback(rating,user,text,id){
+    await updateDoc(doc(db,"feedbacks",id),{
+        feedbacks:arrayUnion({
+            id: uuid(),
+            text,
+            senderId:user.uid,
+            senderName:user.name,
+            date:Timestamp.now(),
+            rating:rating,
+        })
+    })
+}
 async function upload(user,data,text){
     await updateDoc(doc(db,"userChat",user.uid),{
         [data.chatId+".lastMessage"]:{
@@ -90,6 +102,7 @@ export async function createSupplierProfile(userId,data){
 }
 
 export async function addNewProduct(productId,data){
+    setDoc(doc(db,'feedbacks',productId),{});
     return setDoc(doc(db,'products',productId),data);
 }
 
@@ -274,7 +287,29 @@ export const addProductToCatalog = async (id, user) => {
     } 
     user.history.push(id);
     const result = await updateDoc(reference, user);
-    console.log("Orden añadida al historial");
+    return result;
+  }
+  export const addPurchased = async (id, user) => {
+    const reference = doc(db, "users", user.uid);
+    if(user.purchased == undefined){
+      user.purchased = [];
+      user.feedbacks = [];
+      user.purchased.push(id);
+    }else{
+        if(!user.purchased.includes(id)){
+            user.purchased.push(id);
+        }
+    }
+    const result = await updateDoc(reference, user);
+    return result;
+  }
+  export const addFeedback = async (id, user) => {
+    const reference = doc(db, "users", user.uid);
+    if(!user.feedbacks.includes(id)){
+        user.feedbacks.push(id);
+    }
+    
+    const result = await updateDoc(reference, user);
     return result;
   }
 

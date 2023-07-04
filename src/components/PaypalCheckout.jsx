@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { SEARCH_PAGE } from "../routes/Url";
 import { productContext } from "../firebase models/ProductContext";
 import { CHAT } from "../routes/Url";
-import { addOrderToUserHistory, reduceAvailableQuantity } from "../firebase models/user-service";
+import { addOrderToUserHistory, addPurchased, reduceAvailableQuantity } from "../firebase models/user-service";
 import { addNewHistory } from "../firebase models/user-service";
 import { useUser } from "../firebase models/userContext";
 
@@ -54,8 +54,6 @@ export function PaypalCheckout({price}) {
    
     useEffect(() => {
         if (success) {
-            console.log(selectProduct.finalPrice);
-            console.log('Order successful . Your order id is--', orderID);
             reduceAvailableQuantity(selectProduct.selectedProduct, selectProduct.quantity)
             const newData = {
                 "id": orderID,
@@ -65,11 +63,12 @@ export function PaypalCheckout({price}) {
                 "quantity": selectProduct.quantity,
                 "supplier": selectProduct.selectedProduct.supplierName,
                 "date" : new Date().toLocaleString(),
-                "photo": selectProduct.selectedProduct.photos
+                "photo": selectProduct.selectedProduct.photos,
             }
             console.log(newData);
             addNewHistory(orderID, newData);
             addOrderToUserHistory(orderID, user);
+            addPurchased(selectProduct.selectedProduct.id,user)
             navigate(CHAT);
         }
         

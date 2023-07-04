@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { deleteProduct, getFavoritesByUser, getProductById, searchChat, setChats } from "../firebase models/user-service";
+import { addFeedback, deleteProduct, getFavoritesByUser, getProductById, searchChat, setChats, uploadFeedback } from "../firebase models/user-service";
 import { useState } from "react";
 import { set } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,11 @@ import { db } from "../firebase models/Config";
 import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 import { addProductToFavorite } from "../firebase models/user-service";
 import { deleteProductFromFavorite } from "../firebase models/user-service";
+import {
+  arrayUnion,
+  onSnapshot,
+  Timestamp,
+} from "@firebase/firestore";
 
 export function ProductPage() {
   const { id } = useParams();
@@ -24,6 +29,7 @@ export function ProductPage() {
   const selectProduct = useContext(productContext);
   const productSearched = useContext(searchContext);
   const [showMessage, setShowMessage] = useState(false);
+  const [feedbackText,setFeedbackText]=useState("")
 
   const {user} = useUser();
 
@@ -32,6 +38,8 @@ export function ProductPage() {
   const [cantidad, setCantidad] = useState(1);
   const [finalDiscount, setFinalDiscount] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [rating,setRating]=useState(0);
+  const [feedbacks,setFeedbacks]=useState();
 
   const handleDiscount = () => {
     const discounts = selectProduct.discounts;
@@ -111,7 +119,6 @@ export function ProductPage() {
   };
 
   const handleFavoriteProduct = () => {
-    console.log(user.favorites);
     const valueInArray = user?.favorites?.includes(product.id);
     if (user?.favorites==[] || valueInArray==false || user?.favorites==undefined) {
       const data = addProductToFavorite(product.id, user);
@@ -128,9 +135,9 @@ export function ProductPage() {
 
   };
 
-  const getDiscountJson = () => {};
 
   useEffect(() => {
+
     if (selectProduct != null && productSearched != null) {
       getProduct(id);
       setIsFavorite(user?.favorites?.includes(id));
@@ -140,9 +147,14 @@ export function ProductPage() {
   }, []);
 
   useEffect(() => {
+    if(product.length != 0){
+      const unSub = onSnapshot(doc(db,"feedbacks",product.id), (doc) => {
+        doc.exists() 
+        && setFeedbacks(doc.data().feedbacks);
+      });
+    }
     const objetoJSON = product.discounts;
     selectProduct.setDiscounts(objetoJSON);
-    console.log(isFavorite);
 
     let descuento = "";
 
@@ -157,7 +169,25 @@ export function ProductPage() {
     // console.log(descuento);
   }, [product]);
 
-  
+  const handleFeedback = ()=>{
+    uploadFeedback(rating,user,feedbackText,product.id);
+    addFeedback(product.id,user);
+  }
+  const fiveStar = ()=>{
+    setRating(5);
+  }
+  const fourStar = ()=>{
+    setRating(4);
+  }
+  const threeStar = ()=>{
+    setRating(3);
+  }
+  const twoStar = ()=>{
+    setRating(2);
+  }
+  const oneStar = ()=>{
+    setRating(1);
+  }
 
   return (
     <>
@@ -280,7 +310,7 @@ export function ProductPage() {
         </section>
       ) : (
         <section className="text-gray-600 body-font overflow-hidden">
-          <div className="container px-5 py-24 mx-auto">
+          <div className="container px-5 py-12 mx-auto">
             <div className="lg:w-4/5 mx-auto flex flex-wrap">
               <img
                 alt="ecommerce"
@@ -424,7 +454,38 @@ export function ProductPage() {
               </div>
             </div>
           </div>
-       
+          <div className="flex flex-col justify-center items-center">
+            <h1 className="text-4xl p-4 text-yellow-500 font-bold">Feedback</h1>
+            {!user?.feedbacks?.includes(product.id) && user?.purchased?.includes(product.id)  &&
+                <>
+                <p>Haz hecho una compra de este producto y no haz dejado un feedback!</p>
+                <textarea
+                      id="Feedback"
+                      className="w-2/5 h-[200px] border p-2"
+                      placeholder="Deja un Feedback"
+                      onChange={(e)=>setFeedbackText(e.target.value)}
+                    />
+                    <div className='flex flex-row gap-3'>
+                  <div className="flex items-center flex-row-reverse cursor-pointer m-2">
+                    <svg aria-hidden="true" onClick={fiveStar} className="w-8 h-8 peer text-gray-300 peer-hover:text-yellow-400 hover:text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" onClick={fourStar} className="w-8 h-8 peer text-gray-300 peer-hover:text-yellow-400 hover:text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" onClick={threeStar} className="w-8 h-8 peer text-gray-300 peer-hover:text-yellow-400 hover:text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" onClick={twoStar} className="w-8 h-8 peer text-gray-300 peer-hover:text-yellow-400 hover:text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" onClick={oneStar} className="w-8 h-8 peer text-gray-300 peer-hover:text-yellow-400 hover:text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                  </div>
+                  <p className='text-xl font-bold m-3'>{rating}/5</p>
+                 </div>
+                <button 
+                onClick={handleFeedback}
+                className="flex text-white m-3 bg-[#ff7a00] border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded ">Dejar feedback</button>
+                </>
+                }
+            <div className="h-[500px] w-4/5 bg-gray-100 rounded">
+                {feedbacks?.map((m) => (
+                  <p>{m.text}</p>
+                 ))}
+            </div>
+          </div>
         </section>
       )}
     </>
