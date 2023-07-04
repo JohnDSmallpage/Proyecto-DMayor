@@ -351,6 +351,11 @@ export const addProductToCatalog = async (id, user) => {
   }
 
   export const getProductsBySupplier = async (idProducts) => {
+
+    if(idProducts.length==0){
+        return null;
+    }
+    
     const userQuery = query(collection(db,"products"), where("id","in",idProducts), where("hidden","==",false));
     const results = await getDocs(userQuery);
     
@@ -371,6 +376,10 @@ export const addProductToCatalog = async (id, user) => {
 
 
 export const getFavoritesByUser = async (idFavorites) => {
+    if(idFavorites?.length==0 || idFavorites==undefined || idFavorites==null) {
+        return null;
+    }
+
     const userQuery = query(collection(db,"products"), where("id","in",idFavorites));
     const results = await getDocs(userQuery);
     
@@ -406,6 +415,9 @@ export const getHistoryByUser = async (idProducts) => {
 
 
 export const getHiddenProductsBySupplier = async (idProducts) => {
+    if(idProducts.length==0){
+        return null;
+    }
     const userQuery = query(collection(db,"products"), where("id","in",idProducts), where("hidden","==",true));
     const results = await getDocs(userQuery);
     

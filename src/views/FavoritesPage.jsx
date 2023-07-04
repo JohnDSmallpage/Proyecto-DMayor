@@ -12,10 +12,6 @@ export function FavoritesPage() {
 
   const getFavorites = async () => {
 
-    if(user.favorites.length === 0){
-      setProducts(null);
-      return;
-    }
     const idProducts = user.favorites;
     const data = await getFavoritesByUser(idProducts);
     setProducts(data);
