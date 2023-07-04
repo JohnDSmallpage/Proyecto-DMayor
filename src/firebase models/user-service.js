@@ -67,8 +67,6 @@ export async function searchChat(combinedID){
 export async function setChats(combinedID,user,product){
     await setDoc(doc(db,"chats",combinedID),{messages:[]});
     //crea user chats
-    console.log(user)
-    console.log(product)
     await updateDoc(doc(db,"userChat",user.uid),{
         [combinedID+".userInfo"]:{
             uid:product.supplierId,
