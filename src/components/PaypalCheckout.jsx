@@ -75,6 +75,7 @@ export function PaypalCheckout({price}) {
                 "supplier": selectProduct.selectedProduct.supplierName,
                 "date" : new Date().toLocaleString(),
                 "photo": selectProduct.selectedProduct.photos,
+                "productID": selectProduct.selectedProduct.id,
             }
             console.log(newData);
             addNewHistory(orderID, newData);

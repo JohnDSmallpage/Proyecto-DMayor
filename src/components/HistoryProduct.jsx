@@ -1,10 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export function HistoryProduct({ info }) {
 
     
   return (
+    <Link to={`/product/${info.productID}`}>
     <div className="flex space-x-4 w-[500px] sm:p-10 bg-orange-500 dark:text-gray-100 border border-gray-300 rounded-md">
     <img
       className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500"
@@ -20,6 +22,7 @@ export function HistoryProduct({ info }) {
           <p className="text-sm dark:text-black-400">{info.category.charAt(0).toUpperCase() + info.category.slice(1)}</p>
           <p className="text-sm dark:text-black-400">ID Compra: {info.id}</p>
           <p className="text-sm dark:text-black-400">Fecha compra: {info.date.slice(0,9)}</p>
+          <p className="text-sm dark:text-black-400">{info.productID}</p>
         </div>
         <div>
           <p className="text-lg font-semibold">Total: ${info.price}</p>
@@ -29,5 +32,6 @@ export function HistoryProduct({ info }) {
       </div>
     </div>
   </div> 
+  </Link>
   )
 }
