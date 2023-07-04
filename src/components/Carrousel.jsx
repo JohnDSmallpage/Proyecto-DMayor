@@ -65,7 +65,7 @@ const Carrousel = ({ photos, bool, editable, send }) => {
   }, [currentIndex]);
 
   return (
-    <div className="w-full h-full w-full  group ">
+    <div className="w-full h-full  group ">
       <div
         style={{ backgroundImage: `url(${PhotoArray[currentIndex]})` }}
         className="w-full h-full bg-center bg-cover duration-500 flex items-center justify-between px-2"
